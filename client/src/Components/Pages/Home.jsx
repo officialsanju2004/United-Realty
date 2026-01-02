@@ -8,6 +8,7 @@ import FeaturedProperties from '../Sections/FeaturedProperties';
 import WhyChooseUs from '../Sections/WhyChooseUs';
 import Testimonials from '../Sections/Testimonials';
 import Hero from '../Sections/Hero';
+import Contact from './Contact';
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
       <FeaturedProperties />
       <WhyChooseUs />
       <Testimonials />
+      <Contact/>
       
       {/* CTA Section */}
 

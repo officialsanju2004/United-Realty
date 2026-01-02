@@ -12,7 +12,8 @@ import {
 import { MdPool, MdLocalParking, MdFitnessCenter, MdSecurity, MdApartment, MdVilla } from 'react-icons/md';
 import { GiFlowerPot, GiModernCity } from 'react-icons/gi';
 
-// ==================== DATA ====================
+import { Phone, Mail, Home, MessageSquare, Send, User } from 'lucide-react';
+
 const propertiesData = [
   {
     id: 1,
@@ -1883,49 +1884,228 @@ const ModernRealEstateWebsite = () => {
       </section>
 
       {/* CTA Section */}
-      <section id="contact" className="py-20 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-        </div>
+     <div id="contact" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+  <motion.div
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.6 }}
+    viewport={{ once: true }}
+    className="max-w-6xl mx-auto"
+  >
+    <div className="text-center mb-12">
+      <span className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-400 text-white text-sm font-semibold rounded-full mb-4 shadow-lg">
+        📬 CONTACT US
+      </span>
+      <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+        Get In <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Touch</span>
+      </h2>
+      <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+        Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+      </p>
+    </div>
+
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+      {/* Contact Information - Left Side */}
+      <motion.div
+        initial={{ opacity: 0, x: -30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 lg:p-10 text-white shadow-2xl relative overflow-hidden group"
+      >
+        {/* Decorative Elements */}
+        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-125 transition-transform duration-500"></div>
+        <div className="absolute bottom-0 left-0 w-40 h-40 bg-cyan-500/10 rounded-full translate-y-20 -translate-x-20 group-hover:scale-125 transition-transform duration-700"></div>
         
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Find Your Dream Property?
-          </h2>
-          <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-            Schedule a private consultation with our luxury property specialists
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <ColorfulButton
-              variant="glass"
-              size="large"
-              onClick={() => setShowContactModal(true)}
-              className="border-2 border-white"
-            >
-              <FaCalendar className="mr-3" />
-              Book Consultation
-            </ColorfulButton>
-            <ColorfulButton
-              variant="glass"
-              size="large"
-              className="border-2 border-white"
-            >
-              <FaPhone className="mr-3" />
-              Call Now: +1 (888) 456-7890
-            </ColorfulButton>
-            <ColorfulButton
-              variant="glass"
-              size="large"
-              onClick={isLoggedIn ? () => setUserProfileOpen(true) : handleSignIn}
-              className="border-2 border-white"
-            >
-              <FaUser className="mr-3" />
-              {isLoggedIn ? 'My Account' : 'Sign In'}
-            </ColorfulButton>
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-xl shadow-lg">
+              <MessageSquare className="w-6 h-6" />
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold">Contact Information</h3>
           </div>
+          
+          <div className="space-y-8">
+            {[
+              {
+                icon: <Phone className="w-6 h-6" />,
+                title: "Phone Number",
+                details: "(802) 555-1234",
+                description: "Available Monday-Friday, 9am-6pm",
+                gradient: "from-blue-500 to-blue-400"
+              },
+              {
+                icon: <Mail className="w-6 h-6" />,
+                title: "Email Address",
+                details: "info@vermontliferealtors.com",
+                description: "We'll respond within 24 hours",
+                gradient: "from-cyan-500 to-teal-400"
+              },
+              {
+                icon: <Home className="w-6 h-6" />,
+                title: "Office Location",
+                details: "59 South Main St., Stowe, VT 05676",
+                description: "Visit us at our headquarters",
+                gradient: "from-purple-500 to-pink-400"
+              },
+            ].map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ x: 10 }}
+                className="flex items-start gap-4 p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group/item"
+              >
+                <div className={`p-3 rounded-lg bg-gradient-to-r ${item.gradient} shadow-lg`}>
+                  {item.icon}
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-semibold text-lg mb-1">{item.title}</h4>
+                  <p className="text-white font-bold text-xl mb-1 group-hover/item:text-cyan-300 transition-colors">
+                    {item.details}
+                  </p>
+                  <p className="text-gray-300 text-sm">{item.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Social Media Links */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-10 pt-8 border-t border-white/10"
+          >
+            <p className="text-gray-300 mb-4">Follow us on social media</p>
+            <div className="flex gap-4">
+              {['Facebook', 'Instagram', 'LinkedIn', 'Twitter'].map((social, idx) => (
+                <motion.a
+                  key={social}
+                  whileHover={{ y: -5, scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer"
+                >
+                  <span className="text-sm font-medium">{social}</span>
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
         </div>
-      </section>
+      </motion.div>
+
+      {/* Contact Form - Right Side */}
+      <motion.div
+        initial={{ opacity: 0, x: 30 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        viewport={{ once: true }}
+        className="bg-white rounded-2xl p-8 lg:p-10 shadow-2xl border border-gray-100 relative overflow-hidden"
+      >
+        {/* Decorative Background */}
+        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500"></div>
+        
+        <div className="relative z-10">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="p-3 bg-gradient-to-r from-cyan-500 to-blue-400 rounded-xl shadow-lg">
+              <Send className="w-6 h-6 text-white" />
+            </div>
+            <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Send Message</h3>
+          </div>
+
+          <form className="space-y-6">
+            {['Your Name', 'Your Email', 'Phone Number'].map((placeholder, index) => (
+              <motion.div
+                key={placeholder}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className="relative">
+                  <input
+                    type={placeholder.includes('Email') ? 'email' : 'text'}
+                    placeholder={placeholder}
+                    className="w-full px-5 py-4 pl-12 text-gray-700 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-white hover:border-gray-300"
+                  />
+                  <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+                    {placeholder.includes('Name') && <User className="w-5 h-5" />}
+                    {placeholder.includes('Email') && <Mail className="w-5 h-5" />}
+                    {placeholder.includes('Phone') && <Phone className="w-5 h-5" />}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.8 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative">
+                <textarea
+                  placeholder="Your Message"
+                  rows="5"
+                  className="w-full px-5 py-4 pl-12 text-gray-700 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-white hover:border-gray-300 resize-none"
+                ></textarea>
+                <div className="absolute left-4 top-6 text-gray-400">
+                  <MessageSquare className="w-5 h-5" />
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.4, delay: 1 }}
+              viewport={{ once: true }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <button
+                type="submit"
+                className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 transform hover:-translate-y-1 text-lg"
+              >
+                <span className="flex items-center justify-center gap-2">
+                  Send Message
+                  <Send className="w-5 h-5" />
+                </span>
+              </button>
+            </motion.div>
+          </form>
+
+          {/* Additional Info */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 1.2 }}
+            viewport={{ once: true }}
+            className="mt-8 pt-6 border-t border-gray-100"
+          >
+            <div className="flex items-center justify-center gap-6 text-sm text-gray-600">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-green-500"></div>
+                <span>24/7 Support</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-blue-500"></div>
+                <span>Quick Response</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-purple-500"></div>
+                <span>Secure Form</span>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
+    </div>
+  </motion.div>
+</div>
 
       {/* Footer */}
       <footer id="about" className="bg-gradient-to-b from-gray-900 to-gray-950 text-white pt-16 pb-8">
