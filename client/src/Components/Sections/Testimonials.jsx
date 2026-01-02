@@ -81,8 +81,8 @@ const Testimonials = () => {
     <section className="py-20 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-primary-500/5 rounded-full blur-3xl" />
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-secondary-500/5 rounded-full blur-3xl" />
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/5 rounded-full blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -94,13 +94,13 @@ const Testimonials = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-500/10 to-secondary-500/10 px-4 py-2 rounded-full mb-6">
-            <IoCheckmarkCircle className="text-primary-600" />
-            <span className="text-primary-600 font-semibold">Client Success Stories</span>
+          <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 px-4 py-2 rounded-full mb-6">
+            <IoCheckmarkCircle className="text-blue-600" />
+            <span className="text-blue-600 font-semibold">Client Success Stories</span>
           </div>
           
-          <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-4">
-            Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-500">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-500">
               Thousands
             </span>
           </h2>
@@ -129,7 +129,7 @@ const Testimonials = () => {
                 whileHover={{ scale: 1.05 }}
                 className="bg-white rounded-2xl shadow-lg p-6 text-center border border-gray-100"
               >
-                <div className="text-3xl md:text-4xl font-bold text-primary-600 mb-2">
+                <div className="text-3xl md:text-4xl font-bold text-blue-600 mb-2">
                   {stat.value}
                 </div>
                 <div className="text-gray-600 font-medium">
@@ -156,7 +156,7 @@ const Testimonials = () => {
                     className="p-8 md:p-12"
                   >
                     <div className="flex items-start mb-8">
-                      <FaQuoteLeft className="text-4xl text-primary-500/30 mr-4 flex-shrink-0" />
+                      <FaQuoteLeft className="text-4xl text-blue-500/30 mr-4 flex-shrink-0" />
                       <div>
                         <div className="flex mb-4">
                           {[...Array(testimonials[activeIndex].rating)].map((_, i) => (
@@ -186,7 +186,7 @@ const Testimonials = () => {
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-lg font-semibold text-primary-600">
+                        <div className="text-lg font-semibold text-blue-600">
                           {testimonials[activeIndex].transaction}
                         </div>
                         <div className="text-sm text-gray-500">
@@ -209,7 +209,7 @@ const Testimonials = () => {
                 
                 <button
                   onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-                  className="w-12 h-12 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-full shadow-lg flex items-center justify-center text-white hover:shadow-xl transition-all"
+                  className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-500 rounded-full shadow-lg flex items-center justify-center text-white hover:shadow-xl transition-all"
                 >
                   {isAutoPlaying ? <FaPause /> : <FaPlay />}
                 </button>
@@ -230,7 +230,7 @@ const Testimonials = () => {
                     onClick={() => setActiveIndex(index)}
                     className={`w-3 h-3 rounded-full transition-all ${
                       index === activeIndex
-                        ? 'bg-primary-600 w-8'
+                        ? 'bg-blue-600 w-8'
                         : 'bg-gray-300 hover:bg-gray-400'
                     }`}
                   />
@@ -249,7 +249,7 @@ const Testimonials = () => {
               viewport={{ once: true }}
               className="mb-8"
             >
-              <div className="bg-gradient-to-br from-dark-900 to-dark-800 rounded-3xl overflow-hidden shadow-2xl">
+              <div className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-3xl overflow-hidden shadow-2xl">
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-white mb-4">
                     Video Testimonials
@@ -258,7 +258,7 @@ const Testimonials = () => {
                     {/* Video Thumbnail */}
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
-                        <div className="w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform cursor-pointer">
+                        <div className="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 hover:scale-110 transition-transform cursor-pointer">
                           <FaPlay className="text-white text-2xl ml-1" />
                         </div>
                         <p className="text-white text-sm">Watch Client Stories</p>
@@ -292,8 +292,8 @@ const Testimonials = () => {
                   "After-sale Service"
                 ].map((item, index) => (
                   <div key={index} className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center">
-                      <IoCheckmarkCircle className="text-primary-600" />
+                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                      <IoCheckmarkCircle className="text-blue-600" />
                     </div>
                     <span className="text-gray-700">{item}</span>
                   </div>
@@ -307,43 +307,67 @@ const Testimonials = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="mt-8 bg-gradient-to-r from-primary-600 to-secondary-500 rounded-3xl p-6 text-center"
+              className="mt-8 bg-gradient-to-r from-blue-600 to-purple-500 rounded-3xl p-6 text-center"
             >
               <h3 className="text-xl font-bold text-white mb-4">
                 Ready to Share Your Success Story?
               </h3>
-              <p className="text-primary-100 mb-6">
+              <p className="text-blue-100 mb-6">
                 Join thousands of satisfied clients
               </p>
-              <button className="w-full bg-white text-primary-600 font-semibold py-3 rounded-lg hover:bg-gray-100 transition-colors">
+              <button className="w-full bg-white text-blue-600 font-semibold py-3 rounded-lg hover:bg-gray-100 transition-colors">
                 Start Your Journey
               </button>
             </motion.div>
           </div>
         </div>
 
-        {/* Company Logos */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          viewport={{ once: true }}
-          className="mt-16 pt-12 border-t border-gray-200"
-        >
-          <p className="text-center text-gray-600 mb-8">
-            Featured in leading publications
-          </p>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-8 opacity-50">
-            {["Forbes", "Wall Street Journal", "Bloomberg", "Business Insider", "Architectural Digest", "Luxury Portfolio"].map((logo, index) => (
-              <div
-                key={index}
-                className="text-center text-2xl font-bold text-gray-400"
-              >
-                {logo}
-              </div>
-            ))}
+{/* Company Logos - Professional Version */}
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.5 }}
+  viewport={{ once: true }}
+  className="mt-20 pt-16 border-t border-gray-200 bg-gradient-to-b from-white to-gray-50 rounded-2xl p-8"
+>
+  <div className="text-center mb-12">
+    <span className="inline-block px-4 py-2 bg-primary-50 text-primary-700 font-semibold rounded-full text-sm mb-4">
+      TRUSTED BY INDUSTRY LEADERS
+    </span>
+    <h3 className="text-2xl md:text-3xl font-bold text-gray-900">
+      Featured in Leading Publications
+    </h3>
+  </div>
+  
+  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
+    {["Forbes", "Wall Street Journal", "Bloomberg", "Business Insider", "Architectural Digest", "Luxury Portfolio"].map((logo, index) => (
+      <motion.div
+        key={index}
+        initial={{ opacity: 0, scale: 0.9 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.4, delay: index * 0.1 }}
+        viewport={{ once: true }}
+        whileHover={{ y: -5 }}
+        className="flex items-center justify-center p-4 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100"
+      >
+        <div className="text-center">
+          <div className="text-lg md:text-xl font-bold text-gray-900 tracking-tight">
+            {logo}
           </div>
-        </motion.div>
+          <div className="text-xs text-gray-500 mt-2 font-medium">
+            {["Magazine", "Newspaper", "Media", "Digital", "Design", "Luxury"][index]}
+          </div>
+        </div>
+      </motion.div>
+    ))}
+  </div>
+  
+  <div className="text-center mt-12 pt-8 border-t border-gray-100">
+    <p className="text-gray-600 text-sm">
+      Recognized by top-tier media outlets worldwide
+    </p>
+  </div>
+</motion.div>
       </div>
     </section>
   );

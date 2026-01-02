@@ -4,8 +4,9 @@ import { motion } from 'framer-motion';
 import { FaArrowLeft, FaArrowRight, FaStar, FaFire } from 'react-icons/fa';
 
 import Button from '../ui/Button';
-import { properties } from '../../data/properties';
+
 import PropertyCard from '../Properties/propertyCard';
+import { properties } from '../data/properties';
 
 const FeaturedProperties = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -53,7 +54,7 @@ const FeaturedProperties = () => {
           </div>
           
           <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-4">
-            Exclusive <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-500">Properties</span>
+            Exclusive <span className="text-transparent bg-clip-text bg-primary-600">Properties</span>
           </h2>
           
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
@@ -76,7 +77,7 @@ const FeaturedProperties = () => {
                 onClick={() => setActiveFilter(filter.id)}
                 className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
                   activeFilter === filter.id
-                    ? 'bg-gradient-to-r from-primary-600 to-secondary-500 text-white shadow-lg shadow-primary-500/25'
+                    ? 'bg-primary-600 text-white shadow-lg shadow-primary-500/25'
                     : 'bg-white text-gray-700 hover:bg-gray-100 shadow-md'
                 }`}
               >
@@ -201,42 +202,63 @@ const FeaturedProperties = () => {
           )}
         </motion.div>
 
-        {/* Investment Tip */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          viewport={{ once: true }}
-          className="mt-16 bg-gradient-to-r from-dark-900 to-dark-800 rounded-3xl p-8 text-white"
+        {/* Investment Tip - HIGH VISIBILITY VERSION */}
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.4 }}
+  viewport={{ once: true }}
+  className="mt-16 bg-gradient-to-r from-blue-900 via-blue-700 to-purple-900 rounded-3xl p-8 md:p-12 text-white shadow-2xl border-4 border-white"
+>
+  <div className="grid md:grid-cols-2 gap-10 items-center">
+    <div>
+      {/* BADGE - HIGHLY VISIBLE */}
+      <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500 rounded-full mb-6 border-2 border-white">
+        <span className="text-black font-bold">🔥</span>
+        <span className="text-black font-bold text-sm">INVESTMENT TIP</span>
+      </div>
+      
+      {/* HEADING - BOLD & BRIGHT */}
+      <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white leading-tight drop-shadow-lg">
+        Smart Investment<br />
+        <span className="text-yellow-400">Opportunities</span>
+      </h3>
+      
+      {/* PARAGRAPH - MAXIMUM CONTRAST */}
+      <p className="text-gray-100 mb-8 text-lg leading-relaxed font-medium bg-black/20 p-4 rounded-xl">
+        Our experts analyze market trends to identify properties with the highest 
+        appreciation potential. Get personalized investment recommendations.
+      </p>
+      
+      {/* BUTTON - STANDOUT */}
+      <button className="px-8 py-4 bg-yellow-500 text-black font-bold rounded-xl hover:bg-yellow-400 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-lg border-2 border-white">
+        📅 Schedule Consultation
+      </button>
+    </div>
+    
+    <div className="grid grid-cols-2 gap-4">
+      {[
+        { label: 'ROI Potential', value: '18-25%', color: 'bg-green-600' },
+        { label: 'Avg Appreciation', value: '7.2%', color: 'bg-blue-600' },
+        { label: 'Rental Yield', value: '4.8%', color: 'bg-purple-600' },
+        { label: 'Market Growth', value: '6.1%', color: 'bg-red-600' },
+      ].map((stat, index) => (
+        <div 
+          key={index}
+          className="text-center p-4 rounded-xl border-2 border-white shadow-lg"
+          style={{ backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
         >
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-2xl font-bold mb-4">
-                Smart Investment Opportunities
-              </h3>
-              <p className="text-gray-300 mb-6">
-                Our experts analyze market trends to identify properties with the highest 
-                appreciation potential. Get personalized investment recommendations.
-              </p>
-              <Button variant="secondary">
-                Schedule Investment Consultation
-              </Button>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { label: 'ROI Potential', value: '18-25%' },
-                { label: 'Avg Appreciation', value: '7.2%' },
-                { label: 'Rental Yield', value: '4.8%' },
-                { label: 'Market Growth', value: '6.1%' },
-              ].map((stat, index) => (
-                <div key={index} className="text-center p-4 bg-white/10 rounded-xl backdrop-blur-sm">
-                  <div className="text-2xl font-bold text-primary-300 mb-1">{stat.value}</div>
-                  <div className="text-sm text-gray-300">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+          <div className="text-3xl font-bold text-white mb-1 drop-shadow-md">
+            {stat.value}
           </div>
-        </motion.div>
+          <div className="text-white font-semibold text-sm">
+            {stat.label}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</motion.div>
       </div>
     </section>
   );
