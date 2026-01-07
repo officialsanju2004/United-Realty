@@ -5,7 +5,7 @@ import "sweetalert2/src/sweetalert2.scss";
 
 
 
-import VermontLife from "./VermontLife";
+
 import AppRouter from "./app";
 
 
