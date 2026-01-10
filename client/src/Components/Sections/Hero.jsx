@@ -52,8 +52,8 @@ const Hero = () => {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-white mb-6 leading-tight">
-              Discover Your <span className="text-primary-400">Perfect</span><br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-400">
+              Discover Your <span className="text-primary-600">Perfect</span><br />
+              <span className="text-transparent bg-clip-text bg-primary-600">
                 Dream Home
               </span>
             </h1>

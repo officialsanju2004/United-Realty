@@ -38,9 +38,7 @@ const Home = () => {
         Get Free Valuation
       </button>
     </div>
-    <div className="mt-12 text-gray-300 text-sm">
-      <p>✓ No hidden fees &nbsp; • &nbsp; ✓ 24/7 Support &nbsp; • &nbsp; ✓ Verified Properties</p>
-    </div>
+   
   </div>
   
 

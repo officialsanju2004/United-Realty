@@ -219,7 +219,7 @@ const Footer = () => {
                 </div>
                 <button
                   type="submit"
-                  className="px-8 py-4 bg-gradient-to-r from-primary-600 to-secondary-500 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-primary-500/25 transition-all duration-300"
+                  className="px-8 py-4 bg-primary-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-primary-500/25 transition-all duration-300"
                 >
                   Subscribe
                 </button>
@@ -230,7 +230,7 @@ const Footer = () => {
           {/* Bottom Bar */}
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-800">
             <div className="text-gray-400 text-sm mb-4 md:mb-0">
-              © {new Date().getFullYear()} PremiumEstate. All rights reserved.
+              <p>© Growth Flow Media. All rights reserved. | Privacy Policy | Terms of Service</p>
             </div>
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               <Link to="/privacy" className="text-gray-400 hover:text-white transition-colors">

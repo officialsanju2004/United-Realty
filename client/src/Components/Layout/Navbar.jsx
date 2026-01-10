@@ -52,7 +52,7 @@ const Navbar = () => {
               <div className="flex items-center space-x-4">
                 <a
                   href="tel:+1234567890"
-                  className="flex items-center space-x-2  hover:text-primary-600"
+                  className="flex items-center space-x-2  text-white hover:text-primary-600"
                 >
                   <FaPhone className="text-sm" />
                   <span className="hidden lg:inline">+1 (234) 567-890</span>
@@ -96,7 +96,7 @@ const Navbar = () => {
                   <Link
                     key={item.name}
                     to={item.path}
-                    className="block py-2 text-gray-700 hover:text-primary-600 font-medium"
+                    className="block py-2  hover:text-primary-600 font-medium"
                     onClick={() => setIsMenuOpen(false)}
                   >
                     {item.name}
@@ -105,7 +105,7 @@ const Navbar = () => {
                 <div className="pt-4 border-t space-y-4">
                   <a
                     href="tel:+1234567890"
-                    className="flex items-center space-x-2  hover:text-primary-600"
+                    className="flex items-center text-white  space-x-2  hover:text-primary-600"
                   >
                     <FaPhone />
                     <span>+1 (234) 567-890</span>

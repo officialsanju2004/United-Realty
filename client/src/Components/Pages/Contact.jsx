@@ -1,5 +1,6 @@
 // src/pages/Contact.jsx
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   FaPhone, 
@@ -29,7 +30,39 @@ const Contact = () => {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+const [openIndex, setOpenIndex] = useState(null);
 
+  const faqItems = [
+    {
+                q: "How quickly can I expect a response?",
+                a: "We respond to all inquiries within 2 hours during business hours, and within 24 hours maximum. For urgent matters, call our hotline."
+              },
+              {
+                q: "Do you charge for property consultations?",
+                a: "Initial consultations are completely free. We only charge commission when we successfully complete a property transaction."
+              },
+              {
+                q: "What areas do you serve?",
+                a: "We serve all major cities in California, with specialized services in Beverly Hills, Malibu, Santa Monica, and Los Angeles."
+              },
+              {
+                q: "Can you help with international property purchases?",
+                a: "Yes, we have partnerships with international real estate firms and can assist with property purchases in over 20 countries."
+              },
+              {
+                q: "What makes PremiumEstate different?",
+                a: "We offer personalized service, market expertise, and exclusive access to off-market properties not available through traditional channels."
+              },
+              {
+                q: "How do you handle client confidentiality?",
+                a: "We maintain strict confidentiality agreements and use encrypted communication channels to protect all client information."
+              }
+  ];
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
+  const navigate=useNavigate();
   const contactInfo = [
     {
       icon: <FaPhone className="text-2xl" />,
@@ -367,7 +400,7 @@ const Contact = () => {
             </motion.div>
 
             {/* Working Google Maps */}
-            <motion.div
+            {/* <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
@@ -382,7 +415,7 @@ const Contact = () => {
                   123 Luxury Avenue, Beverly Hills, California 90210, United States
                 </p>
                 
-                {/* Google Maps Embed */}
+         
                 <div className="rounded-xl overflow-hidden h-96 border border-gray-200">
                   <iframe
                     src={mapUrl}
@@ -409,100 +442,95 @@ const Contact = () => {
                   </a>
                 </div>
               </div>
-            </motion.div>
+            </motion.div> */}
 
-            {/* Office Hours */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className=" bg-primary-600 rounded-3xl p-8 text-white"
-            >
-              <div className="flex items-center mb-6">
-                <FaClock className="text-2xl mr-3" />
-                <h3 className="text-2xl font-bold">Office Hours</h3>
-              </div>
-              
-              <div className="space-y-4">
-                {officeHours.map((hour, index) => (
-                  <div key={index} className="flex justify-between items-center py-3 border-b border-white/20 last:border-0">
-                    <span className="font-medium">{hour.day}</span>
-                    <span className="font-bold">{hour.time}</span>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="mt-8 pt-6 border-t border-white/20">
-                <p className="text-primary-100 text-sm">
-                  For after-hours emergencies, call our 24/7 hotline: 
-                  <a href="tel:+18884567890" className="font-bold ml-2">+1 (888) 456-7890</a>
-                </p>
-              </div>
-            </motion.div>
+          
           </div>
         </div>
 
-        {/* FAQ Section */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-20"
-        >
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-display font-bold text-gray-900 mb-4">
-              Frequently Asked Questions
-            </h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">
-              Find quick answers to common questions about our services
-            </p>
-          </div>
+       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+            Frequently Asked Questions
+          </h1>
+          <p className="mt-4 text-xl text-gray-600">
+            Find answers to common questions about our products and services
+          </p>
+        </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            {[
-              {
-                q: "How quickly can I expect a response?",
-                a: "We respond to all inquiries within 2 hours during business hours, and within 24 hours maximum. For urgent matters, call our hotline."
-              },
-              {
-                q: "Do you charge for property consultations?",
-                a: "Initial consultations are completely free. We only charge commission when we successfully complete a property transaction."
-              },
-              {
-                q: "What areas do you serve?",
-                a: "We serve all major cities in California, with specialized services in Beverly Hills, Malibu, Santa Monica, and Los Angeles."
-              },
-              {
-                q: "Can you help with international property purchases?",
-                a: "Yes, we have partnerships with international real estate firms and can assist with property purchases in over 20 countries."
-              },
-              {
-                q: "What makes PremiumEstate different?",
-                a: "We offer personalized service, market expertise, and exclusive access to off-market properties not available through traditional channels."
-              },
-              {
-                q: "How do you handle client confidentiality?",
-                a: "We maintain strict confidentiality agreements and use encrypted communication channels to protect all client information."
-              }
-            ].map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 + (index * 0.1) }}
-                className="bg-white rounded-2xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-shadow"
+        {/* FAQ Items */}
+        <div className="space-y-4">
+          {faqItems.map((item, index) => (
+            <div 
+              key={index} 
+              className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
+            >
+              <button
+                className="w-full px-6 py-5 text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-2xl"
+                onClick={() => toggleFAQ(index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
               >
-                <h3 className="text-lg font-bold text-gray-900 mb-3 flex items-center">
-                  <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center text-white font-bold mr-3">
-                    {index + 1}
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-semibold text-gray-900 pr-8">
+                    {item.q}
+                  </h3>
+                  <div className="flex-shrink-0 ml-4">
+                    <svg 
+                      className={`w-6 h-6 text-blue-600 transition-transform duration-300 ${openIndex === index ? 'transform rotate-180' : ''}`}
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth="2" 
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
                   </div>
-                  {faq.q}
-                </h3>
-                <p className="text-gray-600 pl-11">{faq.a}</p>
-              </motion.div>
-            ))}
+                </div>
+              </button>
+              
+              <div 
+                id={`faq-answer-${index}`}
+                className={`px-6 overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? 'pb-5' : 'max-h-0'}`}
+                style={{ maxHeight: openIndex === index ? '200px' : '0' }}
+              >
+                <div className="border-l-4 border-blue-500 pl-4 py-1">
+                  <p className="text-gray-700 leading-relaxed">
+                    {item.a}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Contact Info */}
+        <div className="mt-12 p-6 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl shadow-lg text-white">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="mb-6 md:mb-0">
+              <h3 className="text-xl font-bold">Still have questions?</h3>
+              <p className="mt-2 text-blue-100">
+                Can't find the answer you're looking for? Please contact our support team.
+              </p>
+            </div>
+            <button onClick={()=>{navigate("/contact")}}className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-colors duration-300 shadow-md hover:shadow-lg">
+              Contact Support
+            </button>
           </div>
-        </motion.div>
+        </div>
+
+        {/* Instructions */}
+        <div className="mt-8 text-center text-gray-500 text-sm">
+          <p>Click on any question to reveal the answer. Click again to collapse.</p>
+        </div>
+      </div>
+    </div>
 
         {/* CTA Section */}
         <motion.div

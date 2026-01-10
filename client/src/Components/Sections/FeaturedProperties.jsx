@@ -202,63 +202,7 @@ const FeaturedProperties = () => {
           )}
         </motion.div>
 
-        {/* Investment Tip - HIGH VISIBILITY VERSION */}
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  whileInView={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.6, delay: 0.4 }}
-  viewport={{ once: true }}
-  className="mt-16 bg-gradient-to-r from-blue-900 via-blue-700 to-purple-900 rounded-3xl p-8 md:p-12 text-white shadow-2xl border-4 border-white"
->
-  <div className="grid md:grid-cols-2 gap-10 items-center">
-    <div>
-      {/* BADGE - HIGHLY VISIBLE */}
-      <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500 rounded-full mb-6 border-2 border-white">
-        <span className="text-black font-bold">🔥</span>
-        <span className="text-black font-bold text-sm">INVESTMENT TIP</span>
-      </div>
-      
-      {/* HEADING - BOLD & BRIGHT */}
-      <h3 className="text-3xl md:text-4xl font-bold mb-6 text-white leading-tight drop-shadow-lg">
-        Smart Investment<br />
-        <span className="text-yellow-400">Opportunities</span>
-      </h3>
-      
-      {/* PARAGRAPH - MAXIMUM CONTRAST */}
-      <p className="text-gray-100 mb-8 text-lg leading-relaxed font-medium bg-black/20 p-4 rounded-xl">
-        Our experts analyze market trends to identify properties with the highest 
-        appreciation potential. Get personalized investment recommendations.
-      </p>
-      
-      {/* BUTTON - STANDOUT */}
-      <button className="px-8 py-4 bg-yellow-500 text-black font-bold rounded-xl hover:bg-yellow-400 transition-all duration-300 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 text-lg border-2 border-white">
-        📅 Schedule Consultation
-      </button>
-    </div>
-    
-    <div className="grid grid-cols-2 gap-4">
-      {[
-        { label: 'ROI Potential', value: '18-25%', color: 'bg-green-600' },
-        { label: 'Avg Appreciation', value: '7.2%', color: 'bg-blue-600' },
-        { label: 'Rental Yield', value: '4.8%', color: 'bg-purple-600' },
-        { label: 'Market Growth', value: '6.1%', color: 'bg-red-600' },
-      ].map((stat, index) => (
-        <div 
-          key={index}
-          className="text-center p-4 rounded-xl border-2 border-white shadow-lg"
-          style={{ backgroundColor: 'rgba(255, 255, 255, 0.15)' }}
-        >
-          <div className="text-3xl font-bold text-white mb-1 drop-shadow-md">
-            {stat.value}
-          </div>
-          <div className="text-white font-semibold text-sm">
-            {stat.label}
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-</motion.div>
+
       </div>
     </section>
   );

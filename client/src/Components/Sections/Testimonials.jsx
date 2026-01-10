@@ -301,24 +301,7 @@ const Testimonials = () => {
               </div>
             </motion.div>
 
-            {/* CTA Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              viewport={{ once: true }}
-              className="mt-8 bg-gradient-to-r from-blue-600 to-purple-500 rounded-3xl p-6 text-center"
-            >
-              <h3 className="text-xl font-bold text-white mb-4">
-                Ready to Share Your Success Story?
-              </h3>
-              <p className="text-blue-100 mb-6">
-                Join thousands of satisfied clients
-              </p>
-              <button className="w-full bg-white text-blue-600 font-semibold py-3 rounded-lg hover:bg-gray-100 transition-colors">
-                Start Your Journey
-              </button>
-            </motion.div>
+            
           </div>
         </div>
 
