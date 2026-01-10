@@ -9,11 +9,11 @@ import {
   User
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { FaFacebook, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
-
+import { FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, FaInstagram, FaLinkedinIn, FaPlay, FaStar, FaTwitter, FaUser } from 'react-icons/fa';
 const ModernLuxuryRealEstate = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeFilter, setActiveFilter] = useState('all');
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [mortgageValues, setMortgageValues] = useState({
     price: 2500000,
     downPayment: 20,
@@ -133,12 +133,63 @@ const ModernLuxuryRealEstate = () => {
     { id: 4, name: "Victoria Kensington", title: "International Luxury Director", experience: "14 years", propertiesSold: 395, image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" },
   ];
 
-  // Testimonials data
-  const testimonials = [
-    { id: 1, name: "James & Olivia Chen", text: "The team at LuxeLiving found us our dream waterfront property. Their attention to detail and negotiation skills saved us over $500,000.", property: "Oceanfront Villa, Malibu", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" },
-    { id: 2, name: "Marcus Rodriguez", text: "As an international investor, I needed a reliable partner. Their global network and market insights are unparalleled.", property: "Skyline Penthouse, NYC", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" },
-    { id: 3, name: "The Sterling Family", text: "From start to finish, the experience was seamless. The virtual tours during our relocation were invaluable.", property: "Hillside Estate, Beverly Hills", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" },
-  ];
+  const testimonialsData = [
+  {
+    id: 1,
+    name: "Alexandra Chen",
+    role: "Tech Entrepreneur",
+    content: "The team found me a perfect investment property that has appreciated 35% in just two years. Exceptional service!",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    transaction: "$4.8M Villa Purchase",
+    location: "Singapore",
+    date: "2023-08-15"
+  },
+  {
+    id: 2,
+    name: "Marcus Rodriguez",
+    role: "Investment Banker",
+    content: "Professional, efficient, and incredibly knowledgeable. They navigated a complex international purchase seamlessly.",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    transaction: "$3.2M Penthouse",
+    location: "New York",
+    date: "2023-10-22"
+  },
+  {
+    id: 3,
+    name: "Sophia Williams",
+    role: "Interior Designer",
+    content: "Found my dream studio space in the perfect creative neighborhood. The attention to detail was outstanding.",
+    rating: 5,
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80",
+    transaction: "$1.5M Commercial Space",
+    location: "Los Angeles",
+    date: "2023-09-05"
+  }
+];
+
+// Add video testimonials
+const videoTestimonials = [
+  {
+    id: 1,
+    name: "Robert Johnson",
+    role: "Real Estate Investor",
+    videoUrl: "https://player.vimeo.com/video/76979871?h=8272103f6e",
+    thumbnail: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    duration: "2:45",
+    quote: "The investment guidance I received was invaluable. My portfolio has grown 42% in one year."
+  },
+  {
+    id: 2,
+    name: "Jennifer Lee",
+    role: "Business Owner",
+    videoUrl: "https://player.vimeo.com/video/76979871?h=8272103f6e",
+    thumbnail: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    duration: "3:20",
+    quote: "They found me the perfect commercial space for my business expansion."
+  }
+];
 
 
 
@@ -171,7 +222,112 @@ const ModernLuxuryRealEstate = () => {
       setFavorites([...favorites, id]);
     }
   };
+// Testimonial Card Component - Updated to remove gradients
+const TestimonialCard = ({ testimonial, isActive }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 100 }}
+      animate={{ opacity: isActive ? 1 : 0.5, x: isActive ? 0 : 50, scale: isActive ? 1 : 0.95 }}
+      transition={{ duration: 0.5 }}
+      className={`bg-white rounded-2xl p-8 shadow-lg ${isActive ? 'border-2 border-blue-500' : 'border border-gray-200'}`}
+    >
+      <div className="flex items-center mb-6">
+        <div className="relative">
+          <div className="w-16 h-16 rounded-full bg-blue-500 p-0.5">
+            <img src={testimonial.image} alt={testimonial.name} className="w-full h-full rounded-full object-cover border-2 border-white" />
+          </div>
+          <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+            <FaCheck className="text-white text-xs" />
+          </div>
+        </div>
+        <div className="ml-4">
+          <h4 className="text-xl font-bold text-gray-900">{testimonial.name}</h4>
+          <p className="text-gray-600">{testimonial.role}</p>
+          <div className="flex items-center mt-1">
+            {[...Array(testimonial.rating)].map((_, i) => (
+              <FaStar key={i} className="text-yellow-500 fill-current" />
+            ))}
+          </div>
+        </div>
+      </div>
+      
+      <p className="text-gray-700 text-lg italic mb-6">"{testimonial.content}"</p>
+      
+      <div className="pt-6 border-t border-gray-100">
+        <div className="flex justify-between items-center">
+          <div>
+            <div className="font-bold text-gray-900">{testimonial.transaction}</div>
+            <div className="text-sm text-gray-500">{testimonial.location} • {testimonial.date}</div>
+          </div>
+          <div className="px-4 py-2 rounded-full bg-green-100 text-green-700 font-medium">
+            Completed
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
+// Video Testimonial Component
+const VideoTestimonialCard = ({ testimonial }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  return (
+    <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
+      <div className="relative">
+        {!isPlaying ? (
+          <>
+            <img src={testimonial.thumbnail} alt={testimonial.name} className="w-full h-64 object-cover" />
+            <button
+              onClick={() => setIsPlaying(true)}
+              className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors"
+            >
+              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                <FaPlay className="text-orange-500 text-2xl ml-1" />
+              </div>
+            </button>
+            <div className="absolute bottom-4 right-4 bg-black/70 text-white px-2 py-1 rounded text-sm">
+              {testimonial.duration}
+            </div>
+          </>
+        ) : (
+          <div className="relative h-64">
+            <iframe
+              src={`${testimonial.videoUrl}&autoplay=1`}
+              className="absolute inset-0 w-full h-full"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              title={`Testimonial from ${testimonial.name}`}
+            ></iframe>
+          </div>
+        )}
+      </div>
+      
+      <div className="p-6">
+        <div className="flex items-center mb-4">
+          <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+            <FaUser className="text-gray-600" />
+          </div>
+          <div>
+            <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
+            <p className="text-gray-600 text-sm">{testimonial.role}</p>
+          </div>
+        </div>
+        
+        <p className="text-gray-700 italic mb-4">"{testimonial.quote}"</p>
+        
+        <div className="flex items-center">
+          <FaStar className="text-yellow-500 mr-1" />
+          <FaStar className="text-yellow-500 mr-1" />
+          <FaStar className="text-yellow-500 mr-1" />
+          <FaStar className="text-yellow-500 mr-1" />
+          <FaStar className="text-yellow-500" />
+        </div>
+      </div>
+    </div>
+  );
+};
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 font-sans">
       {/* Navigation */}
@@ -375,60 +531,74 @@ const ModernLuxuryRealEstate = () => {
         </div>
       </section>
 
-      {/* Virtual Tour Preview */}
-      <section className="py-20 bg-gradient-to-r from-gray-50 to-gray-100">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Immersive <span className="text-amber-600">Virtual Tours</span>
-              </h2>
-              <p className="text-gray-600 mb-8 text-lg">
-                Experience our properties from anywhere in the world with our cutting-edge 360° virtual tours. Walk through each room, explore the grounds, and get a true feel for the space before scheduling an in-person visit.
-              </p>
-              <div className="space-y-4">
-                {['High-resolution 360° imaging', 'Interactive floor plans', 'Live guided virtual tours', 'Augmented reality preview'].map((feature, index) => (
-                  <div key={index} className="flex items-center">
-                    <div className="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center mr-4">
-                      <Check className="text-amber-600" size={16} />
-                    </div>
-                    <span className="text-gray-700">{feature}</span>
+       {/* Testimonials Section with Videos */}
+            <section className="py-20 bg-gray-50">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="text-center mb-16">
+                  <div className="inline-flex items-center px-4 py-2 rounded-full bg-orange-100 text-orange-700 font-medium mb-6">
+                    <FaComment className="mr-2" /> Client Success Stories
                   </div>
-                ))}
-              </div>
-              <button className="mt-8 bg-yellow-400 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center">
-                <Play className="mr-2" size={20} />
-                Experience Virtual Tour
-              </button>
-            </div>
-            
-            <div className="relative">
-              <div className="bg-gradient-to-br from-amber-500 to-amber-700 rounded-3xl p-1 shadow-2xl">
-                <div className="bg-gray-900 rounded-3xl overflow-hidden aspect-video relative">
-                  <img 
-                    src="https://images.unsplash.com/photo-1616587226154-91eab0a51dc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" 
-                    alt="Virtual Tour"
-                    className="w-full h-full object-cover opacity-80"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-20 h-20 bg-white/20 backdrop-blur-lg rounded-full flex items-center justify-center cursor-pointer hover:scale-110 transition-transform duration-300">
-                      <Play className="text-white" size={32} fill="white" />
+                  <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    Trusted by <span className="text-orange-500">
+                      Global Elite
+                    </span>
+                  </h2>
+                  <p className="text-gray-600 text-xl max-w-3xl mx-auto">
+                    See why top investors and homeowners choose LuxeLiving for their property needs
+                  </p>
+                </div>
+                
+                {/* Video Testimonials */}
+                <div className="grid md:grid-cols-2 gap-8 mb-16">
+                  {videoTestimonials.map((testimonial) => (
+                    <VideoTestimonialCard key={testimonial.id} testimonial={testimonial} />
+                  ))}
+                </div>
+                
+                {/* Text Testimonials Carousel */}
+                <div className="relative">
+                  <div className="overflow-hidden">
+                    <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${activeTestimonial * 100}%)` }}>
+                      {testimonialsData.map((testimonial, idx) => (
+                        <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
+                          <TestimonialCard testimonial={testimonial} isActive={idx === activeTestimonial} />
+                        </div>
+                      ))}
                     </div>
+                  </div>
+                  
+                  <div className="flex justify-center items-center mt-12 space-x-4">
+                    <button
+                      onClick={() => setActiveTestimonial((prev) => (prev - 1 + testimonialsData.length) % testimonialsData.length)}
+                      className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-300 transition-colors"
+                    >
+                      <FaArrowLeft />
+                    </button>
+                    
+                    <div className="flex space-x-2">
+                      {testimonialsData.map((_, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => setActiveTestimonial(idx)}
+                          className={`w-3 h-3 rounded-full transition-all ${
+                            idx === activeTestimonial
+                              ? 'bg-orange-500 w-8'
+                              : 'bg-gray-300 hover:bg-gray-400'
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    
+                    <button
+                      onClick={() => setActiveTestimonial((prev) => (prev + 1) % testimonialsData.length)}
+                      className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-300 transition-colors"
+                    >
+                      <FaArrowRight />
+                    </button>
                   </div>
                 </div>
               </div>
-              
-              {/* Floating elements */}
-              <div className="absolute -top-6 -right-6 bg-white p-4 rounded-2xl shadow-xl animate-float">
-                <Maximize2 className="text-amber-600" size={24} />
-              </div>
-              <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl animate-float" style={{ animationDelay: '0.5s' }}>
-                <TrendingUp className="text-amber-600" size={24} />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+            </section>
 
     
       {/* Mortgage Calculator */}
@@ -602,50 +772,7 @@ const ModernLuxuryRealEstate = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 bg-gradient-to-r from-gray-50 to-gray-100">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Client <span className="text-amber-600">Testimonials</span>
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-              Hear from our satisfied clients about their experience with LuxeLiving.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial) => (
-              <div 
-                key={testimonial.id} 
-                className="bg-white rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 group"
-              >
-                <div className="flex items-center mb-6">
-                  <div className="w-16 h-16 rounded-full overflow-hidden mr-4">
-                    <img 
-                      src={testimonial.image} 
-                      alt={testimonial.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
-                    <p className="text-amber-600 text-sm">{testimonial.property}</p>
-                  </div>
-                </div>
-                
-                <p className="text-gray-600 mb-6 italic">"{testimonial.text}"</p>
-                
-                <div className="flex text-amber-400">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} size={20} className="fill-current" />
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      
 
       {/* Newsletter */}
       <section className="py-20">
