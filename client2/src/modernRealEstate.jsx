@@ -1,18 +1,25 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import emailjs from '@emailjs/browser'; // For email functionality
+
+// Initialize emailjs
+emailjs.init("YOUR_PUBLIC_KEY_HERE"); // You'll need to get this from emailjs.com
+
+// Remove emoji icons and keep clean icons
 import {
   FaSearch, FaMapMarkerAlt, FaHome, FaDollarSign, FaBed, FaBath, FaRulerCombined,
   FaHeart, FaShare, FaPhone, FaEnvelope, FaWhatsapp, FaFacebook, FaTwitter, FaInstagram,
-  FaLinkedin, FaYoutube, FaArrowRight, FaArrowLeft, FaStar, FaChevronDown, FaChevronUp,
+  FaLinkedinIn, FaYoutube, FaArrowRight, FaArrowLeft, FaStar, FaChevronDown, FaChevronUp,
   FaFilter, FaTimes, FaUser, FaCalendar, FaClock, FaPaperPlane, FaCheck,
   FaEye, FaComment, FaThumbsUp, FaChartLine, FaShieldAlt, FaHandshake, FaBuilding,
   FaCity, FaMountain, FaWater, FaTree, FaChevronRight, FaLock, FaGoogle, FaApple,
-  FaSignOutAlt, FaUserCircle, FaCog, FaBell, FaBookmark, FaHistory
+  FaSignOutAlt, FaUserCircle, FaCog, FaBell, FaBookmark, FaHistory, FaPlay
 } from 'react-icons/fa';
 import { MdPool, MdLocalParking, MdFitnessCenter, MdSecurity, MdApartment, MdVilla } from 'react-icons/md';
 import { GiFlowerPot, GiModernCity } from 'react-icons/gi';
 
-import { Phone, Mail, Home, MessageSquare, Send, User } from 'lucide-react';
+// Remove lucide-react imports since we're using react-icons
+// import { Phone, Mail, Home, MessageSquare, Send, User } from 'lucide-react';
 
 const propertiesData = [
   {
@@ -22,6 +29,7 @@ const propertiesData = [
     price: 3200000,
     location: "Downtown Dubai",
     type: "Penthouse",
+    category: "penthouses",
     bedrooms: 4,
     bathrooms: 3,
     area: 3800,
@@ -46,6 +54,7 @@ const propertiesData = [
     price: 4500000,
     location: "Miami Beach",
     type: "Villa",
+    category: "luxury-villas",
     bedrooms: 5,
     bathrooms: 4,
     area: 5200,
@@ -70,6 +79,7 @@ const propertiesData = [
     price: 850000,
     location: "Brooklyn, NY",
     type: "Loft",
+    category: "all",
     bedrooms: 1,
     bathrooms: 1,
     area: 1200,
@@ -94,6 +104,7 @@ const propertiesData = [
     price: 1800000,
     location: "Aspen, CO",
     type: "Mountain Home",
+    category: "luxury-villas",
     bedrooms: 4,
     bathrooms: 3,
     area: 3200,
@@ -118,6 +129,7 @@ const propertiesData = [
     price: 2900000,
     location: "London, UK",
     type: "Townhouse",
+    category: "all",
     bedrooms: 5,
     bathrooms: 4,
     area: 4100,
@@ -142,6 +154,7 @@ const propertiesData = [
     price: 1200000,
     location: "Maui, HI",
     type: "Condo",
+    category: "waterfront-estates",
     bedrooms: 3,
     bathrooms: 2,
     area: 2100,
@@ -166,6 +179,7 @@ const propertiesData = [
     price: 7500000,
     location: "Silicon Valley",
     type: "Mansion",
+    category: "luxury-villas",
     bedrooms: 8,
     bathrooms: 7,
     area: 9800,
@@ -190,6 +204,7 @@ const propertiesData = [
     price: 12000000,
     location: "Maldives",
     type: "Island Villa",
+    category: "waterfront-estates",
     bedrooms: 6,
     bathrooms: 5,
     area: 7500,
@@ -206,6 +221,33 @@ const propertiesData = [
       email: "lisa@luxeliving.com",
       avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
     }
+  }
+];
+
+const faqItems = [
+  {
+    question: "What is your return policy?",
+    answer: "We offer a 30-day return policy for all items in their original condition. Returns are free of charge, and refunds are processed within 5-7 business days after we receive the returned item."
+  },
+  {
+    question: "How long does shipping take?",
+    answer: "Standard shipping takes 5-7 business days, expedited shipping takes 2-3 business days, and express shipping delivers within 1-2 business days. Shipping times may vary during peak seasons."
+  },
+  {
+    question: "Do you ship internationally?",
+    answer: "Yes, we ship to over 50 countries worldwide. International shipping typically takes 10-20 business days depending on the destination. Additional customs fees may apply."
+  },
+  {
+    question: "Can I change or cancel my order?",
+    answer: "You can change or cancel your order within 24 hours of placing it, provided it hasn't been shipped yet. Please contact our customer support team immediately for assistance."
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer: "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, Apple Pay, Google Pay, and bank transfers for certain orders over $500."
+  },
+  {
+    question: "How can I track my order?",
+    answer: "Once your order ships, you'll receive a tracking number via email. You can use this number on our website or the carrier's website to track your package in real-time."
   }
 ];
 
@@ -245,6 +287,28 @@ const testimonialsData = [
   }
 ];
 
+// Add video testimonials
+const videoTestimonials = [
+  {
+    id: 1,
+    name: "Robert Johnson",
+    role: "Real Estate Investor",
+    videoUrl: "https://player.vimeo.com/video/76979871?h=8272103f6e",
+    thumbnail: "https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    duration: "2:45",
+    quote: "The investment guidance I received was invaluable. My portfolio has grown 42% in one year."
+  },
+  {
+    id: 2,
+    name: "Jennifer Lee",
+    role: "Business Owner",
+    videoUrl: "https://player.vimeo.com/video/76979871?h=8272103f6e",
+    thumbnail: "https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80",
+    duration: "3:20",
+    quote: "They found me the perfect commercial space for my business expansion."
+  }
+];
+
 const propertyReviews = [
   {
     id: 1,
@@ -278,15 +342,21 @@ const propertyReviews = [
   }
 ];
 
-// ==================== COMPONENTS ====================
+// Property Category Tabs
+const propertyCategories = [
+  { id: 'all', label: 'All Properties', icon: <FaHome /> },
+  { id: 'luxury-villas', label: 'Luxury Villas', icon: <MdVilla /> },
+  { id: 'penthouses', label: 'Penthouses', icon: <MdApartment /> },
+  { id: 'waterfront-estates', label: 'Waterfront Estates', icon: <FaWater /> }
+];
 
-// Button Component
+// Button Component - Updated to remove gradients
 const ColorfulButton = ({ children, variant = 'primary', size = 'medium', className = '', ...props }) => {
   const variants = {
-    primary: 'bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 text-white hover:shadow-lg hover:scale-105',
-    secondary: 'bg-gradient-to-r from-cyan-500 to-blue-600 text-white hover:shadow-lg hover:scale-105',
-    outline: 'border-2 border-purple-600 text-purple-600 hover:bg-purple-50',
-    glass: 'bg-white/20 backdrop-blur-lg border border-white/30 text-white hover:bg-white/30'
+    primary: 'bg-orange-500 text-white hover:shadow-lg hover:scale-105',
+    secondary: 'bg-orange-600 text-white hover:shadow-lg hover:scale-105',
+    outline: 'border-2 border-gray-300 text-gray-700 hover:bg-gray-50',
+    glass: 'bg-white/80 backdrop-blur-sm border border-gray-200 text-gray-900 hover:bg-white'
   };
   
   const sizes = {
@@ -305,15 +375,15 @@ const ColorfulButton = ({ children, variant = 'primary', size = 'medium', classN
   );
 };
 
-// Property Card Component
+// Property Card Component - Updated to remove gradients
 const PropertyCard = ({ property, layout = 'grid', onClick }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const [showShare, setShowShare] = useState(false);
   
   const statusColors = {
-    'New': 'bg-gradient-to-r from-green-500 to-emerald-600',
-    'Hot': 'bg-gradient-to-r from-red-500 to-pink-600',
-    'Featured': 'bg-gradient-to-r from-purple-500 to-indigo-600'
+    'New': 'bg-green-600',
+    'Hot': 'bg-red-600',
+    'Featured': 'bg-purple-600'
   };
 
   const formatPrice = (price) => {
@@ -342,7 +412,7 @@ const PropertyCard = ({ property, layout = 'grid', onClick }) => {
       animate={{ opacity: 1, y: 0 }}
       whileHover={{ y: -5 }}
       onClick={onClick}
-      className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer ${layout === 'list' ? 'flex' : ''}`}
+      className={`bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer ${layout === 'list' ? 'flex' : ''}`}
     >
       <div className={`relative ${layout === 'list' ? 'w-1/3' : ''}`}>
         <img src={property.image} alt={property.title} className="w-full h-64 object-cover" />
@@ -350,20 +420,20 @@ const PropertyCard = ({ property, layout = 'grid', onClick }) => {
           <span className={`px-3 py-1 rounded-full text-white text-sm font-bold ${statusColors[property.status]}`}>
             {property.status}
           </span>
-          <span className="px-3 py-1 rounded-full bg-white/90 backdrop-blur-sm text-gray-800 text-sm font-bold flex items-center gap-1">
+          <span className="px-3 py-1 rounded-full bg-white text-gray-800 text-sm font-bold flex items-center gap-1">
             <FaStar className="text-yellow-500" /> {property.rating} ({property.reviews})
           </span>
         </div>
         <div className="absolute top-4 right-4 flex flex-col gap-2">
           <button 
             onClick={(e) => { e.stopPropagation(); setIsFavorite(!isFavorite); }}
-            className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+            className="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:scale-110 transition-transform"
           >
             <FaHeart className={isFavorite ? 'text-red-500' : 'text-gray-400'} />
           </button>
           <button 
             onClick={handleShare}
-            className="w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
+            className="w-10 h-10 bg-white rounded-full shadow-md flex items-center justify-center hover:scale-110 transition-transform"
           >
             <FaShare className="text-gray-600" />
           </button>
@@ -374,7 +444,7 @@ const PropertyCard = ({ property, layout = 'grid', onClick }) => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 10 }}
-              className="absolute top-20 right-4 bg-white rounded-xl shadow-xl p-4 z-10"
+              className="absolute top-20 right-4 bg-white rounded-xl shadow-lg p-4 z-10"
               onClick={e => e.stopPropagation()}
             >
               <p className="font-medium text-gray-800 mb-2">Share this property</p>
@@ -407,7 +477,7 @@ const PropertyCard = ({ property, layout = 'grid', onClick }) => {
             </div>
           </div>
           <div className="text-right">
-            <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <div className="text-2xl font-bold text-orange-500">
               {formatPrice(property.price)}
             </div>
             <div className="text-sm text-gray-500 flex items-center gap-1">
@@ -429,8 +499,8 @@ const PropertyCard = ({ property, layout = 'grid', onClick }) => {
         <div className="flex items-center justify-between mb-6">
           <div className="flex space-x-6">
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-100 to-blue-100 flex items-center justify-center">
-                <FaBed className="text-cyan-600" />
+              <div className="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center">
+                <FaBed className="text-blue-600" />
               </div>
               <div>
                 <div className="font-bold text-gray-900">{property.bedrooms}</div>
@@ -438,16 +508,16 @@ const PropertyCard = ({ property, layout = 'grid', onClick }) => {
               </div>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-pink-100 to-rose-100 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-pink-100 flex items-center justify-center">
                 <FaBath className="text-pink-600" />
               </div>
               <div>
                 <div className="font-bold text-gray-900">{property.bathrooms}</div>
-                <div className="text-sm text-gray500">Baths</div>
+                <div className="text-sm text-gray-500">Baths</div>
               </div>
             </div>
             <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-green-100 to-emerald-100 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-green-100 flex items-center justify-center">
                 <FaRulerCombined className="text-green-600" />
               </div>
               <div>
@@ -461,7 +531,7 @@ const PropertyCard = ({ property, layout = 'grid', onClick }) => {
         <div className="flex items-center justify-between">
           <div className="flex flex-wrap gap-2">
             {property.features.slice(0, 3).map((feature, idx) => (
-              <span key={idx} className="px-3 py-1 bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 rounded-full text-sm">
+              <span key={idx} className="px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm">
                 {feature}
               </span>
             ))}
@@ -475,109 +545,7 @@ const PropertyCard = ({ property, layout = 'grid', onClick }) => {
   );
 };
 
-// Review Section Component
-const ReviewSection = ({ propertyId }) => {
-  const [reviews, setReviews] = useState(propertyReviews.filter(r => r.propertyId === propertyId));
-  const [newReview, setNewReview] = useState({
-    rating: 5,
-    comment: '',
-    userName: ''
-  });
-
-  const handleSubmitReview = (e) => {
-    e.preventDefault();
-    const review = {
-      id: reviews.length + 1,
-      propertyId,
-      userName: newReview.userName || 'Anonymous',
-      userAvatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80',
-      rating: newReview.rating,
-      comment: newReview.comment,
-      date: new Date().toISOString().split('T')[0],
-      helpful: 0
-    };
-    setReviews([review, ...reviews]);
-    setNewReview({ rating: 5, comment: '', userName: '' });
-  };
-
-  return (
-    <div className="bg-white rounded-2xl p-8 shadow-lg">
-      <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2">
-        <FaComment className="text-purple-600" />
-        Property Reviews ({reviews.length})
-      </h3>
-      
-      <form onSubmit={handleSubmitReview} className="mb-8 p-6 bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl">
-        <h4 className="font-bold text-gray-900 mb-4">Add Your Review</h4>
-        <div className="flex items-center mb-4">
-          <span className="mr-4">Rating:</span>
-          {[1, 2, 3, 4, 5].map((star) => (
-            <button
-              key={star}
-              type="button"
-              onClick={() => setNewReview({...newReview, rating: star})}
-              className="text-2xl mr-1"
-            >
-              {star <= newReview.rating ? '★' : '☆'}
-            </button>
-          ))}
-          <span className="ml-2 text-gray-700">{newReview.rating}/5</span>
-        </div>
-        <div className="mb-4">
-          <input
-            type="text"
-            placeholder="Your name (optional)"
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl mb-3"
-            value={newReview.userName}
-            onChange={(e) => setNewReview({...newReview, userName: e.target.value})}
-          />
-          <textarea
-            placeholder="Share your experience..."
-            className="w-full px-4 py-3 border border-gray-300 rounded-xl"
-            rows="3"
-            value={newReview.comment}
-            onChange={(e) => setNewReview({...newReview, comment: e.target.value})}
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="px-6 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-bold hover:shadow-lg transition-all"
-        >
-          Submit Review
-        </button>
-      </form>
-      
-      <div className="space-y-6">
-        {reviews.map((review) => (
-          <div key={review.id} className="border-b border-gray-100 pb-6 last:border-0">
-            <div className="flex items-start justify-between mb-3">
-              <div className="flex items-center">
-                <img src={review.userAvatar} alt={review.userName} className="w-12 h-12 rounded-full mr-4" />
-                <div>
-                  <h5 className="font-bold text-gray-900">{review.userName}</h5>
-                  <div className="flex items-center">
-                    {[...Array(5)].map((_, i) => (
-                      <FaStar key={i} className={`${i < review.rating ? 'text-yellow-500' : 'text-gray-300'}`} />
-                    ))}
-                    <span className="ml-2 text-sm text-gray-500">{review.date}</span>
-                  </div>
-                </div>
-              </div>
-              <button className="flex items-center text-gray-500 hover:text-purple-600">
-                <FaThumbsUp className="mr-2" />
-                Helpful ({review.helpful})
-              </button>
-            </div>
-            <p className="text-gray-700">{review.comment}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// SearchBar Component
+// SearchBar Component - Updated to remove gradients
 const SearchBar = ({ onSearch }) => {
   const [search, setSearch] = useState({
     location: '',
@@ -587,15 +555,15 @@ const SearchBar = ({ onSearch }) => {
   });
 
   const propertyTypes = [
-    { value: '', label: 'Any Type', icon: '🏠' },
-    { value: 'penthouse', label: 'Penthouse', icon: '🏙️' },
-    { value: 'villa', label: 'Villa', icon: '🏡' },
-    { value: 'loft', label: 'Loft', icon: '🏭' },
-    { value: 'mountain', label: 'Mountain Home', icon: '⛰️' },
-    { value: 'townhouse', label: 'Townhouse', icon: '🏘️' },
-    { value: 'condo', label: 'Condo', icon: '🏢' },
-    { value: 'mansion', label: 'Mansion', icon: '🏛️' },
-    { value: 'island', label: 'Island Villa', icon: '🏝️' }
+    { value: '', label: 'Any Type', icon: <FaHome /> },
+    { value: 'penthouse', label: 'Penthouse', icon: <MdApartment /> },
+    { value: 'villa', label: 'Villa', icon: <MdVilla /> },
+    { value: 'loft', label: 'Loft', icon: <GiModernCity /> },
+    { value: 'mountain', label: 'Mountain Home', icon: <FaMountain /> },
+    { value: 'townhouse', label: 'Townhouse', icon: <FaBuilding /> },
+    { value: 'condo', label: 'Condo', icon: <FaCity /> },
+    { value: 'mansion', label: 'Mansion', icon: <FaBuilding /> },
+    { value: 'island', label: 'Island Villa', icon: <FaWater /> }
   ];
 
   const handleSearch = () => {
@@ -606,7 +574,7 @@ const SearchBar = ({ onSearch }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="bg-gradient-to-br from-white/90 via-white/95 to-white backdrop-blur-xl rounded-3xl shadow-2xl p-8 border border-white/20"
+      className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100"
     >
       <div className="mb-6 text-center">
         <h2 className="text-3xl font-bold text-gray-900 mb-2">Find Your Dream Property</h2>
@@ -615,26 +583,26 @@ const SearchBar = ({ onSearch }) => {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="relative group">
-          <FaMapMarkerAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-hover:text-purple-600 transition-colors" />
+          <FaMapMarkerAlt className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-hover:text-blue-600 transition-colors" />
           <input
             type="text"
             placeholder="City, Neighborhood or ZIP"
-            className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-gray-50 to-white border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-purple-500/30 focus:border-purple-500 transition-all text-gray-900 placeholder-gray-500"
+            className="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-gray-900 placeholder-gray-500"
             value={search.location}
             onChange={(e) => setSearch({...search, location: e.target.value})}
           />
         </div>
         
         <div className="relative group">
-          <FaHome className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-hover:text-pink-600 transition-colors" />
+          <FaHome className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-hover:text-green-600 transition-colors" />
           <select
-            className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-gray-50 to-white border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-pink-500/30 focus:border-pink-500 transition-all appearance-none text-gray-900"
+            className="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-all appearance-none text-gray-900"
             value={search.type}
             onChange={(e) => setSearch({...search, type: e.target.value})}
           >
             {propertyTypes.map(type => (
               <option key={type.value} value={type.value}>
-                {type.icon} {type.label}
+                {type.label}
               </option>
             ))}
           </select>
@@ -643,7 +611,7 @@ const SearchBar = ({ onSearch }) => {
         <div className="relative group">
           <FaDollarSign className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 group-hover:text-orange-600 transition-colors" />
           <select
-            className="w-full pl-12 pr-4 py-4 bg-gradient-to-r from-gray-50 to-white border-2 border-gray-200 rounded-xl focus:ring-4 focus:ring-orange-500/30 focus:border-orange-500 transition-all appearance-none text-gray-900"
+            className="w-full pl-12 pr-4 py-4 bg-gray-50 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all appearance-none text-gray-900"
             value={search.price}
             onChange={(e) => setSearch({...search, price: e.target.value})}
           >
@@ -670,7 +638,7 @@ const SearchBar = ({ onSearch }) => {
         {['Beachfront', 'City Center', 'Mountain View', 'Penthouse', 'Gated Community'].map((tag, idx) => (
           <button
             key={idx}
-            className="px-4 py-2 rounded-full text-sm font-medium bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 hover:from-purple-100 hover:to-pink-100 transition-all"
+            className="px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-700 hover:bg-gray-200 transition-all"
             onClick={() => setSearch({...search, location: tag})}
           >
             {tag}
@@ -681,21 +649,21 @@ const SearchBar = ({ onSearch }) => {
   );
 };
 
-// Testimonial Card Component
+// Testimonial Card Component - Updated to remove gradients
 const TestimonialCard = ({ testimonial, isActive }) => {
   return (
     <motion.div
       initial={{ opacity: 0, x: 100 }}
       animate={{ opacity: isActive ? 1 : 0.5, x: isActive ? 0 : 50, scale: isActive ? 1 : 0.95 }}
       transition={{ duration: 0.5 }}
-      className={`bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 shadow-xl ${isActive ? 'border-2 border-purple-500' : 'border border-gray-200'}`}
+      className={`bg-white rounded-2xl p-8 shadow-lg ${isActive ? 'border-2 border-blue-500' : 'border border-gray-200'}`}
     >
       <div className="flex items-center mb-6">
         <div className="relative">
-          <div className="w-16 h-16 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 p-0.5">
+          <div className="w-16 h-16 rounded-full bg-blue-500 p-0.5">
             <img src={testimonial.image} alt={testimonial.name} className="w-full h-full rounded-full object-cover border-2 border-white" />
           </div>
-          <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full flex items-center justify-center">
+          <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
             <FaCheck className="text-white text-xs" />
           </div>
         </div>
@@ -718,7 +686,7 @@ const TestimonialCard = ({ testimonial, isActive }) => {
             <div className="font-bold text-gray-900">{testimonial.transaction}</div>
             <div className="text-sm text-gray-500">{testimonial.location} • {testimonial.date}</div>
           </div>
-          <div className="px-4 py-2 rounded-full bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 font-medium">
+          <div className="px-4 py-2 rounded-full bg-green-100 text-green-700 font-medium">
             Completed
           </div>
         </div>
@@ -727,613 +695,266 @@ const TestimonialCard = ({ testimonial, isActive }) => {
   );
 };
 
-// Sign In/Up Modal Component
-const AuthModal = ({ isOpen, onClose, mode: initialMode = 'signin' }) => {
-  const [mode, setMode] = useState(initialMode);
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    name: '',
-    phone: '',
-    confirmPassword: ''
-  });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (mode === 'signup' && formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match!');
-      return;
-    }
-    
-    // Here you would typically make an API call
-    console.log(`${mode} attempt:`, formData);
-    alert(`${mode === 'signin' ? 'Sign In' : 'Sign Up'} successful!`);
-    onClose();
-  };
-
-  const socialButtons = [
-    { icon: <FaGoogle />, label: 'Google', color: 'from-red-500 to-orange-500' },
-    { icon: <FaApple />, label: 'Apple', color: 'from-gray-800 to-gray-900' },
-    { icon: <FaFacebook />, label: 'Facebook', color: 'from-blue-600 to-blue-700' }
-  ];
+// Video Testimonial Component
+const VideoTestimonialCard = ({ testimonial }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
-          />
-          
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden"
-              onClick={e => e.stopPropagation()}
+    <div className="bg-white rounded-2xl overflow-hidden shadow-lg">
+      <div className="relative">
+        {!isPlaying ? (
+          <>
+            <img src={testimonial.thumbnail} alt={testimonial.name} className="w-full h-64 object-cover" />
+            <button
+              onClick={() => setIsPlaying(true)}
+              className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/40 transition-colors"
             >
-              <div className="relative p-8">
-                <button
-                  onClick={onClose}
-                  className="absolute top-4 right-4 w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
-                >
-                  <FaTimes />
-                </button>
-                
-                <div className="text-center mb-8">
-                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 flex items-center justify-center mx-auto mb-4">
-                    <span className="text-white text-2xl font-bold">L</span>
-                  </div>
-                  <h2 className="text-3xl font-bold text-gray-900">
-                    {mode === 'signin' ? 'Welcome Back' : 'Join LuxeLiving'}
-                  </h2>
-                  <p className="text-gray-600 mt-2">
-                    {mode === 'signin' ? 'Sign in to your account' : 'Create your free account'}
-                  </p>
-                </div>
-
-                <div className="flex gap-2 mb-6">
-                  {socialButtons.map((social, idx) => (
-                    <button
-                      key={idx}
-                      className={`flex-1 py-3 rounded-xl bg-gradient-to-r ${social.color} text-white font-medium flex items-center justify-center gap-2 hover:shadow-lg transition-all`}
-                    >
-                      {social.icon}
-                      {social.label}
-                    </button>
-                  ))}
-                </div>
-
-                <div className="relative my-8">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-full border-t border-gray-200"></div>
-                  </div>
-                  <div className="relative flex justify-center text-sm">
-                    <span className="px-4 bg-white text-gray-500">Or continue with email</span>
-                  </div>
-                </div>
-
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  {mode === 'signup' && (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                      <input
-                        type="text"
-                        required={mode === 'signup'}
-                        value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                        placeholder="John Doe"
-                      />
-                    </div>
-                  )}
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                    <input
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({...formData, email: e.target.value})}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                      placeholder="john@example.com"
-                    />
-                  </div>
-
-                  {mode === 'signup' && (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                      <input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                        placeholder="+1 (234) 567-8900"
-                      />
-                    </div>
-                  )}
-
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
-                    <input
-                      type="password"
-                      required
-                      value={formData.password}
-                      onChange={(e) => setFormData({...formData, password: e.target.value})}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                      placeholder="••••••••"
-                    />
-                  </div>
-
-                  {mode === 'signup' && (
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Confirm Password</label>
-                      <input
-                        type="password"
-                        required={mode === 'signup'}
-                        value={formData.confirmPassword}
-                        onChange={(e) => setFormData({...formData, confirmPassword: e.target.value})}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                        placeholder="••••••••"
-                      />
-                    </div>
-                  )}
-
-                  {mode === 'signin' && (
-                    <div className="flex items-center justify-between">
-                      <label className="flex items-center">
-                        <input type="checkbox" className="rounded border-gray-300 text-purple-600 focus:ring-purple-500" />
-                        <span className="ml-2 text-sm text-gray-700">Remember me</span>
-                      </label>
-                      <button type="button" className="text-sm text-purple-600 hover:text-purple-700 font-medium">
-                        Forgot password?
-                      </button>
-                    </div>
-                  )}
-
-                  <button
-                    type="submit"
-                    className="w-full py-3 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 text-white rounded-xl font-bold hover:shadow-lg transition-all"
-                  >
-                    {mode === 'signin' ? 'Sign In' : 'Create Account'}
-                  </button>
-                </form>
-
-                <div className="mt-6 text-center">
-                  <p className="text-gray-600">
-                    {mode === 'signin' ? "Don't have an account?" : "Already have an account?"}
-                    <button
-                      onClick={() => setMode(mode === 'signin' ? 'signup' : 'signin')}
-                      className="ml-2 text-purple-600 hover:text-purple-700 font-medium"
-                    >
-                      {mode === 'signin' ? 'Sign Up' : 'Sign In'}
-                    </button>
-                  </p>
-                </div>
+              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+                <FaPlay className="text-orange-500 text-2xl ml-1" />
               </div>
-            </motion.div>
-          </div>
-        </>
-      )}
-    </AnimatePresence>
-  );
-};
-
-// User Profile Dropdown
-const UserProfileDropdown = ({ isOpen, onClose, onSignOut }) => {
-  const menuItems = [
-    { icon: <FaUserCircle />, label: 'My Profile', href: '#' },
-    { icon: <FaBookmark />, label: 'Saved Properties', href: '#' },
-    { icon: <FaHistory />, label: 'Viewing History', href: '#' },
-    { icon: <FaBell />, label: 'Notifications', href: '#' },
-    { icon: <FaCog />, label: 'Settings', href: '#' }
-  ];
-
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          <div className="fixed inset-0 z-40" onClick={onClose} />
-          <motion.div
-            initial={{ opacity: 0, y: -10, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -10, scale: 0.95 }}
-            className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-2xl border border-gray-100 z-50 overflow-hidden"
-          >
-            <div className="p-4 border-b border-gray-100">
-              <div className="flex items-center">
-                <img
-                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
-                  alt="User"
-                  className="w-10 h-10 rounded-full"
-                />
-                <div className="ml-3">
-                  <p className="font-bold text-gray-900">John Doe</p>
-                  <p className="text-sm text-gray-500">john@example.com</p>
-                </div>
-              </div>
+            </button>
+            <div className="absolute bottom-4 right-4 bg-black/70 text-white px-2 py-1 rounded text-sm">
+              {testimonial.duration}
             </div>
-            
-            <div className="py-2">
-              {menuItems.map((item, idx) => (
-                <a
-                  key={idx}
-                  href={item.href}
-                  className="flex items-center px-4 py-3 text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors"
-                  onClick={onClose}
-                >
-                  <span className="mr-3 text-lg">{item.icon}</span>
-                  {item.label}
-                </a>
-              ))}
-              
-              <button
-                onClick={onSignOut}
-                className="flex items-center w-full px-4 py-3 text-red-600 hover:bg-red-50 transition-colors border-t border-gray-100 mt-2"
-              >
-                <FaSignOutAlt className="mr-3" />
-                Sign Out
-              </button>
-            </div>
-          </motion.div>
-        </>
-      )}
-    </AnimatePresence>
-  );
-};
-
-// Property Detail Modal
-const PropertyDetailModal = ({ property, isOpen, onClose }) => {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [showContactForm, setShowContactForm] = useState(false);
-
-  const tabs = [
-    { id: 'overview', label: 'Overview', icon: <FaEye /> },
-    { id: 'features', label: 'Features', icon: <FaStar /> },
-    { id: 'amenities', label: 'Amenities', icon: <MdPool /> },
-    { id: 'reviews', label: 'Reviews', icon: <FaComment /> },
-    { id: 'location', label: 'Location', icon: <FaMapMarkerAlt /> }
-  ];
-
-  if (!property) return null;
-
-  return (
-    <AnimatePresence>
-      {isOpen && (
-        <>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
-          />
-          
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-y-auto">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="bg-white rounded-3xl shadow-2xl max-w-6xl w-full max-h-[90vh] overflow-hidden"
-              onClick={e => e.stopPropagation()}
-            >
-              <div className="relative">
-                <img src={property.image} alt={property.title} className="w-full h-96 object-cover" />
-                <button
-                  onClick={onClose}
-                  className="absolute top-4 right-4 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 transition-transform"
-                >
-                  <FaTimes />
-                </button>
-                <div className="absolute bottom-4 left-4">
-                  <span className="px-4 py-2 rounded-full text-white text-sm font-bold bg-gradient-to-r from-purple-600 to-pink-600">
-                    {property.status}
-                  </span>
-                </div>
-              </div>
-              
-              <div className="p-8">
-                <div className="flex justify-between items-start mb-8">
-                  <div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">{property.title}</h2>
-                    <div className="flex items-center text-gray-600 mb-4">
-                      <FaMapMarkerAlt className="mr-2" />
-                      <span className="text-lg">{property.location}</span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <div className="flex items-center">
-                        {[...Array(5)].map((_, i) => (
-                          <FaStar key={i} className={`${i < property.rating ? 'text-yellow-500' : 'text-gray-300'}`} />
-                        ))}
-                        <span className="ml-2 text-gray-700">{property.rating} ({property.reviews} reviews)</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-4xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent mb-2">
-                      ${property.price.toLocaleString()}
-                    </div>
-                    <div className="text-gray-600">{property.type}</div>
-                  </div>
-                </div>
-                
-                <div className="border-b border-gray-200 mb-8">
-                  <div className="flex space-x-8">
-                    {tabs.map((tab) => (
-                      <button
-                        key={tab.id}
-                        onClick={() => setActiveTab(tab.id)}
-                        className={`flex items-center py-3 px-1 font-medium text-lg border-b-2 transition-colors ${
-                          activeTab === tab.id
-                            ? 'border-purple-600 text-purple-600'
-                            : 'border-transparent text-gray-500 hover:text-gray-700'
-                        }`}
-                      >
-                        <span className="mr-2">{tab.icon}</span>
-                        {tab.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-                
-                <div className="mb-8">
-                  {activeTab === 'overview' && (
-                    <div>
-                      <p className="text-gray-700 text-lg mb-6">{property.description}</p>
-                      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                        <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-2xl p-6">
-                          <div className="text-3xl font-bold text-cyan-700 mb-2">{property.bedrooms}</div>
-                          <div className="text-gray-600">Bedrooms</div>
-                        </div>
-                        <div className="bg-gradient-to-r from-pink-50 to-rose-50 rounded-2xl p-6">
-                          <div className="text-3xl font-bold text-pink-700 mb-2">{property.bathrooms}</div>
-                          <div className="text-gray-600">Bathrooms</div>
-                        </div>
-                        <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6">
-                          <div className="text-3xl font-bold text-green-700 mb-2">{property.area.toLocaleString()}</div>
-                          <div className="text-gray-600">Square Feet</div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  
-                  {activeTab === 'features' && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      {property.features.map((feature, idx) => (
-                        <div key={idx} className="flex items-center p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-xl">
-                          <FaCheck className="text-purple-600 mr-3" />
-                          <span className="font-medium">{feature}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  
-                  {activeTab === 'amenities' && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                      {property.amenities.map((amenity, idx) => (
-                        <div key={idx} className="flex items-center p-4 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl">
-                          <span className="mr-3 text-blue-600">✓</span>
-                          <span className="font-medium">{amenity}</span>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                  
-                  {activeTab === 'reviews' && <ReviewSection propertyId={property.id} />}
-                  
-                  {activeTab === 'location' && (
-                    <div className="h-96 bg-gradient-to-r from-gray-100 to-gray-200 rounded-2xl flex items-center justify-center">
-                      <div className="text-center">
-                        <FaMapMarkerAlt className="text-4xl text-red-500 mx-auto mb-4" />
-                        <p className="text-xl font-bold text-gray-900">{property.location}</p>
-                        <p className="text-gray-600">Coordinates: {property.coordinates.lat}, {property.coordinates.lng}</p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-                
-                <div className="border-t border-gray-200 pt-8">
-                  <div className="flex justify-between items-center">
-                    <div className="flex items-center">
-                      <img src={property.agent.avatar} alt={property.agent.name} className="w-16 h-16 rounded-full mr-4" />
-                      <div>
-                        <h4 className="font-bold text-gray-900 text-lg">{property.agent.name}</h4>
-                        <p className="text-gray-600">LuxeLiving Agent</p>
-                        <div className="flex gap-3 mt-2">
-                          <a href={`tel:${property.agent.phone}`} className="text-sm text-purple-600 hover:text-purple-700">
-                            <FaPhone className="inline mr-1" /> Call
-                          </a>
-                          <a href={`mailto:${property.agent.email}`} className="text-sm text-purple-600 hover:text-purple-700">
-                            <FaEnvelope className="inline mr-1" /> Email
-                          </a>
-                          <a href={`https://wa.me/${property.agent.phone.replace(/\D/g, '')}`} className="text-sm text-purple-600 hover:text-purple-700">
-                            <FaWhatsapp className="inline mr-1" /> WhatsApp
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex gap-4">
-                      <button
-                        onClick={() => setShowContactForm(true)}
-                        className="px-8 py-3 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl font-bold hover:shadow-lg transition-all"
-                      >
-                        Schedule Viewing
-                      </button>
-                      <button
-                        onClick={() => alert('Property saved to favorites!')}
-                        className="px-8 py-3 border-2 border-purple-600 text-purple-600 rounded-xl font-bold hover:bg-purple-50 transition-colors"
-                      >
-                        Save Property
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+          </>
+        ) : (
+          <div className="relative h-64">
+            <iframe
+              src={`${testimonial.videoUrl}&autoplay=1`}
+              className="absolute inset-0 w-full h-full"
+              frameBorder="0"
+              allow="autoplay; fullscreen; picture-in-picture"
+              allowFullScreen
+              title={`Testimonial from ${testimonial.name}`}
+            ></iframe>
           </div>
-        </>
-      )}
-    </AnimatePresence>
-  );
-};
-
-// Investment Calculator Component
-const InvestmentCalculator = () => {
-  const [propertyValue, setPropertyValue] = useState(1000000);
-  const [downPayment, setDownPayment] = useState(20);
-  const [interestRate, setInterestRate] = useState(4.5);
-  const [loanTerm, setLoanTerm] = useState(30);
-  const [rentalIncome, setRentalIncome] = useState(5000);
-
-  const calculateMonthlyPayment = () => {
-    const loanAmount = propertyValue * (100 - downPayment) / 100;
-    const monthlyRate = interestRate / 100 / 12;
-    const numberOfPayments = loanTerm * 12;
-    
-    const monthlyPayment = loanAmount * 
-      (monthlyRate * Math.pow(1 + monthlyRate, numberOfPayments)) / 
-      (Math.pow(1 + monthlyRate, numberOfPayments) - 1);
-    
-    return monthlyPayment.toFixed(2);
-  };
-
-  const calculateROI = () => {
-    const annualIncome = rentalIncome * 12;
-    const investment = propertyValue * downPayment / 100;
-    const roi = ((annualIncome - (parseFloat(calculateMonthlyPayment()) * 12)) / investment * 100).toFixed(2);
-    return roi;
-  };
-
-  return (
-    <div className="bg-gradient-to-br from-white to-gray-50 rounded-3xl p-8 shadow-2xl">
-      <h3 className="text-2xl font-bold text-gray-900 mb-2">Investment Calculator</h3>
-      <p className="text-gray-600 mb-8">Calculate your potential returns</p>
+        )}
+      </div>
       
-      <div className="space-y-6">
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            Property Value: ${propertyValue.toLocaleString()}
-          </label>
-          <input
-            type="range"
-            min="100000"
-            max="10000000"
-            step="10000"
-            value={propertyValue}
-            onChange={(e) => setPropertyValue(parseInt(e.target.value))}
-            className="w-full h-2 bg-gradient-to-r from-purple-200 to-pink-200 rounded-lg appearance-none cursor-pointer"
-          />
-        </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Down Payment: {downPayment}%
-            </label>
-            <input
-              type="range"
-              min="5"
-              max="50"
-              step="1"
-              value={downPayment}
-              onChange={(e) => setDownPayment(parseInt(e.target.value))}
-              className="w-full h-2 bg-gradient-to-r from-blue-200 to-cyan-200 rounded-lg appearance-none cursor-pointer"
-            />
+      <div className="p-6">
+        <div className="flex items-center mb-4">
+          <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center mr-4">
+            <FaUser className="text-gray-600" />
           </div>
-          
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Interest Rate: {interestRate}%
-            </label>
-            <input
-              type="range"
-              min="2"
-              max="10"
-              step="0.1"
-              value={interestRate}
-              onChange={(e) => setInterestRate(parseFloat(e.target.value))}
-              className="w-full h-2 bg-gradient-to-r from-green-200 to-emerald-200 rounded-lg appearance-none cursor-pointer"
-            />
+            <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
+            <p className="text-gray-600 text-sm">{testimonial.role}</p>
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Loan Term: {loanTerm} years
-            </label>
-            <select
-              value={loanTerm}
-              onChange={(e) => setLoanTerm(parseInt(e.target.value))}
-              className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500"
-            >
-              <option value={15}>15 years</option>
-              <option value={20}>20 years</option>
-              <option value={25}>25 years</option>
-              <option value={30}>30 years</option>
-            </select>
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Monthly Rental Income: ${rentalIncome}
-            </label>
-            <input
-              type="range"
-              min="1000"
-              max="20000"
-              step="100"
-              value={rentalIncome}
-              onChange={(e) => setRentalIncome(parseInt(e.target.value))}
-              className="w-full h-2 bg-gradient-to-r from-orange-200 to-red-200 rounded-lg appearance-none cursor-pointer"
-            />
-          </div>
-        </div>
+        <p className="text-gray-700 italic mb-4">"{testimonial.quote}"</p>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-          <div className="bg-gradient-to-r from-cyan-50 to-blue-50 rounded-2xl p-6 text-center">
-            <div className="text-3xl font-bold text-cyan-700 mb-2">${calculateMonthlyPayment()}</div>
-            <div className="text-gray-600">Monthly Payment</div>
-          </div>
-          <div className="bg-gradient-to-r from-green-50 to-emerald-50 rounded-2xl p-6 text-center">
-            <div className="text-3xl font-bold text-green-700 mb-2">{calculateROI()}%</div>
-            <div className="text-gray-600">Annual ROI</div>
-          </div>
-          <div className="bg-gradient-to-r from-purple-50 to-pink-50 rounded-2xl p-6 text-center">
-            <div className="text-3xl font-bold text-purple-700 mb-2">${(rentalIncome - parseFloat(calculateMonthlyPayment())).toFixed(2)}</div>
-            <div className="text-gray-600">Monthly Cash Flow</div>
-          </div>
+        <div className="flex items-center">
+          <FaStar className="text-yellow-500 mr-1" />
+          <FaStar className="text-yellow-500 mr-1" />
+          <FaStar className="text-yellow-500 mr-1" />
+          <FaStar className="text-yellow-500 mr-1" />
+          <FaStar className="text-yellow-500" />
         </div>
       </div>
     </div>
   );
 };
 
-// ==================== MAIN APP ====================
+// Updated Contact Form Component with Email Sending
+const ContactForm = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState('');
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus('');
+
+    try {
+      // Replace with your EmailJS service ID, template ID, and public key
+      const result = await emailjs.send(
+        'YOUR_SERVICE_ID',
+        'YOUR_TEMPLATE_ID',
+        {
+          to_name: 'LuxeLiving Team',
+          from_name: formData.name,
+          from_email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+          reply_to: formData.email
+        },
+        'YOUR_PUBLIC_KEY'
+      );
+
+      if (result.status === 200) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', phone: '', message: '' });
+        
+        // Also send confirmation to user
+        await emailjs.send(
+          'YOUR_SERVICE_ID',
+          'YOUR_CONFIRMATION_TEMPLATE_ID',
+          {
+            to_name: formData.name,
+            to_email: formData.email,
+          },
+          'YOUR_PUBLIC_KEY'
+        );
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  return (
+    <div className="bg-white rounded-2xl p-8 shadow-lg">
+      <div className="flex items-center gap-3 mb-8">
+        <div className="p-3 bg-orange-500 rounded-xl shadow">
+          <FaPaperPlane className="w-6 h-6 text-white" />
+        </div>
+        <h3 className="text-2xl font-bold text-gray-900">Send Message</h3>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="relative">
+          <FaUser className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            type="text"
+            placeholder="Your Name"
+            className="w-full pl-12 pr-4 py-3 text-gray-700 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all hover:bg-white"
+            value={formData.name}
+            onChange={(e) => setFormData({...formData, name: e.target.value})}
+            required
+          />
+        </div>
+
+        <div className="relative">
+          <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            type="email"
+            placeholder="Your Email"
+            className="w-full pl-12 pr-4 py-3 text-gray-700 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all hover:bg-white"
+            value={formData.email}
+            onChange={(e) => setFormData({...formData, email: e.target.value})}
+            required
+          />
+        </div>
+
+        <div className="relative">
+          <FaPhone className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
+          <input
+            type="tel"
+            placeholder="Phone Number"
+            className="w-full pl-12 pr-4 py-3 text-gray-700 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all hover:bg-white"
+            value={formData.phone}
+            onChange={(e) => setFormData({...formData, phone: e.target.value})}
+          />
+        </div>
+
+        <div className="relative">
+          <FaComment className="absolute left-4 top-6 text-gray-400" />
+          <textarea
+            placeholder="Your Message"
+            rows="5"
+            className="w-full pl-12 pr-4 py-3 text-gray-700 bg-gray-50 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all hover:bg-white resize-none"
+            value={formData.message}
+            onChange={(e) => setFormData({...formData, message: e.target.value})}
+            required
+          ></textarea>
+        </div>
+
+        {submitStatus === 'success' && (
+          <div className="p-4 bg-green-100 text-green-700 rounded-xl">
+            Message sent successfully! We'll contact you soon.
+          </div>
+        )}
+
+        {submitStatus === 'error' && (
+          <div className="p-4 bg-red-100 text-red-700 rounded-xl">
+            Failed to send message. Please try again or call us directly.
+          </div>
+        )}
+
+        <motion.div
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
+        >
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full bg-orange-500 text-white font-bold py-4 px-6 rounded-xl shadow hover:bg-orange-600 transition-all duration-300 text-lg disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {isSubmitting ? (
+              <span className="flex items-center justify-center gap-2">
+                <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Sending...
+              </span>
+            ) : (
+              <span className="flex items-center justify-center gap-2">
+                Send Message
+                <FaPaperPlane className="w-5 h-5" />
+              </span>
+            )}
+          </button>
+        </motion.div>
+      </form>
+    </div>
+  );
+};
+
+// Property Category Tabs Component
+const PropertyCategoryTabs = ({ activeCategory, onCategoryChange }) => {
+  return (
+    <div className="flex flex-wrap justify-center gap-3 mb-8">
+      {propertyCategories.map((category) => (
+        <button
+          key={category.id}
+          onClick={() => onCategoryChange(category.id)}
+          className={`flex items-center px-6 py-3 rounded-xl font-medium transition-all ${
+            activeCategory === category.id
+              ? 'bg-orange-500 text-white shadow-lg'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+          }`}
+        >
+          <span className="mr-2">{category.icon}</span>
+          {category.label}
+        </button>
+      ))}
+    </div>
+  );
+};
+
+// Main App Component
 const ModernRealEstateWebsite = () => {
   const [activeTestimonial, setActiveTestimonial] = useState(0);
   const [viewMode, setViewMode] = useState('grid');
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [activeCategory, setActiveCategory] = useState('all');
   const [showContactModal, setShowContactModal] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [authMode, setAuthMode] = useState('signin');
   const [userProfileOpen, setUserProfileOpen] = useState(false);
   const [selectedProperty, setSelectedProperty] = useState(null);
   const [showAllProperties, setShowAllProperties] = useState(false);
-  const [contactForm, setContactForm] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: ''
-  });
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [openIndex, setOpenIndex] = useState(null);
+
+  // Filter properties based on active category
+  const filteredProperties = propertiesData.filter(property => 
+    activeCategory === 'all' || property.category === activeCategory
+  );
+
+  const displayedProperties = showAllProperties 
+    ? filteredProperties 
+    : filteredProperties.slice(0, 6);
 
   // Auto-rotate testimonials
   useEffect(() => {
@@ -1364,13 +985,6 @@ const ModernRealEstateWebsite = () => {
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  const handleContactSubmit = (e) => {
-    e.preventDefault();
-    alert('Thank you for your message! We will contact you soon.');
-    setContactForm({ name: '', email: '', phone: '', message: '' });
-    setShowContactModal(false);
-  };
-
   const handleSignIn = () => {
     setAuthMode('signin');
     setShowAuthModal(true);
@@ -1384,34 +998,24 @@ const ModernRealEstateWebsite = () => {
   const handleSignOut = () => {
     setIsLoggedIn(false);
     setUserProfileOpen(false);
-    alert('You have been signed out successfully!');
   };
 
-  const propertyFilters = [
-    { id: 'all', label: 'All Properties', color: 'from-purple-500 to-pink-500' },
-    { id: 'penthouse', label: 'Penthouses', color: 'from-blue-500 to-cyan-500' },
-    { id: 'villa', label: 'Villas', color: 'from-green-500 to-emerald-500' },
-    { id: 'featured', label: 'Featured', color: 'from-orange-500 to-red-500' },
-    { id: 'new', label: 'New Listings', color: 'from-indigo-500 to-purple-500' },
-    { id: 'hot', label: 'Hot Deals', color: 'from-red-500 to-pink-500' }
-  ];
-
-  const filteredProperties = showAllProperties 
-    ? propertiesData 
-    : propertiesData.slice(0, 6);
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50">
+    <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
-      <nav className="fixed top-0 w-full z-50 bg-white/90 backdrop-blur-lg border-b border-gray-100">
+      <nav className="fixed top-0 w-full z-50 bg-white/95 backdrop-blur-lg border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 flex items-center justify-center">
+              <div className="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center">
                 <span className="text-white font-bold text-xl">L</span>
               </div>
               <div>
-                <div className="text-2xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <div className="text-2xl font-bold text-gray-900">
                   LuxeLiving
                 </div>
                 <div className="text-xs text-gray-500 -mt-1">Premium Properties</div>
@@ -1433,8 +1037,8 @@ const ModernRealEstateWebsite = () => {
                   href={`#${item.id}`}
                   className={`font-medium transition-colors ${
                     activeSection === item.id
-                      ? 'text-purple-600'
-                      : 'text-gray-700 hover:text-purple-600'
+                      ? 'text-orange-500'
+                      : 'text-gray-700 hover:text-orange-500'
                   }`}
                   onClick={() => setActiveSection(item.id)}
                 >
@@ -1448,24 +1052,17 @@ const ModernRealEstateWebsite = () => {
                     onClick={() => setUserProfileOpen(!userProfileOpen)}
                     className="flex items-center space-x-3 p-2 rounded-xl hover:bg-gray-50"
                   >
-                    <img
-                      src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
-                      alt="User"
-                      className="w-8 h-8 rounded-full"
-                    />
+                    <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                      <FaUser className="text-gray-600" />
+                    </div>
                     <span className="font-medium text-gray-700">John Doe</span>
                   </button>
-                  <UserProfileDropdown
-                    isOpen={userProfileOpen}
-                    onClose={() => setUserProfileOpen(false)}
-                    onSignOut={handleSignOut}
-                  />
                 </div>
               ) : (
                 <div className="flex items-center space-x-4">
                   <button
                     onClick={handleSignIn}
-                    className="font-medium text-gray-700 hover:text-purple-600 transition-colors"
+                    className="font-medium text-gray-700 hover:text-orange-500 transition-colors"
                   >
                     Sign In
                   </button>
@@ -1487,10 +1084,7 @@ const ModernRealEstateWebsite = () => {
 
       {/* Hero Section */}
       <section id="home" className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-r from-purple-500/20 to-pink-500/20 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-full blur-3xl"></div>
-        </div>
+        <div className="absolute inset-0 bg-gray-100"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <motion.div
@@ -1499,12 +1093,12 @@ const ModernRealEstateWebsite = () => {
             transition={{ duration: 0.8 }}
             className="text-center mb-12"
           >
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 font-medium mb-6">
-              🏆 #1 Luxury Real Estate Platform
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-700 font-medium mb-6">
+              <FaStar className="mr-2" /> #1 Luxury Real Estate Platform
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
               <span className="block text-gray-900">Discover </span>
-              <span className="bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 bg-clip-text text-transparent">
+              <span className="text-orange-500">
                 Extraordinary Living
               </span>
             </h1>
@@ -1523,15 +1117,15 @@ const ModernRealEstateWebsite = () => {
             className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8"
           >
             {[
-              { value: '500+', label: 'Luxury Properties', color: 'from-purple-500 to-pink-500' },
-              { value: '$2.5B+', label: 'Total Value Sold', color: 'from-green-500 to-emerald-500' },
-              { value: '50+', label: 'Countries Served', color: 'from-blue-500 to-cyan-500' },
-              { value: '98%', label: 'Client Satisfaction', color: 'from-orange-500 to-red-500' }
+              { value: '500+', label: 'Luxury Properties', color: 'bg-blue-500' },
+              { value: '$2.5B+', label: 'Total Value Sold', color: 'bg-green-500' },
+              { value: '50+', label: 'Countries Served', color: 'bg-purple-500' },
+              { value: '98%', label: 'Client Satisfaction', color: 'bg-orange-500' }
             ].map((stat, idx) => (
               <div key={idx} className="text-center">
-                <div className={`w-20 h-20 rounded-2xl bg-gradient-to-br ${stat.color} p-0.5 mx-auto mb-4`}>
+                <div className={`w-20 h-20 rounded-2xl ${stat.color} p-0.5 mx-auto mb-4`}>
                   <div className="w-full h-full bg-white rounded-2xl flex items-center justify-center">
-                    <div className={`text-2xl font-bold bg-gradient-to-br ${stat.color} bg-clip-text text-transparent`}>
+                    <div className={`text-2xl font-bold ${stat.color.replace('bg-', 'text-')}`}>
                       {stat.value}
                     </div>
                   </div>
@@ -1543,16 +1137,16 @@ const ModernRealEstateWebsite = () => {
         </div>
       </section>
 
-      {/* Featured Properties */}
-      <section id="properties" className="py-20 bg-gradient-to-b from-white to-gray-50">
+      {/* Featured Properties with Categories */}
+      <section id="properties" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row justify-between items-center mb-12">
             <div>
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-cyan-50 to-blue-50 text-cyan-700 font-medium mb-4">
-                ✨ Featured Collection
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-700 font-medium mb-4">
+                <FaStar className="mr-2" /> Featured Collection
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900">
-                Exclusive <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                Exclusive <span className="text-orange-500">
                   Properties
                 </span>
               </h2>
@@ -1567,7 +1161,7 @@ const ModernRealEstateWebsite = () => {
                 >
                   <div className="grid grid-cols-2 gap-1 w-6 h-6">
                     {[...Array(4)].map((_, i) => (
-                      <div key={i} className={`${viewMode === 'grid' ? 'bg-purple-600' : 'bg-gray-400'} rounded`}></div>
+                      <div key={i} className={`${viewMode === 'grid' ? 'bg-orange-500' : 'bg-gray-400'} rounded`}></div>
                     ))}
                   </div>
                 </button>
@@ -1576,9 +1170,9 @@ const ModernRealEstateWebsite = () => {
                   className={`p-3 rounded-lg ${viewMode === 'list' ? 'bg-white shadow-md' : ''}`}
                 >
                   <div className="space-y-1 w-6 h-6">
-                    <div className={`h-2 rounded-full ${viewMode === 'list' ? 'bg-pink-600' : 'bg-gray-400'}`}></div>
-                    <div className={`h-2 rounded-full ${viewMode === 'list' ? 'bg-pink-600' : 'bg-gray-400'}`}></div>
-                    <div className={`h-2 rounded-full ${viewMode === 'list' ? 'bg-pink-600' : 'bg-gray-400'}`}></div>
+                    <div className={`h-2 rounded-full ${viewMode === 'list' ? 'bg-orange-500' : 'bg-gray-400'}`}></div>
+                    <div className={`h-2 rounded-full ${viewMode === 'list' ? 'bg-orange-500' : 'bg-gray-400'}`}></div>
+                    <div className={`h-2 rounded-full ${viewMode === 'list' ? 'bg-orange-500' : 'bg-gray-400'}`}></div>
                   </div>
                 </button>
               </div>
@@ -1589,26 +1183,15 @@ const ModernRealEstateWebsite = () => {
             </div>
           </div>
           
-          {/* Filter Tabs */}
-          <div className="flex flex-wrap gap-3 mb-8">
-            {propertyFilters.map((filter) => (
-              <button
-                key={filter.id}
-                onClick={() => setActiveFilter(filter.id)}
-                className={`px-6 py-3 rounded-xl font-medium transition-all ${
-                  activeFilter === filter.id
-                    ? `bg-gradient-to-r ${filter.color} text-white shadow-lg`
-                    : 'bg-white text-gray-700 hover:bg-gray-50 shadow-md'
-                }`}
-              >
-                {filter.label}
-              </button>
-            ))}
-          </div>
+          {/* Property Category Tabs */}
+          <PropertyCategoryTabs 
+            activeCategory={activeCategory}
+            onCategoryChange={setActiveCategory}
+          />
           
           {/* Properties Grid */}
           <div className={viewMode === 'grid' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8' : 'space-y-6'}>
-            {filteredProperties.map((property) => (
+            {displayedProperties.map((property) => (
               <PropertyCard
                 key={property.id}
                 property={property}
@@ -1631,489 +1214,226 @@ const ModernRealEstateWebsite = () => {
         </div>
       </section>
 
-      {/* Investment Section */}
-      <section id="investment" className="py-20 bg-gradient-to-br from-gray-900 to-gray-950">
+      {/* Testimonials Section with Videos */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-orange-500/20 to-red-500/20 text-white font-medium mb-6">
-                📈 Smart Investing
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                Maximize Your <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                  Real Estate Returns
-                </span>
-              </h2>
-              <p className="text-gray-300 text-lg mb-8">
-                Use our advanced investment calculator to analyze potential returns, cash flow, and ROI on any property.
-                Make data-driven decisions with confidence.
-              </p>
-              <div className="space-y-4">
-                {[
-                  { icon: '💰', title: 'Accurate ROI Projections', desc: 'Calculate precise returns based on market data' },
-                  { icon: '📊', title: 'Cash Flow Analysis', desc: 'Understand your monthly income vs expenses' },
-                  { icon: '🏦', title: 'Mortgage Calculations', desc: 'Compare different financing options' },
-                  { icon: '📈', title: 'Market Trends', desc: 'Access historical data and future projections' }
-                ].map((feature, idx) => (
-                  <div key={idx} className="flex items-center">
-                    <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center mr-4">
-                      <span className="text-2xl">{feature.icon}</span>
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-white">{feature.title}</h4>
-                      <p className="text-gray-400">{feature.desc}</p>
-                    </div>
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-orange-100 text-orange-700 font-medium mb-6">
+              <FaComment className="mr-2" /> Client Success Stories
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              Trusted by <span className="text-orange-500">
+                Global Elite
+              </span>
+            </h2>
+            <p className="text-gray-600 text-xl max-w-3xl mx-auto">
+              See why top investors and homeowners choose LuxeLiving for their property needs
+            </p>
+          </div>
+          
+          {/* Video Testimonials */}
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
+            {videoTestimonials.map((testimonial) => (
+              <VideoTestimonialCard key={testimonial.id} testimonial={testimonial} />
+            ))}
+          </div>
+          
+          {/* Text Testimonials Carousel */}
+          <div className="relative">
+            <div className="overflow-hidden">
+              <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${activeTestimonial * 100}%)` }}>
+                {testimonialsData.map((testimonial, idx) => (
+                  <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
+                    <TestimonialCard testimonial={testimonial} isActive={idx === activeTestimonial} />
                   </div>
                 ))}
               </div>
             </div>
             
-            <InvestmentCalculator />
-          </div>
-        </div>
-      </section>
-
-      {/* Agents Section */}
-      <section id="agents" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 font-medium mb-6">
-              👥 Meet Our Experts
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Our <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                Elite Agents
-              </span>
-            </h2>
-            <p className="text-gray-600 text-xl max-w-3xl mx-auto">
-              Work with the industry's top professionals who understand luxury real estate
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {propertiesData.slice(0, 4).map((property, idx) => (
-              <motion.div
-                key={property.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all border border-gray-100 text-center"
-              >
-                <div className="w-32 h-32 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 p-0.5 mx-auto mb-6">
-                  <img src={property.agent.avatar} alt={property.agent.name} className="w-full h-full rounded-full object-cover border-4 border-white" />
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{property.agent.name}</h3>
-                <p className="text-gray-600 mb-4">Senior Property Consultant</p>
-                <div className="flex items-center justify-center mb-6">
-                  <FaStar className="text-yellow-500" />
-                  <span className="ml-2 font-bold text-gray-900">{property.rating}/5</span>
-                  <span className="mx-2">•</span>
-                  <span className="text-gray-600">{property.reviews} deals</span>
-                </div>
-                <div className="space-y-2 mb-6">
-                  <div className="flex items-center justify-center text-gray-600">
-                    <FaPhone className="mr-2" />
-                    {property.agent.phone}
-                  </div>
-                  <div className="flex items-center justify-center text-gray-600">
-                    <FaEnvelope className="mr-2" />
-                    {property.agent.email}
-                  </div>
-                </div>
-                <button className="w-full py-3 bg-gradient-to-r from-purple-50 to-pink-50 text-purple-700 rounded-xl font-bold hover:from-purple-100 hover:to-pink-100 transition-all">
-                  Contact Agent
-                </button>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-950 relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full blur-3xl"></div>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/20 to-pink-500/20 text-white font-medium mb-6">
-              💫 Client Success Stories
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Trusted by <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
-                Global Elite
-              </span>
-            </h2>
-            <p className="text-gray-300 text-xl max-w-3xl mx-auto">
-              See why top investors and homeowners choose LuxeLiving for their property needs
-            </p>
-          </div>
-          
-          <div className="relative h-[400px]">
-            {testimonialsData.map((testimonial, idx) => (
-              <div
-                key={testimonial.id}
-                className={`absolute inset-0 transition-all duration-500 ${
-                  idx === activeTestimonial ? 'z-20' : 'z-10'
-                }`}
-                style={{
-                  transform: `translateX(${(idx - activeTestimonial) * 100}%)`
-                }}
-              >
-                <div className="max-w-4xl mx-auto">
-                  <TestimonialCard testimonial={testimonial} isActive={idx === activeTestimonial} />
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          <div className="flex justify-center items-center mt-12 space-x-4">
-            <button
-              onClick={() => setActiveTestimonial((prev) => (prev - 1 + testimonialsData.length) % testimonialsData.length)}
-              className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-lg flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-            >
-              <FaArrowLeft />
-            </button>
-            
-            <div className="flex space-x-2">
-              {testimonialsData.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setActiveTestimonial(idx)}
-                  className={`w-3 h-3 rounded-full transition-all ${
-                    idx === activeTestimonial
-                      ? 'bg-gradient-to-r from-cyan-500 to-blue-500 w-8'
-                      : 'bg-gray-600 hover:bg-gray-500'
-                  }`}
-                />
-              ))}
-            </div>
-            
-            <button
-              onClick={() => setActiveTestimonial((prev) => (prev + 1) % testimonialsData.length)}
-              className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-lg flex items-center justify-center text-white hover:bg-white/20 transition-colors"
-            >
-              <FaArrowRight />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section id="services" className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-green-50 to-emerald-50 text-green-700 font-medium mb-6">
-              🚀 Premium Services
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Beyond <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                Real Estate
-              </span>
-            </h2>
-            <p className="text-gray-600 text-xl max-w-3xl mx-auto">
-              Comprehensive solutions for every step of your property journey
-            </p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                icon: '🏠',
-                title: 'Property Search',
-                description: 'AI-powered matching with exclusive off-market listings',
-                color: 'from-purple-500 to-pink-500',
-                features: ['AI Matching', 'Off-Market Access', 'Virtual Tours']
-              },
-              {
-                icon: '💰',
-                title: 'Investment Analysis',
-                description: 'Data-driven insights and ROI projections',
-                color: 'from-blue-500 to-cyan-500',
-                features: ['ROI Analysis', 'Market Trends', 'Risk Assessment']
-              },
-              {
-                icon: '⚖️',
-                title: 'Legal & Compliance',
-                description: 'Full legal support and regulatory compliance',
-                color: 'from-green-500 to-emerald-500',
-                features: ['Legal Support', 'Compliance', 'Documentation']
-              },
-              {
-                icon: '🎯',
-                title: 'Wealth Management',
-                description: 'Portfolio optimization and asset management',
-                color: 'from-orange-500 to-red-500',
-                features: ['Portfolio Management', 'Tax Planning', 'Asset Protection']
-              }
-            ].map((service, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
-                whileHover={{ y: -10 }}
-                className="bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 shadow-xl hover:shadow-2xl transition-all border border-gray-100"
-              >
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.color} p-0.5 mb-6`}>
-                  <div className="w-full h-full bg-white rounded-2xl flex items-center justify-center text-3xl">
-                    {service.icon}
-                  </div>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-600 mb-4">{service.description}</p>
-                <ul className="space-y-2 mb-6">
-                  {service.features.map((feature, fIdx) => (
-                    <li key={fIdx} className="flex items-center text-sm text-gray-600">
-                      <FaCheck className="text-green-500 mr-2" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-                <button className="text-sm font-medium text-purple-600 hover:text-purple-700 flex items-center">
-                  Learn More
-                  <FaArrowRight className="ml-2" />
-                </button>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-     <div id="contact" className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.6 }}
-    viewport={{ once: true }}
-    className="max-w-6xl mx-auto"
-  >
-    <div className="text-center mb-12">
-      <span className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-400 text-white text-sm font-semibold rounded-full mb-4 shadow-lg">
-        📬 CONTACT US
-      </span>
-      <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-        Get In <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Touch</span>
-      </h2>
-      <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-        Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
-      </p>
-    </div>
-
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
-      {/* Contact Information - Left Side */}
-      <motion.div
-        initial={{ opacity: 0, x: -30 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        viewport={{ once: true }}
-        className="bg-gradient-to-br from-gray-900 to-gray-800 rounded-2xl p-8 lg:p-10 text-white shadow-2xl relative overflow-hidden group"
-      >
-        {/* Decorative Elements */}
-        <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-125 transition-transform duration-500"></div>
-        <div className="absolute bottom-0 left-0 w-40 h-40 bg-cyan-500/10 rounded-full translate-y-20 -translate-x-20 group-hover:scale-125 transition-transform duration-700"></div>
-        
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-xl shadow-lg">
-              <MessageSquare className="w-6 h-6" />
-            </div>
-            <h3 className="text-2xl md:text-3xl font-bold">Contact Information</h3>
-          </div>
-          
-          <div className="space-y-8">
-            {[
-              {
-                icon: <Phone className="w-6 h-6" />,
-                title: "Phone Number",
-                details: "(802) 555-1234",
-                description: "Available Monday-Friday, 9am-6pm",
-                gradient: "from-blue-500 to-blue-400"
-              },
-              {
-                icon: <Mail className="w-6 h-6" />,
-                title: "Email Address",
-                details: "info@vermontliferealtors.com",
-                description: "We'll respond within 24 hours",
-                gradient: "from-cyan-500 to-teal-400"
-              },
-              {
-                icon: <Home className="w-6 h-6" />,
-                title: "Office Location",
-                details: "59 South Main St., Stowe, VT 05676",
-                description: "Visit us at our headquarters",
-                gradient: "from-purple-500 to-pink-400"
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
-                viewport={{ once: true }}
-                whileHover={{ x: 10 }}
-                className="flex items-start gap-4 p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group/item"
-              >
-                <div className={`p-3 rounded-lg bg-gradient-to-r ${item.gradient} shadow-lg`}>
-                  {item.icon}
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-semibold text-lg mb-1">{item.title}</h4>
-                  <p className="text-white font-bold text-xl mb-1 group-hover/item:text-cyan-300 transition-colors">
-                    {item.details}
-                  </p>
-                  <p className="text-gray-300 text-sm">{item.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Social Media Links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            viewport={{ once: true }}
-            className="mt-10 pt-8 border-t border-white/10"
-          >
-            <p className="text-gray-300 mb-4">Follow us on social media</p>
-            <div className="flex gap-4">
-              {['Facebook', 'Instagram', 'LinkedIn', 'Twitter'].map((social, idx) => (
-                <motion.a
-                  key={social}
-                  whileHover={{ y: -5, scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer"
-                >
-                  <span className="text-sm font-medium">{social}</span>
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
-        </div>
-      </motion.div>
-
-      {/* Contact Form - Right Side */}
-      <motion.div
-        initial={{ opacity: 0, x: 30 }}
-        whileInView={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, delay: 0.4 }}
-        viewport={{ once: true }}
-        className="bg-white rounded-2xl p-8 lg:p-10 shadow-2xl border border-gray-100 relative overflow-hidden"
-      >
-        {/* Decorative Background */}
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500"></div>
-        
-        <div className="relative z-10">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="p-3 bg-gradient-to-r from-cyan-500 to-blue-400 rounded-xl shadow-lg">
-              <Send className="w-6 h-6 text-white" />
-            </div>
-            <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Send Message</h3>
-          </div>
-
-          <form className="space-y-6">
-            {['Your Name', 'Your Email', 'Phone Number'].map((placeholder, index) => (
-              <motion.div
-                key={placeholder}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.5 + index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="relative">
-                  <input
-                    type={placeholder.includes('Email') ? 'email' : 'text'}
-                    placeholder={placeholder}
-                    className="w-full px-5 py-4 pl-12 text-gray-700 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-white hover:border-gray-300"
-                  />
-                  <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
-                    {placeholder.includes('Name') && <User className="w-5 h-5" />}
-                    {placeholder.includes('Email') && <Mail className="w-5 h-5" />}
-                    {placeholder.includes('Phone') && <Phone className="w-5 h-5" />}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.8 }}
-              viewport={{ once: true }}
-            >
-              <div className="relative">
-                <textarea
-                  placeholder="Your Message"
-                  rows="5"
-                  className="w-full px-5 py-4 pl-12 text-gray-700 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition-all duration-300 hover:bg-white hover:border-gray-300 resize-none"
-                ></textarea>
-                <div className="absolute left-4 top-6 text-gray-400">
-                  <MessageSquare className="w-5 h-5" />
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.4, delay: 1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
+            <div className="flex justify-center items-center mt-12 space-x-4">
               <button
-                type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 transform hover:-translate-y-1 text-lg"
+                onClick={() => setActiveTestimonial((prev) => (prev - 1 + testimonialsData.length) % testimonialsData.length)}
+                className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-300 transition-colors"
               >
-                <span className="flex items-center justify-center gap-2">
-                  Send Message
-                  <Send className="w-5 h-5" />
-                </span>
+                <FaArrowLeft />
               </button>
-            </motion.div>
-          </form>
-
-          {/* Additional Info */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-            viewport={{ once: true }}
-            className="mt-8 pt-6 border-t border-gray-100"
-          >
-            <div className="flex items-center justify-center gap-6 text-sm text-gray-600">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                <span>24/7 Support</span>
+              
+              <div className="flex space-x-2">
+                {testimonialsData.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setActiveTestimonial(idx)}
+                    className={`w-3 h-3 rounded-full transition-all ${
+                      idx === activeTestimonial
+                        ? 'bg-orange-500 w-8'
+                        : 'bg-gray-300 hover:bg-gray-400'
+                    }`}
+                  />
+                ))}
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                <span>Quick Response</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                <span>Secure Form</span>
-              </div>
+              
+              <button
+                onClick={() => setActiveTestimonial((prev) => (prev + 1) % testimonialsData.length)}
+                className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-300 transition-colors"
+              >
+                <FaArrowRight />
+              </button>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
-    </div>
-  </motion.div>
-</div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12">
+            {/* Contact Information */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-gray-900 rounded-2xl p-8 lg:p-10 text-white"
+            >
+              <div className="flex items-center gap-3 mb-8">
+                <div className="p-3 bg-orange-500 rounded-xl shadow">
+                  <FaComment className="w-6 h-6" />
+                </div>
+                <h3 className="text-2xl md:text-3xl font-bold">Contact Information</h3>
+              </div>
+              
+              <div className="space-y-8">
+                {[
+                  {
+                    icon: <FaPhone className="w-6 h-6" />,
+                    title: "Phone Number",
+                    details: "(802) 555-1234",
+                    description: "Available Monday-Friday, 9am-6pm"
+                  },
+                  {
+                    icon: <FaEnvelope className="w-6 h-6" />,
+                    title: "Email Address",
+                    details: "info@luxeliving.com",
+                    description: "We'll respond within 24 hours"
+                  },
+                  {
+                    icon: <FaMapMarkerAlt className="w-6 h-6" />,
+                    title: "Office Location",
+                    details: "59 South Main St., New York, NY 10001",
+                    description: "Visit us at our headquarters"
+                  },
+                ].map((item, index) => (
+                  <div key={index} className="flex items-start gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors">
+                    <div className="p-3 rounded-lg bg-orange-500">
+                      {item.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-lg mb-1">{item.title}</h4>
+                      <p className="font-bold text-xl mb-1">{item.details}</p>
+                      <p className="text-gray-300 text-sm">{item.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* Contact Form */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <ContactForm />
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <div className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+              Frequently Asked Questions
+            </h1>
+            <p className="mt-4 text-xl text-gray-600">
+              Find answers to common questions about our services
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {faqItems.map((item, index) => (
+              <div 
+                key={index} 
+                className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
+              >
+                <button
+                  className="w-full px-6 py-5 text-left focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  onClick={() => toggleFAQ(index)}
+                  aria-expanded={openIndex === index}
+                >
+                  <div className="flex justify-between items-center">
+                    <h3 className="text-lg font-semibold text-gray-900 pr-8">
+                      {item.question}
+                    </h3>
+                    <div className="flex-shrink-0 ml-4">
+                      <svg 
+                        className={`w-6 h-6 text-blue-600 transition-transform duration-300 ${openIndex === index ? 'transform rotate-180' : ''}`}
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          strokeWidth="2" 
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </button>
+                
+                <div 
+                  className={`px-6 overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? 'pb-5' : 'max-h-0'}`}
+                >
+                  <div className="border-l-4 border-blue-500 pl-4 py-1">
+                    <p className="text-gray-700 leading-relaxed">
+                      {item.answer}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-12 p-6 bg-orange-500 rounded-2xl shadow-lg text-white">
+            <div className="flex flex-col md:flex-row items-center justify-between">
+              <div className="mb-6 md:mb-0">
+                <h3 className="text-xl font-bold">Still have questions?</h3>
+                <p className="mt-2 text-orange-100">
+                  Can't find the answer you're looking for? Please contact our support team.
+                </p>
+              </div>
+              <button 
+                onClick={() => setActiveSection('contact')}
+                className="px-6 py-3 bg-white text-orange-500 font-semibold rounded-xl hover:bg-gray-100 transition-colors duration-300 shadow-md hover:shadow-lg"
+              >
+                Contact Support
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* Footer */}
-      <footer id="about" className="bg-gradient-to-b from-gray-900 to-gray-950 text-white pt-16 pb-8">
+      <footer id="about" className="bg-gray-900 text-white pt-16 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12">
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-r from-purple-600 via-pink-500 to-orange-500 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-xl bg-orange-500 flex items-center justify-center">
                   <span className="text-white font-bold text-2xl">L</span>
                 </div>
                 <div>
@@ -2124,16 +1444,21 @@ const ModernRealEstateWebsite = () => {
               <p className="text-gray-400 mb-8 max-w-md">
                 Transforming luxury real estate experiences with innovation, expertise, and unparalleled service since 2015.
               </p>
-              <div className="flex space-x-4">
-                {[FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaYoutube].map((Icon, idx) => (
-                  <a
-                    key={idx}
-                    href="#"
-                    className="w-10 h-10 rounded-lg bg-gray-800 flex items-center justify-center hover:bg-gradient-to-r hover:from-purple-600 hover:to-pink-600 transition-all"
-                  >
-                    <Icon />
-                  </a>
-                ))}
+              <div>
+                <h4 className="text-xl font-bold mb-6">Connect With Us</h4>
+                <p className="text-gray-400 mb-6">
+                  Follow us on social media for the latest luxury listings and market updates.
+                </p>
+                <div className="flex space-x-4">
+                  {[FaFacebook, FaInstagram, FaLinkedinIn, FaTwitter].map((Icon, index) => (
+                    <button 
+                      key={index}
+                      className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-500 transition-colors"
+                    >
+                      <Icon />
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
             
@@ -2143,8 +1468,7 @@ const ModernRealEstateWebsite = () => {
                 <ul className="space-y-3">
                   {['About Us', 'Contact', 'Careers', 'Blog'].map((link, linkIdx) => (
                     <li key={linkIdx}>
-                      <a href="#" className="text-gray-400 hover:text-white transition-colors flex items-center">
-                        <FaArrowRight className="mr-2 opacity-0 hover:opacity-100 transition-opacity" />
+                      <a href="#" className="text-gray-400 hover:text-white transition-colors">
                         {link}
                       </a>
                     </li>
@@ -2155,124 +1479,10 @@ const ModernRealEstateWebsite = () => {
           </div>
           
           <div className="mt-16 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
-            <p>© {new Date().getFullYear()} LuxeLiving. All rights reserved.</p>
-            <p className="mt-2">Luxury real estate services in 50+ countries</p>
+            <p>© LuxeLiving. All rights reserved. | Privacy Policy | Terms of Service</p>
           </div>
         </div>
       </footer>
-
-      {/* Contact Modal */}
-      <AnimatePresence>
-        {showContactModal && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setShowContactModal(false)}
-              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
-            />
-            
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9, y: 20 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                className="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden"
-              >
-                <div className="p-8">
-                  <div className="flex justify-between items-center mb-8">
-                    <div>
-                      <h3 className="text-2xl font-bold text-gray-900">Book a Consultation</h3>
-                      <p className="text-gray-600">We'll contact you within 24 hours</p>
-                    </div>
-                    <button
-                      onClick={() => setShowContactModal(false)}
-                      className="w-10 h-10 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center"
-                    >
-                      <FaTimes />
-                    </button>
-                  </div>
-                  
-                  <form onSubmit={handleContactSubmit}>
-                    <div className="space-y-4">
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
-                        <input
-                          type="text"
-                          value={contactForm.name}
-                          onChange={(e) => setContactForm({...contactForm, name: e.target.value})}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                          placeholder="John Doe"
-                          required
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
-                        <input
-                          type="email"
-                          value={contactForm.email}
-                          onChange={(e) => setContactForm({...contactForm, email: e.target.value})}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                          placeholder="john@example.com"
-                          required
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Phone Number</label>
-                        <input
-                          type="tel"
-                          value={contactForm.phone}
-                          onChange={(e) => setContactForm({...contactForm, phone: e.target.value})}
-                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                          placeholder="+1 (234) 567-8900"
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
-                        <textarea
-                          value={contactForm.message}
-                          onChange={(e) => setContactForm({...contactForm, message: e.target.value})}
-                          rows="4"
-                          className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
-                          placeholder="Tell us about your property requirements..."
-                          required
-                        />
-                      </div>
-                      
-                      <ColorfulButton
-                        type="submit"
-                        variant="primary"
-                        className="w-full"
-                      >
-                        <FaPaperPlane className="mr-2" />
-                        Send Request
-                      </ColorfulButton>
-                    </div>
-                  </form>
-                </div>
-              </motion.div>
-            </div>
-          </>
-        )}
-      </AnimatePresence>
-
-      {/* Property Detail Modal */}
-      <PropertyDetailModal
-        property={selectedProperty}
-        isOpen={!!selectedProperty}
-        onClose={() => setSelectedProperty(null)}
-      />
-
-      {/* Auth Modal */}
-      <AuthModal
-        isOpen={showAuthModal}
-        onClose={() => setShowAuthModal(false)}
-        mode={authMode}
-      />
     </div>
   );
 };

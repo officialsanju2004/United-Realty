@@ -13,7 +13,7 @@ import {
   Building as BuildingIcon, Users2,
   Lightbulb, CpuIcon, Zap
 } from 'lucide-react';
-
+import { FaFacebook, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 const CorporateRealEstateWebsite = () => {
   const [activeTab, setActiveTab] = useState('commercial');
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -183,7 +183,38 @@ const CorporateRealEstateWebsite = () => {
       features: ["River Views", "Smart Homes", "Fitness Center", "Lounge"]
     }
   ];
+  const [openIndex, setOpenIndex] = useState(null);
 
+  const faqItems = [
+    {
+      question: "What is your return policy?",
+      answer: "We offer a 30-day return policy for all items in their original condition. Returns are free of charge, and refunds are processed within 5-7 business days after we receive the returned item."
+    },
+    {
+      question: "How long does shipping take?",
+      answer: "Standard shipping takes 5-7 business days, expedited shipping takes 2-3 business days, and express shipping delivers within 1-2 business days. Shipping times may vary during peak seasons."
+    },
+    {
+      question: "Do you ship internationally?",
+      answer: "Yes, we ship to over 50 countries worldwide. International shipping typically takes 10-20 business days depending on the destination. Additional customs fees may apply."
+    },
+    {
+      question: "Can I change or cancel my order?",
+      answer: "You can change or cancel your order within 24 hours of placing it, provided it hasn't been shipped yet. Please contact our customer support team immediately for assistance."
+    },
+    {
+      question: "What payment methods do you accept?",
+      answer: "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, Apple Pay, Google Pay, and bank transfers for certain orders over $500."
+    },
+    {
+      question: "How can I track my order?",
+      answer: "Once your order ships, you'll receive a tracking number via email. You can use this number on our website or the carrier's website to track your package in real-time."
+    }
+  ];
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
   // Company timeline
   const timelineData = [
     { year: "2005", title: "Company Founded", description: "Started with commercial property management" },
@@ -277,7 +308,7 @@ const CorporateRealEstateWebsite = () => {
           {subtitle}
         </div>
       )}
-      <h2 className={`text-4xl md:text-5xl font-bold text-gray-900 mb-6 relative inline-block ${centered ? 'mx-auto' : ''}`}>
+      <h2 className={`text-4xl md:text-5xl font-bold text-pink-800 mb-6 relative inline-block ${centered ? 'mx-auto' : ''}`}>
         {title}
         <span className="absolute -bottom-2 left-0 w-24 h-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full"></span>
         {centered && (
@@ -365,7 +396,7 @@ const CorporateRealEstateWebsite = () => {
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-blue-900/90 to-indigo-900/80"></div>
         <div 
-          className="absolute inset-0 bg-cover bg-center opacity-30"
+          className="absolute inset-0 bg-cover bg-center "
           style={{ 
             backgroundImage: 'url("https://images.unsplash.com/photo-1487956382158-bb926046304a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")',
             transform: `translateY(${scrollProgress * 0.5}px)`
@@ -578,8 +609,10 @@ const CorporateRealEstateWebsite = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <SectionHeading 
+              
                 title="Investor Opportunities"
                 subtitle="Strategic Partnerships"
+               
               />
               
               <p className="text-xl text-gray-300 mb-8">
@@ -608,7 +641,7 @@ const CorporateRealEstateWebsite = () => {
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <button className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:shadow-amber-500/25 transition-all duration-300 transform hover:-translate-y-0.5">
+                <button className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:shadow-amber-500/25 transition-all duration-300 transform hover:-translate-y-0.5">
                   Download Investor Kit
                 </button>
                 <button className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-xl font-semibold hover:bg-white/10 transition-colors duration-300">
@@ -727,7 +760,7 @@ const CorporateRealEstateWebsite = () => {
                 key={index}
                 className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 group"
               >
-                <div className="w-16 h-16 bg-gradient-to-br from-amber-500 to-orange-500 rounded-xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-300">
+                <div className="w-16 h-16 bg-primary-500 rounded-xl flex items-center justify-center mb-6 group-hover:rotate-12 transition-transform duration-300">
                   <Award className="text-white" size={28} />
                 </div>
                 <div className="text-3xl font-bold text-gray-900 mb-2">{award.year}</div>
@@ -819,70 +852,7 @@ const CorporateRealEstateWebsite = () => {
         </div>
       </section>
 
-      {/* Interactive Gallery */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading 
-            title="Project Gallery"
-            subtitle="Visual Showcase"
-            centered
-          />
-          
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {galleryImages.map((image, index) => (
-              <div 
-                key={index}
-                className={`group relative overflow-hidden rounded-xl cursor-pointer ${
-                  index === 0 ? 'md:col-span-2 md:row-span-2' : ''
-                }`}
-                onClick={() => setCurrentImageIndex(index)}
-              >
-                <img 
-                  src={image} 
-                  alt={`Gallery ${index + 1}`}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="text-white font-medium">View Project</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          
-          {/* Gallery Lightbox */}
-          {currentImageIndex !== null && (
-            <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-4">
-              <div className="relative max-w-4xl max-h-[90vh]">
-                <img 
-                  src={galleryImages[currentImageIndex]} 
-                  alt="Gallery View"
-                  className="w-full h-full object-contain rounded-lg"
-                />
-                <button 
-                  className="absolute top-4 right-4 bg-white/20 backdrop-blur-sm text-white p-2 rounded-full hover:bg-white/30 transition-colors"
-                  onClick={() => setCurrentImageIndex(null)}
-                >
-                  <X size={24} />
-                </button>
-                <button 
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-colors"
-                  onClick={() => setCurrentImageIndex((currentImageIndex - 1 + galleryImages.length) % galleryImages.length)}
-                >
-                  <ChevronLeft size={24} />
-                </button>
-                <button 
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/20 backdrop-blur-sm text-white p-3 rounded-full hover:bg-white/30 transition-colors"
-                  onClick={() => setCurrentImageIndex((currentImageIndex + 1) % galleryImages.length)}
-                >
-                  <ChevronRight size={24} />
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      </section>
-
+     
       {/* Contact Section */}
       <section className="py-20 bg-gradient-to-r from-blue-50 to-indigo-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -1017,7 +987,89 @@ const CorporateRealEstateWebsite = () => {
           </div>
         </div>
       </section>
+<div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+            Frequently Asked Questions
+          </h1>
+          <p className="mt-4 text-xl text-gray-600">
+            Find answers to common questions about our products and services
+          </p>
+        </div>
 
+        {/* FAQ Items */}
+        <div className="space-y-4">
+          {faqItems.map((item, index) => (
+            <div 
+              key={index} 
+              className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
+            >
+              <button
+                className="w-full px-6 py-5 text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-2xl"
+                onClick={() => toggleFAQ(index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
+              >
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-semibold text-gray-900 pr-8">
+                    {item.question}
+                  </h3>
+                  <div className="flex-shrink-0 ml-4">
+                    <svg 
+                      className={`w-6 h-6 text-blue-600 transition-transform duration-300 ${openIndex === index ? 'transform rotate-180' : ''}`}
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth="2" 
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </button>
+              
+              <div 
+                id={`faq-answer-${index}`}
+                className={`px-6 overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? 'pb-5' : 'max-h-0'}`}
+                style={{ maxHeight: openIndex === index ? '200px' : '0' }}
+              >
+                <div className="border-l-4 border-blue-500 pl-4 py-1">
+                  <p className="text-gray-700 leading-relaxed">
+                    {item.answer}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Contact Info */}
+        <div className="mt-12 p-6 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl shadow-lg text-white">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="mb-6 md:mb-0">
+              <h3 className="text-xl font-bold">Still have questions?</h3>
+              <p className="mt-2 text-blue-100">
+                Can't find the answer you're looking for? Please contact our support team.
+              </p>
+            </div>
+            <button className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-colors duration-300 shadow-md hover:shadow-lg">
+              Contact Support
+            </button>
+          </div>
+        </div>
+
+        {/* Instructions */}
+        <div className="mt-8 text-center text-gray-500 text-sm">
+          <p>Click on any question to reveal the answer. Click again to collapse.</p>
+        </div>
+      </div>
+    </div>
       {/* Footer */}
       <footer className="bg-gray-900 text-white pt-16 pb-8">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -1036,16 +1088,22 @@ const CorporateRealEstateWebsite = () => {
               <p className="text-gray-400 mb-8">
                 Premier real estate development firm specializing in commercial and residential properties across global markets since 2005.
               </p>
-              <div className="flex space-x-4">
-                {['LinkedIn', 'Twitter', 'Instagram', 'YouTube'].map((social) => (
-                  <div 
-                    key={social}
-                    className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 cursor-pointer transition-colors duration-300"
-                  >
-                    {social.charAt(0)}
-                  </div>
-                ))}
-              </div>
+                 <div>
+                             <h4 className="text-xl font-bold mb-6">Connect With Us</h4>
+                             <p className="text-gray-400 mb-6">
+                               Follow us on social media for the latest luxury listings and market updates.
+                             </p>
+                             <div className="flex space-x-4">
+                               {[<FaFacebook/>, <FaInstagram/>, <FaLinkedinIn/>,<FaTwitter/>].map((social) => (
+                                 <div 
+                                   key={social}
+                                   className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-amber-600 cursor-pointer transition-colors"
+                                 >
+                                   {social}
+                                 </div>
+                               ))}
+                             </div>
+                           </div>
             </div>
             
             {/* Quick Links */}
@@ -1098,7 +1156,7 @@ const CorporateRealEstateWebsite = () => {
           <div className="border-t border-gray-800 mt-12 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="text-gray-400 text-sm mb-4 md:mb-0">
-                © 2024 Horizon Real Estate Group. All rights reserved.
+                <p>© Growth Flow Media. All rights reserved. | Privacy Policy | Terms of Service</p>
               </div>
               <div className="flex space-x-6 text-sm text-gray-400">
                 <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

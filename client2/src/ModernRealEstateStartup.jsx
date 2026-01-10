@@ -11,7 +11,7 @@ import {
   MessageSquare, Award, Leaf, Wifi, Send,
   User
 } from 'lucide-react';
-
+import { FaFacebook, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 import { motion } from 'framer-motion';
 const ModernRealEstateStartup = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -27,9 +27,8 @@ const ModernRealEstateStartup = () => {
   const [typingText, setTypingText] = useState('');
   const typingIndex = useRef(0);
   const typingTexts = [
-    "Find your perfect home",
-    "Discover smart living spaces",
-    "Experience modern real estate"
+    "Fiind your perfect home",
+   
   ];
   const typingSpeed = 100;
   const erasingSpeed = 50;
@@ -86,7 +85,38 @@ const ModernRealEstateStartup = () => {
     { id: 5, name: "Denver", state: "CO", properties: 760, avgPrice: "$550K", image: "https://images.unsplash.com/photo-1580424917967-a8867a6e676e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80" },
     { id: 6, name: "Nashville", state: "TN", properties: 540, avgPrice: "$450K", image: "https://images.unsplash.com/photo-1543349689-9a4d426bee8e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2080&q=80" },
   ];
+  const [openIndex, setOpenIndex] = useState(null);
 
+  const faqItems = [
+    {
+      question: "What is your return policy?",
+      answer: "We offer a 30-day return policy for all items in their original condition. Returns are free of charge, and refunds are processed within 5-7 business days after we receive the returned item."
+    },
+    {
+      question: "How long does shipping take?",
+      answer: "Standard shipping takes 5-7 business days, expedited shipping takes 2-3 business days, and express shipping delivers within 1-2 business days. Shipping times may vary during peak seasons."
+    },
+    {
+      question: "Do you ship internationally?",
+      answer: "Yes, we ship to over 50 countries worldwide. International shipping typically takes 10-20 business days depending on the destination. Additional customs fees may apply."
+    },
+    {
+      question: "Can I change or cancel my order?",
+      answer: "You can change or cancel your order within 24 hours of placing it, provided it hasn't been shipped yet. Please contact our customer support team immediately for assistance."
+    },
+    {
+      question: "What payment methods do you accept?",
+      answer: "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, Apple Pay, Google Pay, and bank transfers for certain orders over $500."
+    },
+    {
+      question: "How can I track my order?",
+      answer: "Once your order ships, you'll receive a tracking number via email. You can use this number on our website or the carrier's website to track your package in real-time."
+    }
+  ];
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
   const featuredProperties = [
     { 
       id: 1, 
@@ -350,13 +380,13 @@ const ModernRealEstateStartup = () => {
             {/* Logo */}
             <div className="flex items-center space-x-2 group cursor-pointer">
               <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
+                <div className="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center transform group-hover:rotate-12 transition-transform duration-300">
                   <Home className="text-white" size={22} />
                 </div>
                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white"></div>
               </div>
               <div>
-                <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <span className="text-2xl font-bold bg-purple-600 bg-clip-text text-transparent">
                   HomeSphere
                 </span>
                 <div className="text-xs text-gray-500">AI-Powered Real Estate</div>
@@ -375,7 +405,7 @@ const ModernRealEstateStartup = () => {
                   <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
                 </a>
               ))}
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-medium hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-0.5">
+              <button className="bg-purple-600 text-white px-6 py-3 rounded-xl font-medium hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-0.5">
                 Get Started
               </button>
             </div>
@@ -402,7 +432,7 @@ const ModernRealEstateStartup = () => {
                 {item}
               </a>
             ))}
-            <button className="w-full mt-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-medium">
+            <button className="w-full mt-4 bg-purple-600 text-white px-6 py-3 rounded-xl font-medium">
               Get Started
             </button>
           </div>
@@ -419,7 +449,7 @@ const ModernRealEstateStartup = () => {
                 {typingText}
                 <span className="inline-block w-1 h-12 bg-blue-600 ml-1 animate-pulse align-middle"></span>
               </span>
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="bg-purple-600 bg-clip-text text-transparent">
                 Made Smarter with AI
               </span>
             </h1>
@@ -468,7 +498,7 @@ const ModernRealEstateStartup = () => {
                   </div>
                 </div>
                 
-                <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center min-w-[160px]">
+                <button className="bg-purple-600 text-white px-8 py-4 rounded-xl font-semibold hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-0.5 flex items-center justify-center min-w-[160px]">
                   <Search className="mr-2" size={20} />
                   Find Properties
                 </button>
@@ -497,9 +527,9 @@ const ModernRealEstateStartup = () => {
               ].map((stat, index) => (
                 <div 
                   key={index}
-                  className="bg-white/50 backdrop-blur-sm rounded-xl p-4 border border-gray-100 hover:border-blue-200 transition-all duration-300 hover:shadow-lg group"
+                  className="bg-white/50 backdrop-blur-sm rounded-xl p-4 border border-gray-100 hover:border-purple-200 transition-all duration-300 hover:shadow-lg group"
                 >
-                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
+                  <div className="flex items-center justify-center w-12 h-12 bg-purple-600 rounded-lg mx-auto mb-3 group-hover:scale-110 transition-transform duration-300">
                     <div className="text-white">
                       {stat.icon}
                     </div>
@@ -522,7 +552,7 @@ const ModernRealEstateStartup = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Explore <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Popular Cities</span>
+              Explore <span className="bg-purple-600 bg-clip-text text-transparent">Popular Cities</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Discover properties in the fastest growing tech and innovation hubs across the country.
@@ -576,7 +606,7 @@ const ModernRealEstateStartup = () => {
                 AI-Powered Intelligence
               </div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                Smart <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Recommendations</span>
+                Smart <span className="bg-purple-600 bg-clip-text text-transparent">Recommendations</span>
               </h2>
               <p className="text-xl text-gray-600 mb-8">
                 Our AI analyzes thousands of data points to match you with properties that fit your lifestyle, budget, and future goals.
@@ -673,7 +703,7 @@ const ModernRealEstateStartup = () => {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Featured <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Properties</span>
+                Featured <span className="bg-purple-600 bg-clip-text text-transparent">Properties</span>
               </h2>
               <p className="text-xl text-gray-600">
                 Handpicked smart homes with modern amenities and prime locations
@@ -687,7 +717,7 @@ const ModernRealEstateStartup = () => {
                   key={filter}
                   onClick={() => setActiveFilter(filter)}
                   className={`px-4 py-2 rounded-lg font-medium transition-all duration-300 ${activeFilter === filter 
-                    ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg' 
+                    ? 'bg-purple-600 text-white shadow-lg' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
                 >
                   {filter === 'all' ? 'All' : filter.charAt(0).toUpperCase() + filter.slice(1)}
@@ -771,7 +801,7 @@ const ModernRealEstateStartup = () => {
                         </span>
                       ))}
                     </div>
-                    <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-xl font-medium hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-0.5">
+                    <button className="bg-purple-600 text-white px-6 py-3 rounded-xl font-medium hover:shadow-xl hover:shadow-blue-500/25 transition-all duration-300 transform hover:-translate-y-0.5">
                       View Details
                     </button>
                   </div>
@@ -794,7 +824,7 @@ const ModernRealEstateStartup = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Simple, <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Transparent</span> Pricing
+              Simple, <span className="bg-purple-600 bg-clip-text text-transparent">Transparent</span> Pricing
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Choose the plan that fits your needs. All plans include our core AI-powered search and matching technology.
@@ -852,7 +882,7 @@ const ModernRealEstateStartup = () => {
                     plan.recommended 
                       ? 'bg-white text-blue-600 hover:bg-gray-100' 
                       : selectedPlan === plan.id
-                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+                      ? 'bg-purple-600 text-white'
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
@@ -869,7 +899,7 @@ const ModernRealEstateStartup = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Loved by <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Home Seekers</span>
+              Loved by <span className="bg-purple-600 bg-clip-text text-transparent">Home Seekers</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               See what our users have to say about their experience with HomeSphere.
@@ -929,7 +959,7 @@ const ModernRealEstateStartup = () => {
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
             <div>
               <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                Latest <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Insights</span>
+                Latest <span className="bg-purple-600 bg-clip-text text-transparent">Insights</span>
               </h2>
               <p className="text-xl text-gray-600">
                 Stay updated with market trends, investment tips, and smart home technology.
@@ -984,40 +1014,99 @@ const ModernRealEstateStartup = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Frequently Asked <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Questions</span>
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Get answers to common questions about our platform and services.
-            </p>
-          </div>
-          
-          <div className="max-w-3xl mx-auto">
-            <div className="space-y-4">
-              {faqs.map((faq, index) => (
-                <div 
-                  key={index}
-                  className="bg-white rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  <div className="flex items-start justify-between">
-                    <h3 className="text-lg font-bold text-gray-900">{faq.question}</h3>
-                    <ChevronRight className="text-blue-600 transform rotate-90" size={20} />
+
+
+
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+            Frequently Asked Questions
+          </h1>
+          <p className="mt-4 text-xl text-gray-600">
+            Find answers to common questions about our products and services
+          </p>
+        </div>
+
+        {/* FAQ Items */}
+        <div className="space-y-4">
+          {faqItems.map((item, index) => (
+            <div 
+              key={index} 
+              className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
+            >
+              <button
+                className="w-full px-6 py-5 text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-2xl"
+                onClick={() => toggleFAQ(index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
+              >
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-semibold text-gray-900 pr-8">
+                    {item.question}
+                  </h3>
+                  <div className="flex-shrink-0 ml-4">
+                    <svg 
+                      className={`w-6 h-6 text-blue-600 transition-transform duration-300 ${openIndex === index ? 'transform rotate-180' : ''}`}
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth="2" 
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
                   </div>
-                  <p className="text-gray-600 mt-3">{faq.answer}</p>
                 </div>
-              ))}
+              </button>
+              
+              <div 
+                id={`faq-answer-${index}`}
+                className={`px-6 overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? 'pb-5' : 'max-h-0'}`}
+                style={{ maxHeight: openIndex === index ? '200px' : '0' }}
+              >
+                <div className="border-l-4 border-blue-500 pl-4 py-1">
+                  <p className="text-gray-700 leading-relaxed">
+                    {item.answer}
+                  </p>
+                </div>
+              </div>
             </div>
+          ))}
+        </div>
+
+        {/* Contact Info */}
+        <div className="mt-12 p-6 bg-purple-600 rounded-2xl shadow-lg text-white">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="mb-6 md:mb-0">
+              <h3 className="text-xl font-bold">Still have questions?</h3>
+              <p className="mt-2 text-blue-100">
+                Can't find the answer you're looking for? Please contact our support team.
+              </p>
+            </div>
+            <button className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-colors duration-300 shadow-md hover:shadow-lg">
+              Contact Support
+            </button>
           </div>
         </div>
-      </section>
+
+        {/* Instructions */}
+        <div className="mt-8 text-center text-gray-500 text-sm">
+          <p>Click on any question to reveal the answer. Click again to collapse.</p>
+        </div>
+      </div>
+    </div>
+
+
+
 
       {/* CTA Section */}
       <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600"></div>
+        <div className="absolute inset-0 bg-purple-600"></div>
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1558036117-15e82a2c9a9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-10"></div>
         
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -1080,7 +1169,7 @@ const ModernRealEstateStartup = () => {
         
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-8">
-            <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-xl shadow-lg">
+            <div className="p-3 bg-purple-600 rounded-xl shadow-lg">
               <MessageSquare className="w-6 h-6" />
             </div>
             <h3 className="text-2xl md:text-3xl font-bold">Contact Information</h3>
@@ -1093,21 +1182,21 @@ const ModernRealEstateStartup = () => {
                 title: "Phone Number",
                 details: "(802) 555-1234",
                 description: "Available Monday-Friday, 9am-6pm",
-                gradient: "from-blue-500 to-blue-400"
+                gradient: "bg-purple-600"
               },
               {
                 icon: <Mail className="w-6 h-6" />,
                 title: "Email Address",
                 details: "info@vermontliferealtors.com",
                 description: "We'll respond within 24 hours",
-                gradient: "from-cyan-500 to-teal-400"
+                gradient: "bg-purple-600"
               },
               {
                 icon: <Home className="w-6 h-6" />,
                 title: "Office Location",
                 details: "59 South Main St., Stowe, VT 05676",
                 description: "Visit us at our headquarters",
-                gradient: "from-purple-500 to-pink-400"
+                gradient: "bg-purple-600"
               },
             ].map((item, index) => (
               <motion.div
@@ -1133,28 +1222,7 @@ const ModernRealEstateStartup = () => {
             ))}
           </div>
 
-          {/* Social Media Links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            viewport={{ once: true }}
-            className="mt-10 pt-8 border-t border-white/10"
-          >
-            <p className="text-gray-300 mb-4">Follow us on social media</p>
-            <div className="flex gap-4">
-              {['Facebook', 'Instagram', 'LinkedIn', 'Twitter'].map((social, idx) => (
-                <motion.a
-                  key={social}
-                  whileHover={{ y: -5, scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer"
-                >
-                  <span className="text-sm font-medium">{social}</span>
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
+         
         </div>
       </motion.div>
 
@@ -1167,11 +1235,11 @@ const ModernRealEstateStartup = () => {
         className="bg-white rounded-2xl p-8 lg:p-10 shadow-2xl border border-gray-100 relative overflow-hidden"
       >
         {/* Decorative Background */}
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500"></div>
+        <div className="absolute top-0 left-0 w-full h-2 bg-purple-600"></div>
         
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-8">
-            <div className="p-3 bg-gradient-to-r from-cyan-500 to-blue-400 rounded-xl shadow-lg">
+            <div className="p-3 bg-purple-600 rounded-xl shadow-lg">
               <Send className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Send Message</h3>
@@ -1229,7 +1297,7 @@ const ModernRealEstateStartup = () => {
             >
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 transform hover:-translate-y-1 text-lg"
+                className="w-full bg-purple-600 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 transform hover:-translate-y-1 text-lg"
               >
                 <span className="flex items-center justify-center gap-2">
                   Send Message
@@ -1239,29 +1307,8 @@ const ModernRealEstateStartup = () => {
             </motion.div>
           </form>
 
-          {/* Additional Info */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-            viewport={{ once: true }}
-            className="mt-8 pt-6 border-t border-gray-100"
-          >
-            <div className="flex items-center justify-center gap-6 text-sm text-gray-600">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                <span>24/7 Support</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                <span>Quick Response</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                <span>Secure Form</span>
-              </div>
-            </div>
-          </motion.div>
+         
+         
         </div>
       </motion.div>
     </div>
@@ -1274,7 +1321,7 @@ const ModernRealEstateStartup = () => {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-2 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-purple-600 rounded-xl flex items-center justify-center">
                   <Home size={22} className="text-white" />
                 </div>
                 <div>
@@ -1285,16 +1332,22 @@ const ModernRealEstateStartup = () => {
               <p className="text-gray-400 mb-8 max-w-md">
                 Revolutionizing real estate with artificial intelligence, machine learning, and seamless user experiences.
               </p>
-              <div className="flex space-x-4">
-                {['Facebook', 'Twitter', 'Instagram', 'LinkedIn', 'YouTube'].map((social) => (
-                  <div 
-                    key={social}
-                    className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center hover:bg-blue-600 cursor-pointer transition-colors duration-300"
-                  >
-                    {social.charAt(0)}
+      <div>
+                  <h4 className="text-xl font-bold mb-6">Connect With Us</h4>
+                  <p className="text-gray-400 mb-6">
+                    Follow us on social media for the latest luxury listings and market updates.
+                  </p>
+                  <div className="flex space-x-4">
+                    {[<FaFacebook/>, <FaInstagram/>, <FaLinkedinIn/>,<FaTwitter/>].map((social) => (
+                      <div 
+                        key={social}
+                        className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-amber-600 cursor-pointer transition-colors"
+                      >
+                        {social}
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
             </div>
             
             {/* Quick Links */}
@@ -1343,7 +1396,7 @@ const ModernRealEstateStartup = () => {
           <div className="border-t border-gray-800 mt-12 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="text-gray-400 text-sm mb-4 md:mb-0">
-                © 2024 HomeSphere. All rights reserved.
+                 <p>© Growth Flow Media. All rights reserved. | Privacy Policy | Terms of Service</p>
               </div>
               <div className="flex space-x-6 text-sm text-gray-400">
                 <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
@@ -1356,7 +1409,7 @@ const ModernRealEstateStartup = () => {
       </footer>
 
       {/* Floating Action Button */}
-      <button className="fixed bottom-6 right-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50">
+      <button className="fixed bottom-6 right-6 bg-purple-600 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50">
         <MessageSquare size={24} />
       </button>
 

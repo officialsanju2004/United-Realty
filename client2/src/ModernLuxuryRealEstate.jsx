@@ -9,6 +9,7 @@ import {
   User
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { FaFacebook, FaInstagram, FaLinkedinIn, FaTwitter } from 'react-icons/fa';
 
 const ModernLuxuryRealEstate = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -75,7 +76,38 @@ const ModernLuxuryRealEstate = () => {
       </div>
     );
   };
+  const [openIndex, setOpenIndex] = useState(null);
 
+  const faqItems = [
+    {
+      question: "What is your return policy?",
+      answer: "We offer a 30-day return policy for all items in their original condition. Returns are free of charge, and refunds are processed within 5-7 business days after we receive the returned item."
+    },
+    {
+      question: "How long does shipping take?",
+      answer: "Standard shipping takes 5-7 business days, expedited shipping takes 2-3 business days, and express shipping delivers within 1-2 business days. Shipping times may vary during peak seasons."
+    },
+    {
+      question: "Do you ship internationally?",
+      answer: "Yes, we ship to over 50 countries worldwide. International shipping typically takes 10-20 business days depending on the destination. Additional customs fees may apply."
+    },
+    {
+      question: "Can I change or cancel my order?",
+      answer: "You can change or cancel your order within 24 hours of placing it, provided it hasn't been shipped yet. Please contact our customer support team immediately for assistance."
+    },
+    {
+      question: "What payment methods do you accept?",
+      answer: "We accept all major credit cards (Visa, MasterCard, American Express), PayPal, Apple Pay, Google Pay, and bank transfers for certain orders over $500."
+    },
+    {
+      question: "How can I track my order?",
+      answer: "Once your order ships, you'll receive a tracking number via email. You can use this number on our website or the carrier's website to track your package in real-time."
+    }
+  ];
+
+  const toggleFAQ = (index) => {
+    setOpenIndex(openIndex === index ? null : index);
+  };
   // Floating property cards data
   const floatingProperties = [
     { id: 1, title: "Oceanfront Villa", price: "$8.5M", location: "Malibu, CA", beds: 6, baths: 8, sqft: "12,500", image: "https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" },
@@ -108,12 +140,7 @@ const ModernLuxuryRealEstate = () => {
     { id: 3, name: "The Sterling Family", text: "From start to finish, the experience was seamless. The virtual tours during our relocation were invaluable.", property: "Hillside Estate, Beverly Hills", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80" },
   ];
 
-  // Property comparison data
-  const comparisonProperties = [
-    { id: 1, name: "Oceanfront Villa", price: "$8.5M", location: "Malibu, CA", beds: 6, baths: 8, sqft: "12,500", year: 2021, amenities: ["Pool", "Spa", "Home Theater", "Wine Cellar", "Gym", "Beach Access"] },
-    { id: 2, name: "Skyline Penthouse", price: "$12.2M", location: "Manhattan, NY", beds: 5, baths: 6, sqft: "8,400", year: 2023, amenities: ["Pool", "Concierge", "Private Elevator", "Panoramic Views", "Smart Home", "Wine Cellar"] },
-    { id: 3, name: "Hillside Mansion", price: "$15.7M", location: "Beverly Hills, CA", beds: 8, baths: 10, sqft: "18,200", year: 2019, amenities: ["Pool", "Spa", "Tennis Court", "Guest House", "Gym", "Wine Cellar", "Home Theater"] },
-  ];
+
 
   // Mortgage calculator logic
   const calculateMortgage = () => {
@@ -148,30 +175,29 @@ const ModernLuxuryRealEstate = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100 font-sans">
       {/* Navigation */}
-      <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-lg py-3' : 'bg-transparent py-6'}`}>
+      <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'shadow-lg py-3' : 'bg-transparent py-6'}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-amber-600 to-amber-800 rounded-lg flex items-center justify-center">
+            <div className="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center">
               <Home className="text-white" size={24} />
             </div>
-            <span className="text-2xl font-bold text-gray-900">LuxeLiving</span>
+            <span className={`text-2xl font-bold text-white`}>LuxeLiving</span>
           </div>
           
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-10">
-            {['Properties', 'Services', 'About', 'Agents', 'Contact'].map((item) => (
-              <a key={item} href="#" className="text-gray-700 hover:text-amber-700 font-medium transition-colors duration-300">
+          <div className="hidden md:flex items-center space-x-10">            {['Properties', 'Services', 'About', 'Agents', 'Contact'].map((item) => (
+              <a key={item} href="#" className="text-white hover:text-amber-700 font-medium transition-colors duration-300">
                 {item}
               </a>
             ))}
-            <button className="bg-gradient-to-r from-amber-600 to-amber-800 text-white px-6 py-3 rounded-lg font-medium hover:shadow-xl transition-all duration-300 hover:scale-105">
+            <button className="bg-yellow-400 text-white px-6 py-3 rounded-lg font-medium hover:shadow-xl transition-all duration-300 hover:scale-105">
               Schedule Consultation
             </button>
           </div>
           
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden text-gray-700"
+            className="md:hidden text-yellow-400"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -186,7 +212,7 @@ const ModernLuxuryRealEstate = () => {
                 {item}
               </a>
             ))}
-            <button className="mt-4 w-full bg-gradient-to-r from-amber-600 to-amber-800 text-white px-6 py-3 rounded-lg font-medium">
+            <button className="mt-4 w-full bg-yellow-400 text-white px-6 py-3 rounded-lg font-medium">
               Schedule Consultation
             </button>
           </div>
@@ -199,11 +225,11 @@ const ModernLuxuryRealEstate = () => {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
           style={{ 
-            backgroundImage: 'url("https://images.unsplash.com/photo-1613977257363-707ba9348227?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")',
+            backgroundImage: 'url("https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80")',
             transform: `translateY(${window.scrollY * 0.5}px)`
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-black/30"></div>
         </div>
         
         {/* Hero Content */}
@@ -212,7 +238,7 @@ const ModernLuxuryRealEstate = () => {
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
               Discover <span className="text-amber-400">Extraordinary</span> Luxury Properties
             </h1>
-            <p className="text-xl text-gray-200 mb-10">
+            <p className="text-xl text-gray-200 mb-5">
               Exclusive estates, penthouses, and waterfront villas curated for the world's most discerning clients.
             </p>
             
@@ -226,7 +252,7 @@ const ModernLuxuryRealEstate = () => {
                   className="w-full outline-none bg-transparent"
                 />
               </div>
-              <button className="bg-gradient-to-r from-amber-600 to-amber-800 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center">
+              <button className="bg-yellow-400 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center">
                 <Search className="mr-2" size={20} />
                 Explore Properties
               </button>
@@ -268,7 +294,7 @@ const ModernLuxuryRealEstate = () => {
                 key={filter}
                 onClick={() => setActiveFilter(filter)}
                 className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${activeFilter === filter 
-                  ? 'bg-gradient-to-r from-amber-600 to-amber-800 text-white shadow-lg' 
+                  ? 'bg-yellow-400 text-white shadow-lg' 
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
               >
                 {filter === 'all' ? 'All Properties' : 
@@ -332,7 +358,7 @@ const ModernLuxuryRealEstate = () => {
                     </div>
                   </div>
                   
-                  <button className="w-full bg-gradient-to-r from-amber-600 to-amber-800 text-white py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300 flex items-center justify-center group/btn">
+                  <button className="w-full bg-yellow-400 text-white py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300 flex items-center justify-center group/btn">
                     <span>Schedule Viewing</span>
                     <ChevronRight className="ml-2 group-hover/btn:translate-x-1 transition-transform" size={20} />
                   </button>
@@ -370,7 +396,7 @@ const ModernLuxuryRealEstate = () => {
                   </div>
                 ))}
               </div>
-              <button className="mt-8 bg-gradient-to-r from-amber-600 to-amber-800 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center">
+              <button className="mt-8 bg-yellow-400 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center">
                 <Play className="mr-2" size={20} />
                 Experience Virtual Tour
               </button>
@@ -404,82 +430,7 @@ const ModernLuxuryRealEstate = () => {
         </div>
       </section>
 
-      {/* Property Comparison */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Property <span className="text-amber-600">Comparison</span>
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-              Compare features, amenities, and pricing across our premium properties.
-            </p>
-          </div>
-          
-          <div className="overflow-x-auto rounded-2xl shadow-2xl">
-            <table className="w-full bg-white rounded-2xl overflow-hidden">
-              <thead className="bg-gradient-to-r from-gray-900 to-gray-800 text-white">
-                <tr>
-                  <th className="py-6 px-8 text-left">Features</th>
-                  {comparisonProperties.map((property) => (
-                    <th key={property.id} className="py-6 px-8 text-left">
-                      <div className="font-bold text-xl mb-2">{property.name}</div>
-                      <div className="text-amber-400 text-2xl font-bold">{property.price}</div>
-                      <div className="text-gray-300 text-sm">{property.location}</div>
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {[
-                  { label: 'Bedrooms', key: 'beds' },
-                  { label: 'Bathrooms', key: 'baths' },
-                  { label: 'Square Feet', key: 'sqft' },
-                  { label: 'Year Built', key: 'year' },
-                ].map((row, rowIndex) => (
-                  <tr key={rowIndex} className={rowIndex % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                    <td className="py-4 px-8 font-medium text-gray-700">{row.label}</td>
-                    {comparisonProperties.map((property) => (
-                      <td key={property.id} className="py-4 px-8 text-gray-900 font-medium">
-                        {property[row.key]}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
-                
-                <tr className="bg-gray-50">
-                  <td className="py-4 px-8 font-medium text-gray-700">Key Amenities</td>
-                  {comparisonProperties.map((property) => (
-                    <td key={property.id} className="py-4 px-8">
-                      <ul className="space-y-2">
-                        {property.amenities.slice(0, 4).map((amenity, index) => (
-                          <li key={index} className="flex items-center">
-                            <Check className="text-green-500 mr-2" size={16} />
-                            <span className="text-gray-700">{amenity}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </td>
-                  ))}
-                </tr>
-              </tbody>
-              <tfoot>
-                <tr className="bg-white">
-                  <td className="py-6 px-8"></td>
-                  {comparisonProperties.map((property) => (
-                    <td key={property.id} className="py-6 px-8">
-                      <button className="w-full bg-gradient-to-r from-amber-600 to-amber-800 text-white py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-300">
-                        View Details
-                      </button>
-                    </td>
-                  ))}
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        </div>
-      </section>
-
+    
       {/* Mortgage Calculator */}
       <section className="py-20 bg-gradient-to-r from-gray-900 to-gray-800">
         <div className="container mx-auto px-6">
@@ -699,7 +650,7 @@ const ModernLuxuryRealEstate = () => {
       {/* Newsletter */}
       <section className="py-20">
         <div className="container mx-auto px-6">
-          <div className="bg-gradient-to-r from-amber-600 to-amber-800 rounded-3xl p-12 text-center">
+          <div className="bg-yellow-400 rounded-3xl p-12 text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Stay Ahead in Luxury Real Estate
             </h2>
@@ -737,11 +688,11 @@ const ModernLuxuryRealEstate = () => {
     className="max-w-6xl mx-auto"
   >
     <div className="text-center mb-12">
-      <span className="inline-block px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-400 text-white text-sm font-semibold rounded-full mb-4 shadow-lg">
+      <span className="inline-block px-4 py-2 bg-yellow-400 text-white text-sm font-semibold rounded-full mb-4 shadow-lg">
         📬 CONTACT US
       </span>
       <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-        Get In <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-500">Touch</span>
+        Get In <span className="text-transparent bg-clip-text bg-yellow-400">Touch</span>
       </h2>
       <p className="text-gray-600 max-w-2xl mx-auto text-lg">
         Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
@@ -763,7 +714,7 @@ const ModernLuxuryRealEstate = () => {
         
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-8">
-            <div className="p-3 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-xl shadow-lg">
+            <div className="p-3 bg-yellow-400 rounded-xl shadow-lg">
               <MessageSquare className="w-6 h-6" />
             </div>
             <h3 className="text-2xl md:text-3xl font-bold">Contact Information</h3>
@@ -776,21 +727,21 @@ const ModernLuxuryRealEstate = () => {
                 title: "Phone Number",
                 details: "(802) 555-1234",
                 description: "Available Monday-Friday, 9am-6pm",
-                gradient: "from-blue-500 to-blue-400"
+                gradient: "bg-yellow-400"
               },
               {
                 icon: <Mail className="w-6 h-6" />,
                 title: "Email Address",
                 details: "info@vermontliferealtors.com",
                 description: "We'll respond within 24 hours",
-                gradient: "from-cyan-500 to-teal-400"
+                gradient: "bg-green-400"
               },
               {
                 icon: <Home className="w-6 h-6" />,
                 title: "Office Location",
                 details: "59 South Main St., Stowe, VT 05676",
                 description: "Visit us at our headquarters",
-                gradient: "from-purple-500 to-pink-400"
+                gradient: "bg-yellow-400"
               },
             ].map((item, index) => (
               <motion.div
@@ -816,28 +767,7 @@ const ModernLuxuryRealEstate = () => {
             ))}
           </div>
 
-          {/* Social Media Links */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            viewport={{ once: true }}
-            className="mt-10 pt-8 border-t border-white/10"
-          >
-            <p className="text-gray-300 mb-4">Follow us on social media</p>
-            <div className="flex gap-4">
-              {['Facebook', 'Instagram', 'LinkedIn', 'Twitter'].map((social, idx) => (
-                <motion.a
-                  key={social}
-                  whileHover={{ y: -5, scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="p-3 rounded-xl bg-white/5 hover:bg-white/10 transition-all duration-300 cursor-pointer"
-                >
-                  <span className="text-sm font-medium">{social}</span>
-                </motion.a>
-              ))}
-            </div>
-          </motion.div>
+       
         </div>
       </motion.div>
 
@@ -850,11 +780,11 @@ const ModernLuxuryRealEstate = () => {
         className="bg-white rounded-2xl p-8 lg:p-10 shadow-2xl border border-gray-100 relative overflow-hidden"
       >
         {/* Decorative Background */}
-        <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500"></div>
+        <div className="absolute top-0 left-0 w-full h-2 bg-yellow-400"></div>
         
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-8">
-            <div className="p-3 bg-gradient-to-r from-cyan-500 to-blue-400 rounded-xl shadow-lg">
+            <div className="p-3 bg-yellow-400 rounded-xl shadow-lg">
               <Send className="w-6 h-6 text-white" />
             </div>
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900">Send Message</h3>
@@ -912,7 +842,7 @@ const ModernLuxuryRealEstate = () => {
             >
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 transform hover:-translate-y-1 text-lg"
+                className="w-full bg-yellow-400 text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl hover:from-blue-700 hover:to-cyan-600 transition-all duration-300 transform hover:-translate-y-1 text-lg"
               >
                 <span className="flex items-center justify-center gap-2">
                   Send Message
@@ -922,41 +852,102 @@ const ModernLuxuryRealEstate = () => {
             </motion.div>
           </form>
 
-          {/* Additional Info */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
-            viewport={{ once: true }}
-            className="mt-8 pt-6 border-t border-gray-100"
-          >
-            <div className="flex items-center justify-center gap-6 text-sm text-gray-600">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-green-500"></div>
-                <span>24/7 Support</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-blue-500"></div>
-                <span>Quick Response</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-purple-500"></div>
-                <span>Secure Form</span>
-              </div>
-            </div>
-          </motion.div>
+         
         </div>
       </motion.div>
     </div>
   </motion.div>
 </div>
+ <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl">
+            Frequently Asked Questions
+          </h1>
+          <p className="mt-4 text-xl text-gray-600">
+            Find answers to common questions about our products and services
+          </p>
+        </div>
+
+        {/* FAQ Items */}
+        <div className="space-y-4">
+          {faqItems.map((item, index) => (
+            <div 
+              key={index} 
+              className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
+            >
+              <button
+                className="w-full px-6 py-5 text-left focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 rounded-2xl"
+                onClick={() => toggleFAQ(index)}
+                aria-expanded={openIndex === index}
+                aria-controls={`faq-answer-${index}`}
+              >
+                <div className="flex justify-between items-center">
+                  <h3 className="text-lg font-semibold text-gray-900 pr-8">
+                    {item.question}
+                  </h3>
+                  <div className="flex-shrink-0 ml-4">
+                    <svg 
+                      className={`w-6 h-6 text-blue-600 transition-transform duration-300 ${openIndex === index ? 'transform rotate-180' : ''}`}
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth="2" 
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </div>
+                </div>
+              </button>
+              
+              <div 
+                id={`faq-answer-${index}`}
+                className={`px-6 overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? 'pb-5' : 'max-h-0'}`}
+                style={{ maxHeight: openIndex === index ? '200px' : '0' }}
+              >
+                <div className="border-l-4 border-blue-500 pl-4 py-1">
+                  <p className="text-gray-700 leading-relaxed">
+                    {item.answer}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Contact Info */}
+        <div className="mt-12 p-6 bg-yellow-400 rounded-2xl shadow-lg text-white">
+          <div className="flex flex-col md:flex-row items-center justify-between">
+            <div className="mb-6 md:mb-0">
+              <h3 className="text-xl font-bold">Still have questions?</h3>
+              <p className="mt-2 text-blue-100">
+                Can't find the answer you're looking for? Please contact our support team.
+              </p>
+            </div>
+            <button className="px-6 py-3 bg-white text-blue-600 font-semibold rounded-xl hover:bg-blue-50 transition-colors duration-300 shadow-md hover:shadow-lg">
+              Contact Support
+            </button>
+          </div>
+        </div>
+
+        {/* Instructions */}
+        <div className="mt-8 text-center text-gray-500 text-sm">
+          <p>Click on any question to reveal the answer. Click again to collapse.</p>
+        </div>
+      </div>
+    </div>
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div>
               <div className="flex items-center space-x-2 mb-6">
-                <div className="w-10 h-10 bg-gradient-to-r from-amber-600 to-amber-800 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center">
                   <Home size={24} />
                 </div>
                 <span className="text-2xl font-bold">LuxeLiving</span>
@@ -1003,12 +994,12 @@ const ModernLuxuryRealEstate = () => {
                 Follow us on social media for the latest luxury listings and market updates.
               </p>
               <div className="flex space-x-4">
-                {['Facebook', 'Instagram', 'LinkedIn', 'Twitter'].map((social) => (
+                {[<FaFacebook/>, <FaInstagram/>, <FaLinkedinIn/>,<FaTwitter/>].map((social) => (
                   <div 
                     key={social}
                     className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-amber-600 cursor-pointer transition-colors"
                   >
-                    {social.charAt(0)}
+                    {social}
                   </div>
                 ))}
               </div>
@@ -1016,13 +1007,13 @@ const ModernLuxuryRealEstate = () => {
           </div>
           
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>© 2023 LuxeLiving. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>© Growth Flow Media. All rights reserved. | Privacy Policy | Terms of Service</p>
           </div>
         </div>
       </footer>
 
       {/* Floating Contact Button */}
-      <button className="fixed bottom-6 right-6 bg-gradient-to-r from-amber-600 to-amber-800 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50">
+      <button className="fixed bottom-6 right-6 bg-yellow-400 text-white p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50">
         <Phone size={24} />
       </button>
 
