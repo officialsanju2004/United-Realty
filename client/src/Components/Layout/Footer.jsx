@@ -99,13 +99,13 @@ const Footer = () => {
               <div className="mb-8">
                 <Link to="/" className="inline-flex items-center space-x-3 group">
                   <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-white font-display font-bold text-2xl">B</span>
+                  <span className="text-white font-display font-bold text-2xl">U</span>
                   </div>
                   
                    
                   <div>
                     <h2 className="text-3xl font-display font-bold">
-                      Bond Cou<span className="text-primary-400">nty Realtors</span>
+                      United<span className="text-primary-400">Reality</span>
                     </h2>
                     <p className="text-gray-400 text-sm">Luxury Real Estate Solutions</p>
                   </div>
@@ -230,7 +230,7 @@ const Footer = () => {
           {/* Bottom Bar */}
           <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-gray-800">
             <div className="text-gray-400 text-sm mb-4 md:mb-0">
-              <p>© Bond County Realtors. All rights reserved. | Privacy Policy | Terms of Service</p>
+              <p>© UnitedReality. All rights reserved. | Privacy Policy | Terms of Service</p>
             </div>
             <div className="flex flex-wrap justify-center gap-6 text-sm">
               <Link to="/privacy" className="text-gray-400 hover:text-white transition-colors">

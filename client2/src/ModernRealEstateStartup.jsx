@@ -387,7 +387,7 @@ const ModernRealEstateStartup = () => {
               </div>
               <div>
                 <span className="text-2xl font-bold bg-purple-600 bg-clip-text text-transparent">
-                  Bond County Realtors
+                  United Realty
                 </span>
                 <div className="text-xs text-gray-500">AI-Powered Real Estate</div>
               </div>
@@ -902,7 +902,7 @@ const ModernRealEstateStartup = () => {
               Loved by <span className="bg-purple-600 bg-clip-text text-transparent">Home Seekers</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              See what our users have to say about their experience with Bond County Realtors.
+              See what our users have to say about their experience with United Realty.
             </p>
           </div>
           
@@ -1325,7 +1325,7 @@ const ModernRealEstateStartup = () => {
                   <Home size={22} className="text-white" />
                 </div>
                 <div>
-                  <span className="text-2xl font-bold">Bond County Realtors</span>
+                  <span className="text-2xl font-bold">United Realty</span>
                   <div className="text-sm text-gray-400">AI-Powered Real Estate</div>
                 </div>
               </div>
@@ -1396,7 +1396,7 @@ const ModernRealEstateStartup = () => {
           <div className="border-t border-gray-800 mt-12 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="text-gray-400 text-sm mb-4 md:mb-0">
-                 <p>© Bond County Realtors. All rights reserved. | Privacy Policy | Terms of Service</p>
+                 <p>© United Realty. All rights reserved. | Privacy Policy | Terms of Service</p>
               </div>
               <div className="flex space-x-6 text-sm text-gray-400">
                 <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>

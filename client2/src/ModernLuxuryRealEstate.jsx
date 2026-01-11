@@ -337,7 +337,7 @@ const VideoTestimonialCard = ({ testimonial }) => {
             <div className="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center">
               <Home className="text-white" size={24} />
             </div>
-            <span className={`text-2xl font-bold text-white`}>Bond County Realtors</span>
+            <span className={`text-2xl font-bold text-white`}>United Realty</span>
           </div>
           
           {/* Desktop Menu */}
@@ -544,7 +544,7 @@ const VideoTestimonialCard = ({ testimonial }) => {
                     </span>
                   </h2>
                   <p className="text-gray-600 text-xl max-w-3xl mx-auto">
-                    See why top investors and homeowners choose Bond County Realtors for their property needs
+                    See why top investors and homeowners choose United Realty for their property needs
                   </p>
                 </div>
                 
@@ -1077,7 +1077,7 @@ const VideoTestimonialCard = ({ testimonial }) => {
                 <div className="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center">
                   <Home size={24} />
                 </div>
-                <span className="text-2xl font-bold">Bond County Realtors</span>
+                <span className="text-2xl font-bold">United Realty</span>
               </div>
               <p className="text-gray-400">
                 Redefining luxury real estate with unparalleled service, exclusive properties, and global expertise.
