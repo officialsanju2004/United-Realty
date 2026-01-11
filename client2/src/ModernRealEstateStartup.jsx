@@ -387,7 +387,7 @@ const ModernRealEstateStartup = () => {
               </div>
               <div>
                 <span className="text-2xl font-bold bg-purple-600 bg-clip-text text-transparent">
-                  HomeSphere
+                  Willcuts Company Realtors
                 </span>
                 <div className="text-xs text-gray-500">AI-Powered Real Estate</div>
               </div>
@@ -902,7 +902,7 @@ const ModernRealEstateStartup = () => {
               Loved by <span className="bg-purple-600 bg-clip-text text-transparent">Home Seekers</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              See what our users have to say about their experience with HomeSphere.
+              See what our users have to say about their experience with Willcuts Company Realtors.
             </p>
           </div>
           
@@ -1325,7 +1325,7 @@ const ModernRealEstateStartup = () => {
                   <Home size={22} className="text-white" />
                 </div>
                 <div>
-                  <span className="text-2xl font-bold">HomeSphere</span>
+                  <span className="text-2xl font-bold">Willcuts Company Realtors</span>
                   <div className="text-sm text-gray-400">AI-Powered Real Estate</div>
                 </div>
               </div>

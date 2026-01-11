@@ -337,7 +337,7 @@ const VideoTestimonialCard = ({ testimonial }) => {
             <div className="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center">
               <Home className="text-white" size={24} />
             </div>
-            <span className={`text-2xl font-bold text-white`}>LuxeLiving</span>
+            <span className={`text-2xl font-bold text-white`}>Cornerstone Realtors</span>
           </div>
           
           {/* Desktop Menu */}
@@ -544,7 +544,7 @@ const VideoTestimonialCard = ({ testimonial }) => {
                     </span>
                   </h2>
                   <p className="text-gray-600 text-xl max-w-3xl mx-auto">
-                    See why top investors and homeowners choose LuxeLiving for their property needs
+                    See why top investors and homeowners choose Cornerstone Realtors for their property needs
                   </p>
                 </div>
                 
@@ -1077,7 +1077,7 @@ const VideoTestimonialCard = ({ testimonial }) => {
                 <div className="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center">
                   <Home size={24} />
                 </div>
-                <span className="text-2xl font-bold">LuxeLiving</span>
+                <span className="text-2xl font-bold">Cornerstone Realtors</span>
               </div>
               <p className="text-gray-400">
                 Redefining luxury real estate with unparalleled service, exclusive properties, and global expertise.
