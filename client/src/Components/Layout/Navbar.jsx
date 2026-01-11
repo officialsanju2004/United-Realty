@@ -26,10 +26,10 @@ const Navbar = () => {
             {/* Logo */}
             <Link to="/" className="flex items-center space-x-2">
                <div className="w-12 h-12 bg-primary-600 rounded-xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-white font-display font-bold text-2xl">P</span>
+                    <span className="text-white font-display font-bold text-2xl">U</span>
                   </div>
               <span className="text-2xl font-display font-bold text-dark-900">
-                Premium<span className="text-primary-600">Estate</span>
+             United<span className="text-primary-600">Realty</span>
               </span>
             </Link>
 

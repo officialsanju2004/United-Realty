@@ -72,7 +72,7 @@ const WhyChooseUs = () => {
         >
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-500/10 to-secondary-500/10 px-4 py-2 rounded-full mb-6">
             <IoRibbon className="text-primary-600" />
-            <span className="text-primary-600 font-semibold">Why Choose PremiumEstate</span>
+            <span className="text-primary-600 font-semibold">Why Choose UnitedReality</span>
           </div>
           
           <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-4">

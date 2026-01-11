@@ -99,13 +99,13 @@ const Footer = () => {
               <div className="mb-8">
                 <Link to="/" className="inline-flex items-center space-x-3 group">
                   <div className="w-12 h-12 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-white font-display font-bold text-2xl">P</span>
+                  <span className="text-white font-display font-bold text-2xl">U</span>
                   </div>
                   
                    
                   <div>
                     <h2 className="text-3xl font-display font-bold">
-                      Premium<span className="text-primary-400">Estate</span>
+                      United<span className="text-primary-400">Reality</span>
                     </h2>
                     <p className="text-gray-400 text-sm">Luxury Real Estate Solutions</p>
                   </div>
