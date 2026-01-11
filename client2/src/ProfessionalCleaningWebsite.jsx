@@ -1,850 +1,863 @@
 import React, { useState, useEffect } from 'react';
 
-const ProfessionalCleaningWebsite = () => {
-  // FAQ Accordion state
-  const [activeFaq, setActiveFaq] = useState(null);
-  
-  // Contact form state
+const XcellentCleaning = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeFAQ, setActiveFAQ] = useState(null);
+  const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    service: '',
+    suburb: '',
+    rooms: '1 Room',
+    service: 'Carpet Cleaning Brisbane',
+    date: '',
     message: ''
   });
-  
-  // Services data
+
+  // Hero image slideshow
+  const heroImages = [
+    '/api/placeholder/1600/900?text=Professional+Carpet+Cleaning+Brisbane&bg=3d5a80&color=fff',
+    '/api/placeholder/1600/900?text=End+of+Lease+Cleaning+Experts&bg=ee6c4d&color=fff',
+    '/api/placeholder/1600/900?text=Commercial+Cleaning+Services&bg=98c1d9&color=333',
+    '/api/placeholder/1600/900?text=Builder+Clean+Specialists&bg=293241&color=fff'
+  ];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeroImage((prev) => (prev + 1) % heroImages.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const toggleFAQ = (index) => {
+    setActiveFAQ(activeFAQ === index ? null : index);
+  };
+
+  // Service images
+  const serviceImages = {
+    'Carpet Cleaning': '/api/placeholder/400/300?text=Carpet+Cleaning&bg=ee6c4d',
+    'Bond Cleaning': '/api/placeholder/400/300?text=Bond+Cleaning&bg=3d5a80',
+    'End of Lease Cleaning': '/api/placeholder/400/300?text=Lease+Cleaning&bg=98c1d9',
+    'Upholstery Cleaning': '/api/placeholder/400/300?text=Upholstery&bg=293241',
+    'Exit Cleaning': '/api/placeholder/400/300?text=Exit+Cleaning&bg=ee6c4d',
+    'House Cleaning': '/api/placeholder/400/300?text=House+Cleaning&bg=3d5a80',
+    'Builder Cleaning': '/api/placeholder/400/300?text=Builder+Clean&bg=98c1d9',
+    'Pressure Cleaning': '/api/placeholder/400/300?text=Pressure+Wash&bg=293241'
+  };
+
   const services = [
-    { 
-      id: 1, 
-      title: "Residential Cleaning", 
-      description: "Complete home cleaning for apartments, condos, and houses",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-        </svg>
-      ),
-      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&auto=format&fit=crop"
+    {
+      title: 'Carpet Cleaning',
+      description: 'Professional carpet cleaning service using advanced steam technology to remove deep-seated dirt, stains, and allergens. We restore your carpets to like-new condition with our commercial-grade equipment.',
+      details: [
+        'Deep steam cleaning technology',
+        'Stain removal treatment',
+        'Odor elimination',
+        'Allergen reduction',
+        'Quick drying process'
+      ],
+      icon: '🧹'
     },
-    { 
-      id: 2, 
-      title: "Commercial Cleaning", 
-      description: "Office and workspace cleaning for businesses",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-        </svg>
-      ),
-      image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&auto=format&fit=crop"
+    {
+      title: 'Bond Cleaning',
+      description: 'Get your full bond refund guaranteed with our comprehensive bond cleaning service. We follow real estate agency checklists meticulously, ensuring every corner meets inspection standards.',
+      details: [
+        '100% bond back guarantee',
+        'Real estate approved',
+        'Full property deep clean',
+        'Carpet steam cleaning included',
+        'Window and blind cleaning'
+      ],
+      icon: '🏠'
     },
-    { 
-      id: 3, 
-      title: "Deep Cleaning", 
-      description: "Thorough cleaning of every corner of your space",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-        </svg>
-      ),
-      image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&auto=format&fit=crop"
+    {
+      title: 'End of Lease Cleaning',
+      description: 'Ensure a smooth property handover with our end of lease cleaning service. We transform your property to meet real estate standards, focusing on high-traffic areas and commonly inspected zones.',
+      details: [
+        'Complete property clean',
+        'Kitchen degreasing',
+        'Bathroom sanitization',
+        'Wall mark removal',
+        'Final inspection preparation'
+      ],
+      icon: '📋'
     },
-    { 
-      id: 4, 
-      title: "Carpet & Upholstery", 
-      description: "Professional cleaning for carpets and furniture",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-        </svg>
-      ),
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&auto=format&fit=crop"
-    },
-    { 
-      id: 5, 
-      title: "Window Cleaning", 
-      description: "Interior and exterior window cleaning services",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-        </svg>
-      ),
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&auto=format&fit=crop"
-    },
-    { 
-      id: 6, 
-      title: "Move In/Out Cleaning", 
-      description: "Specialized cleaning for moving transitions",
-      icon: (
-        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
-        </svg>
-      ),
-      image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&auto=format&fit=crop"
-    },
+    {
+      title: 'Upholstery Cleaning',
+      description: 'Revitalize your furniture with our professional upholstery cleaning service. We remove dirt, stains, and allergens from sofas, chairs, and curtains using safe, effective methods.',
+      details: [
+        'Fabric-safe cleaning solutions',
+        'Stain treatment',
+        'Odor removal',
+        'Quick drying',
+        'Fabric protection application'
+      ],
+      icon: '🛋️'
+    }
   ];
-  
-  // Process steps
-  const processSteps = [
-    { step: 1, title: "Book Online", description: "Schedule your cleaning service through our website or phone" },
-    { step: 2, title: "Customize Plan", description: "Select services and customize to your specific needs" },
-    { step: 3, title: "Team Dispatch", description: "Our trained cleaning team arrives at your location" },
-    { step: 4, title: "Quality Inspection", description: "We ensure every detail meets our high standards" },
+
+  const allServices = [
+    {
+      title: 'Carpet Cleaning',
+      description: 'Professional carpet cleaning service using advanced steam technology to remove deep-seated dirt, stains, and allergens.',
+      image: '/api/placeholder/600/400?text=Carpet+Cleaning&bg=ee6c4d'
+    },
+    {
+      title: 'Bond Cleaning',
+      description: '100% bond back guarantee with comprehensive cleaning following real estate standards.',
+      image: '/api/placeholder/600/400?text=Bond+Cleaning&bg=3d5a80'
+    },
+    {
+      title: 'End of Lease Cleaning',
+      description: 'Smooth property handover with meticulous attention to inspection requirements.',
+      image: '/api/placeholder/600/400?text=Lease+Cleaning&bg=98c1d9'
+    },
+    {
+      title: 'Upholstery Cleaning',
+      description: 'Revitalize furniture with professional fabric care and stain removal.',
+      image: '/api/placeholder/600/400?text=Upholstery&bg=293241'
+    },
+    {
+      title: 'Exit Cleaning',
+      description: 'Complete move-out cleaning covering all areas from ceiling to floor.',
+      image: '/api/placeholder/600/400?text=Exit+Cleaning&bg=ee6c4d'
+    },
+    {
+      title: 'House Cleaning',
+      description: 'Regular maintenance cleaning for spotless, fresh, and inviting homes.',
+      image: '/api/placeholder/600/400?text=House+Cleaning&bg=3d5a80'
+    },
+    {
+      title: 'Builder Cleaning',
+      description: 'Post-construction cleaning removing all dust and debris.',
+      image: '/api/placeholder/600/400?text=Builder+Clean&bg=98c1d9'
+    },
+    {
+      title: 'Pressure Cleaning',
+      description: 'Restore outdoor surfaces with high-pressure cleaning technology.',
+      image: '/api/placeholder/600/400?text=Pressure+Wash&bg=293241'
+    }
   ];
-  
-  // Testimonials with video
+
+  const whyChooseUs = [
+    {
+      title: 'Experienced Professionals',
+      description: 'Our team consists of highly trained, experienced cleaning professionals with years of industry experience.',
+      icon: '👨‍🔧'
+    },
+    {
+      title: 'Affordable Pricing',
+      description: 'Competitive, transparent pricing with no hidden fees and cost-effective packages.',
+      icon: '💰'
+    },
+    {
+      title: 'Eco-Friendly Products',
+      description: 'Environmentally friendly cleaning products and sustainable methods for safe spaces.',
+      icon: '🌿'
+    },
+    {
+      title: 'Quality Guarantee',
+      description: 'Unmatched cleaning excellence with meticulous attention to every detail.',
+      icon: '⭐'
+    },
+    {
+      title: 'Custom Solutions',
+      description: 'Tailored services with flexible scheduling and personalized cleaning plans.',
+      icon: '📋'
+    },
+    {
+      title: 'Satisfaction Promise',
+      description: '100% satisfaction guarantee with commitment to making things right.',
+      icon: '✅'
+    }
+  ];
+
   const testimonials = [
-    { 
-      name: "Sarah Johnson", 
-      text: "The best cleaning service I've ever used. My apartment has never looked better!", 
-      role: "Residential Client",
-      videoId: "testimonial1",
-      videoThumbnail: "https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=800&auto=format&fit=crop"
+    {
+      name: 'Sarah Johnson',
+      location: 'Paddington, Brisbane',
+      rating: '★★★★★',
+      text: 'Xcellent Cleaning transformed our rental property for the final inspection. We received our full bond back without any issues.',
+      image: '/api/placeholder/100/100?text=SJ&bg=ee6c4d&color=fff',
+      service: 'Bond Cleaning'
     },
-    { 
-      name: "Michael Chen", 
-      text: "Our office space is consistently spotless. Highly professional team.", 
-      role: "Business Owner",
-      videoId: "testimonial2",
-      videoThumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&auto=format&fit=crop"
+    {
+      name: 'Michael Chen',
+      location: 'Fortitude Valley',
+      rating: '★★★★★',
+      text: 'Our office carpets were in terrible condition. Xcellent Cleaning revived them completely. Highly professional team!',
+      image: '/api/placeholder/100/100?text=MC&bg=3d5a80&color=fff',
+      service: 'Commercial Cleaning'
     },
-    { 
-      name: "Emma Rodriguez", 
-      text: "Reliable, thorough, and affordable. I recommend them to all my friends.", 
-      role: "Regular Client",
-      videoId: "testimonial3",
-      videoThumbnail: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&auto=format&fit=crop"
-    },
+    {
+      name: 'Emma Williams',
+      location: 'New Farm',
+      rating: '★★★★★',
+      text: 'As a property manager, I\'ve worked with many cleaning companies. Xcellent Cleaning stands out for reliability and quality.',
+      image: '/api/placeholder/100/100?text=EW&bg=98c1d9&color=333',
+      service: 'End of Lease Cleaning'
+    }
   ];
-  
-  // FAQ data
+
+  const cleaningTips = [
+    {
+      title: 'Carpet Maintenance',
+      tip: 'Regular vacuuming and immediate stain treatment extend carpet life. Use doormats to reduce dirt entry.',
+      image: '/api/placeholder/300/200?text=Carpet+Care&bg=ee6c4d'
+    },
+    {
+      title: 'Kitchen Hygiene',
+      tip: 'Clean kitchen surfaces daily and regularly degrease range hoods to maintain air quality.',
+      image: '/api/placeholder/300/200?text=Kitchen+Clean&bg=3d5a80'
+    },
+    {
+      title: 'Bathroom Care',
+      tip: 'Use squeegees on shower screens after use and ensure proper ventilation to prevent mold.',
+      image: '/api/placeholder/300/200?text=Bathroom+Care&bg=98c1d9'
+    },
+    {
+      title: 'Seasonal Cleaning',
+      tip: 'Schedule deep cleaning during season changes including window tracks and ceiling fans.',
+      image: '/api/placeholder/300/200?text=Seasonal+Clean&bg=293241'
+    }
+  ];
+
   const faqs = [
-    { question: "What areas do you service?", answer: "We currently service the greater metropolitan area including all suburbs within a 25-mile radius. Contact us to check if we cover your specific location." },
-    { question: "How do you price your services?", answer: "Our pricing is based on the size of the space, type of service, and frequency. We offer free estimates after a brief consultation." },
-    { question: "Are your cleaning products eco-friendly?", answer: "Yes, we use environmentally friendly cleaning products that are safe for children, pets, and people with allergies." },
-    { question: "Do you bring your own equipment?", answer: "Yes, our professional team arrives fully equipped with all necessary cleaning supplies and equipment." },
-    { question: "Can I schedule recurring cleaning?", answer: "Absolutely! We offer weekly, bi-weekly, and monthly cleaning plans with discounted rates for recurring services." },
+    {
+      question: 'Is the cost for all the services predefined?',
+      answer: 'No, the cost depends on your specific needs. We provide transparent quotes after assessing area size, cleaning requirements, and additional services needed.'
+    },
+    {
+      question: 'Can I get customized cleaning service?',
+      answer: 'Yes, we specialize in customized solutions tailored to your specific requirements with flexible scheduling.'
+    },
+    {
+      question: 'Do you work on weekends?',
+      answer: 'Yes, we offer flexible scheduling including weekends, evenings, and after-hours appointments.'
+    },
+    {
+      question: 'What cleaning products do you use?',
+      answer: 'We use professional-grade, eco-friendly cleaning products that are safe for families, pets, and the environment.'
+    }
   ];
-  
-  // Gallery images
-  const galleryImages = [
-    { 
-      id: 1, 
-      alt: "Clean living room",
-      image: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&auto=format&fit=crop"
-    },
-    { 
-      id: 2, 
-      alt: "Sparkling kitchen",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop"
-    },
-    { 
-      id: 3, 
-      alt: "Office cleaning",
-      image: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=800&auto=format&fit=crop"
-    },
-    { 
-      id: 4, 
-      alt: "Window cleaning",
-      image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&auto=format&fit=crop"
-    },
-    { 
-      id: 5, 
-      alt: "Carpet cleaning",
-      image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&auto=format&fit=crop"
-    },
-    { 
-      id: 6, 
-      alt: "Bathroom cleaning",
-      image: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800&auto=format&fit=crop"
-    },
-  ];
-  
-  // Toggle FAQ accordion
-  const toggleFaq = (index) => {
-    setActiveFaq(activeFaq === index ? null : index);
-  };
-  
-  // Handle form input changes
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-  
-  // Handle form submission
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("Thank you for your inquiry! We'll contact you within 24 hours.");
+    alert('Thank you for your inquiry! We will contact you within 24 hours with a detailed cost estimate.');
     setFormData({
       name: '',
       email: '',
       phone: '',
-      service: '',
+      suburb: '',
+      rooms: '1 Room',
+      service: 'Carpet Cleaning Brisbane',
+      date: '',
       message: ''
     });
   };
-  
-  // Play video testimonial
-  const playVideo = (videoId) => {
-    alert(`Playing video testimonial: ${videoId}. In a real application, this would open a video modal or play the video inline.`);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
   };
-  
-  // Animation on scroll
-  const [visibleSections, setVisibleSections] = useState([]);
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = document.querySelectorAll('section');
-      const newVisibleSections = [];
-      
-      sections.forEach((section, index) => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= window.innerHeight * 0.75) {
-          newVisibleSections.push(index);
-        }
-      });
-      
-      setVisibleSections(newVisibleSections);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial check
-    
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-  
+
+  // Floating elements positions
+  const floatingElements = [
+    { top: '20%', left: '10%', delay: '0s' },
+    { top: '40%', right: '15%', delay: '1s' },
+    { top: '70%', left: '20%', delay: '2s' },
+    { top: '30%', right: '25%', delay: '3s' }
+  ];
+
   return (
-    <div className="min-h-screen bg-gray-50 font-sans">
+    <div className="min-h-screen bg-gray-50">
       {/* Navigation */}
-      <nav className="bg-white shadow-md sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-3 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
-            </div>
-            <h1 className="text-2xl font-bold text-gray-800">Clean<span className="text-blue-600">Pro</span></h1>
-          </div>
-          
-          <div className="hidden md:flex space-x-8">
-            <a href="#home" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">Home</a>
-            <a href="#contact-home" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">Contact</a>
-            <a href="#services" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">Services</a>
-            <a href="#testimonials" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">Testimonials</a>
-            <a href="#faq" className="text-gray-700 hover:text-blue-600 font-medium transition-colors">FAQ</a>
-          </div>
-          
-          <a href="#contact" className="bg-blue-600 text-white px-5 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-            Book Now
-          </a>
-        </div>
-      </nav>
-      
-      {/* Hero Banner */}
-      <section id="home" className="bg-blue-600 text-white py-20">
-        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
-          <div className={`md:w-1/2 mb-10 md:mb-0 transition-all duration-1000 ${visibleSections.includes(0) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Professional Cleaning Services for Your Home & Business</h1>
-            <p className="text-xl mb-8 text-blue-100">We provide top-quality cleaning solutions with trained professionals, eco-friendly products, and satisfaction guarantee.</p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <a href="#contact" className="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition-colors text-center">
-                Schedule a Cleaning
-              </a>
-              <a href="#services" className="border-2 border-white text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-blue-700 transition-colors text-center">
-                View Services
-              </a>
-            </div>
-          </div>
-          <div className="md:w-1/2 flex justify-center">
-            <div className="relative w-full max-w-lg">
-              <div className="bg-white rounded-xl shadow-2xl p-2 transform rotate-3">
-                <div className="h-64 rounded-lg overflow-hidden">
-                  <img 
-                    src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=800&auto=format&fit=crop" 
-                    alt="Professional cleaning team"
-                    className="w-full h-full object-cover"
-                  />
+      <nav className="bg-white shadow-lg sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-20">
+            <div className="flex items-center">
+              <div className="flex-shrink-0 flex items-center">
+                <div className="w-10 h-10 bg-[#ee6c4d] rounded-lg flex items-center justify-center transform rotate-45">
+                  <span className="text-white font-bold text-xl -rotate-45">X</span>
+                </div>
+                <div className="ml-3">
+                  <span className="text-2xl font-bold text-gray-900">Xcellent</span>
+                  <span className="text-2xl font-bold text-[#ee6c4d] ml-1">Cleaning</span>
                 </div>
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-2xl p-2 transform -rotate-3 w-3/4">
-                <div className="h-40 rounded-lg overflow-hidden">
-                  <img 
-                    src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&auto=format&fit=crop" 
-                    alt="Clean carpet results"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-      
-      {/* Contact Form - Homepage */}
-      <section id="contact-home" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className={`max-w-6xl mx-auto transition-all duration-1000 ${visibleSections.includes(1) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Get Your Free Cleaning Quote</h2>
-              <p className="text-gray-600 max-w-2xl mx-auto">Contact us today for a personalized cleaning plan and competitive pricing.</p>
             </div>
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-              <div>
-                <h3 className="text-2xl font-bold text-gray-800 mb-6">Contact Information</h3>
-                <div className="space-y-6">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-gray-800">Call Us</h4>
-                      <p className="text-gray-600">(555) 123-4567</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89-5.26a2 2 0 012.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-gray-800">Email Us</h4>
-                      <p className="text-gray-600">info@cleanpro.com</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <svg className="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-gray-800">Business Hours</h4>
-                      <p className="text-gray-600">Mon-Fri: 8am-6pm</p>
-                      <p className="text-gray-600">Sat: 9am-4pm</p>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="mt-8 bg-gray-50 rounded-xl p-6">
-                  <h4 className="font-bold text-gray-800 mb-4">Why Choose CleanPro?</h4>
-                  <ul className="space-y-3">
-                    <li className="flex items-center">
-                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-gray-700">Trained & background-checked staff</span>
-                    </li>
-                    <li className="flex items-center">
-                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-gray-700">Eco-friendly cleaning products</span>
-                    </li>
-                    <li className="flex items-center">
-                      <svg className="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                      </svg>
-                      <span className="text-gray-700">Satisfaction guarantee</span>
-                    </li>
-                  </ul>
-                </div>
+            <div className="hidden md:flex items-center space-x-8">
+              <a href="#home" className="text-gray-700 hover:text-[#ee6c4d] font-medium transition-colors duration-300">Home</a>
+              <a href="#services" className="text-gray-700 hover:text-[#ee6c4d] font-medium transition-colors duration-300">Services</a>
+              <a href="#why-us" className="text-gray-700 hover:text-[#ee6c4d] font-medium transition-colors duration-300">Why Choose Us</a>
+              <a href="#testimonials" className="text-gray-700 hover:text-[#ee6c4d] font-medium transition-colors duration-300">Testimonials</a>
+              <a href="#faq" className="text-gray-700 hover:text-[#ee6c4d] font-medium transition-colors duration-300">FAQ</a>
+              <button className="bg-[#ee6c4d] text-white px-6 py-2 rounded-lg font-medium hover:bg-[#d45a3d] transition-all duration-300 transform hover:scale-105 shadow-lg">
+                Book Now
+              </button>
+            </div>
+
+            <div className="md:hidden flex items-center">
+              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-700 p-2">
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  {isMenuOpen ? (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  ) : (
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  )}
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {isMenuOpen && (
+            <div className="md:hidden bg-white border-t">
+              <div className="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" className="block px-3 py-2 text-gray-700 hover:text-[#ee6c4d]">Home</a>
+                <a href="#services" className="block px-3 py-2 text-gray-700 hover:text-[#ee6c4d]">Services</a>
+                <a href="#why-us" className="block px-3 py-2 text-gray-700 hover:text-[#ee6c4d]">Why Choose Us</a>
+                <a href="#testimonials" className="block px-3 py-2 text-gray-700 hover:text-[#ee6c4d]">Testimonials</a>
+                <a href="#faq" className="block px-3 py-2 text-gray-700 hover:text-[#ee6c4d]">FAQ</a>
+                <button className="w-full text-center px-3 py-2 bg-[#ee6c4d] text-white rounded-lg font-medium mt-2">
+                  Book Now
+                </button>
               </div>
-              
-              <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-6">
-                <h3 className="text-2xl font-bold text-gray-800 mb-6">Request a Quote</h3>
-                <form onSubmit={handleSubmit}>
-                  <div className="space-y-4">
-                    <div>
-                      <label className="block text-gray-700 mb-2">Full Name *</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
-                        required
-                      />
-                    </div>
-                    
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-gray-700 mb-2">Email Address *</label>
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
-                          required
-                        />
-                      </div>
-                      
-                      <div>
-                        <label className="block text-gray-700 mb-2">Phone Number *</label>
-                        <input
-                          type="tel"
-                          name="phone"
-                          value={formData.phone}
-                          onChange={handleInputChange}
-                          className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
-                          required
-                        />
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <label className="block text-gray-700 mb-2">Service Interested In</label>
-                      <select
-                        name="service"
-                        value={formData.service}
-                        onChange={handleInputChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
-                      >
-                        <option value="">Select a service</option>
-                        <option value="residential">Residential Cleaning</option>
-                        <option value="commercial">Commercial Cleaning</option>
-                        <option value="deep">Deep Cleaning</option>
-                        <option value="carpet">Carpet & Upholstery</option>
-                        <option value="window">Window Cleaning</option>
-                        <option value="move">Move In/Out Cleaning</option>
-                      </select>
-                    </div>
-                    
-                    <div>
-                      <label className="block text-gray-700 mb-2">Message</label>
-                      <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        rows="4"
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
-                        placeholder="Tell us about your cleaning needs..."
-                      ></textarea>
-                    </div>
-                    
-                    <button
-                      type="submit"
-                      className="w-full bg-blue-600 text-white py-3.5 rounded-lg font-bold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
-                    >
-                      Get Free Quote
-                    </button>
-                  </div>
-                </form>
-              </div>
+            </div>
+          )}
+        </div>
+      </nav>
+
+      {/* Hero Section with Image Slider */}
+      <section id="home" className="relative h-screen overflow-hidden">
+        {/* Hero Images Slider */}
+        {heroImages.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ${
+              index === currentHeroImage ? 'opacity-100' : 'opacity-0'
+            }`}
+            style={{ backgroundImage: `url(${image})` }}
+          />
+        ))}
+        
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        
+        {/* Floating Elements */}
+        {floatingElements.map((pos, index) => (
+          <div
+            key={index}
+            className={`absolute w-8 h-8 bg-[#ee6c4d] bg-opacity-20 rounded-full animate-float`}
+            style={{
+              top: pos.top,
+              left: pos.left,
+              right: pos.right,
+              animationDelay: pos.delay
+            }}
+          />
+        ))}
+        
+        <div className="relative h-full flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 animate-fade-in">
+              Premium Cleaning Services in Brisbane
+            </h1>
+            <p className="text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto animate-slide-up">
+              Professional • Reliable • Exceptional Results
+            </p>
+            <div className="w-32 h-1 bg-[#ee6c4d] mx-auto mb-10 animate-expand"></div>
+            <p className="text-lg text-white mb-10 max-w-3xl mx-auto animate-slide-up delay-300">
+              Transform your space with Brisbane's most trusted cleaning professionals. 
+              From comprehensive bond cleaning to regular maintenance, we deliver excellence.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up delay-500">
+              <button className="bg-[#ee6c4d] text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-[#d45a3d] transition-all duration-300 transform hover:scale-105 shadow-xl">
+                Get Free Quote
+              </button>
+              <button className="bg-white text-[#ee6c4d] px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-xl">
+                Call: (07) 1234 5678
+              </button>
             </div>
           </div>
         </div>
+        
+        {/* Hero Image Indicators */}
+        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {heroImages.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentHeroImage(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentHeroImage ? 'bg-[#ee6c4d] w-8' : 'bg-white bg-opacity-50'
+              }`}
+            />
+          ))}
+        </div>
       </section>
-      
-      {/* Services Section */}
-      <section id="services" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className={`text-center mb-16 transition-all duration-1000 ${visibleSections.includes(2) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Cleaning Services</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">We offer a comprehensive range of professional cleaning services tailored to meet your specific needs.</p>
+
+      {/* Stats Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {[
+              { number: '2000+', label: 'Properties Cleaned', icon: '🏠' },
+              { number: '98%', label: 'Bond Return Rate', icon: '✓' },
+              { number: '24/7', label: 'Customer Support', icon: '📞' },
+              { number: '50+', label: 'Trained Staff', icon: '👨‍🔧' }
+            ].map((stat, index) => (
+              <div key={index} className="text-center p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow duration-300">
+                <div className="text-4xl mb-3">{stat.icon}</div>
+                <div className="text-3xl md:text-4xl font-bold text-[#ee6c4d] mb-2">{stat.number}</div>
+                <div className="text-gray-600">{stat.label}</div>
+              </div>
+            ))}
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              Our Cleaning Services
+            </h2>
+            <div className="w-24 h-1 bg-[#ee6c4d] mx-auto mb-8"></div>
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+              Comprehensive cleaning solutions for residential and commercial properties across Brisbane
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {services.map((service, index) => (
               <div 
-                key={service.id} 
-                className={`bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-xl hover:-translate-y-2 transition-all duration-500 ${visibleSections.includes(2) ? 'opacity-100' : 'opacity-0'}`}
-                style={{transitionDelay: `${index * 100}ms`}}
+                key={index}
+                className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
               >
-                <div className="h-48 overflow-hidden">
-                  <img 
-                    src={service.image} 
-                    alt={service.title}
-                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
-                  />
-                </div>
+                <div 
+                  className="h-48 bg-cover bg-center"
+                  style={{ backgroundImage: `url(${serviceImages[service.title]})` }}
+                />
                 <div className="p-6">
-                  <div className="w-14 h-14 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600 mb-4 -mt-12 relative bg-white shadow-lg">
-                    {service.icon}
+                  <div className="flex items-center mb-3">
+                    <div className="text-2xl mr-3">{service.icon}</div>
+                    <h3 className="text-xl font-bold text-gray-900">{service.title}</h3>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-800 mb-3">{service.title}</h3>
-                  <p className="text-gray-600 mb-6">{service.description}</p>
-                  <button className="text-blue-600 font-medium hover:text-blue-800 transition-colors flex items-center">
+                  <p className="text-gray-700 mb-4 text-sm">{service.description}</p>
+                  <ul className="space-y-2 mb-4">
+                    {service.details.map((detail, idx) => (
+                      <li key={idx} className="flex items-start">
+                        <span className="text-[#ee6c4d] mr-2">•</span>
+                        <span className="text-gray-600 text-sm">{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  <button className="text-[#ee6c4d] font-medium text-sm hover:text-[#d45a3d] transition-colors duration-300 flex items-center">
                     Learn More
-                    <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    <svg className="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
                 </div>
               </div>
             ))}
           </div>
+
+          {/* All Services Grid */}
+          <div className="mt-16">
+            <h3 className="text-2xl font-bold text-center mb-8">All Our Services</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {allServices.map((service, index) => (
+                <div key={index} className="relative group cursor-pointer">
+                  <div className="overflow-hidden rounded-lg">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent opacity-60 group-hover:opacity-70 transition-opacity duration-300"></div>
+                    <div className="absolute bottom-0 left-0 right-0 p-4">
+                      <h4 className="text-white font-bold text-lg">{service.title}</h4>
+                      <p className="text-white text-sm opacity-90">{service.description}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
-      
-      {/* Video Testimonials */}
-      <section id="testimonials" className="py-20 bg-gray-50">
-        <div className="container mx-auto px-4">
-          <div className={`text-center mb-16 transition-all duration-1000 ${visibleSections.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Video Testimonials</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">Hear directly from our satisfied clients about their experience with CleanPro.</p>
+
+      {/* Why Choose Us */}
+      <section id="why-us" className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              Why Choose Xcellent Cleaning?
+            </h2>
+            <div className="w-24 h-1 bg-[#3d5a80] mx-auto mb-8"></div>
           </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <div>
+              <img 
+                src="/api/placeholder/600/400?text=Professional+Team&bg=3d5a80" 
+                alt="Professional Cleaning Team"
+                className="rounded-xl shadow-2xl"
+              />
+            </div>
+            <div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {whyChooseUs.map((item, index) => (
+                  <div key={index} className="bg-gray-50 p-6 rounded-lg hover:shadow-lg transition-shadow duration-300">
+                    <div className="text-3xl mb-3">{item.icon}</div>
+                    <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
+                    <p className="text-gray-700 text-sm">{item.description}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials with Images */}
+      <section id="testimonials" className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              Client Testimonials
+            </h2>
+            <div className="w-24 h-1 bg-[#ee6c4d] mx-auto mb-8"></div>
+            <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+              Hear what our Brisbane clients say about our cleaning services
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <div 
-                key={index} 
-                className={`bg-white rounded-xl overflow-hidden shadow-lg transition-all duration-500 hover:shadow-xl ${visibleSections.includes(3) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-                style={{transitionDelay: `${index * 200}ms`}}
+                key={index}
+                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow duration-300"
               >
-                <div className="relative h-48 overflow-hidden">
+                <div className="flex items-center mb-4">
                   <img 
-                    src={testimonial.videoThumbnail} 
-                    alt={`Video testimonial from ${testimonial.name}`}
-                    className="w-full h-full object-cover"
+                    src={testimonial.image} 
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full mr-4"
                   />
-                  <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-                    <button 
-                      onClick={() => playVideo(testimonial.videoId)}
-                      className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition-colors"
-                    >
-                      <svg className="w-6 h-6 text-white ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </button>
+                  <div>
+                    <div className="font-bold text-gray-900">{testimonial.name}</div>
+                    <div className="text-gray-600 text-sm">{testimonial.location}</div>
                   </div>
                 </div>
-                <div className="p-6">
-                  <div className="flex items-center mb-4">
-                    <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold mr-3">
-                      {testimonial.name.charAt(0)}
-                    </div>
-                    <div>
-                      <h4 className="font-bold text-gray-800">{testimonial.name}</h4>
-                      <p className="text-gray-600 text-sm">{testimonial.role}</p>
-                    </div>
-                  </div>
-                  <p className="text-gray-700 italic">"{testimonial.text}"</p>
-                  <div className="flex mt-4 text-yellow-500">
-                    {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                    ))}
-                  </div>
-                </div>
+                <div className="text-yellow-500 mb-4">{testimonial.rating}</div>
+                <p className="text-gray-700 mb-6 italic">"{testimonial.text}"</p>
+                <div className="text-[#ee6c4d] text-sm font-medium">{testimonial.service}</div>
               </div>
             ))}
           </div>
         </div>
       </section>
-      
-      {/* Process Steps */}
-      <section id="process" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className={`text-center mb-16 transition-all duration-1000 ${visibleSections.includes(4) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our 4-Step Cleaning Process</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">A systematic approach that ensures exceptional results every time.</p>
+
+      {/* Quote Form Section */}
+      <section className="py-16 bg-gradient-to-r from-[#3d5a80] to-[#293241] text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              Get Your Free Quote
+            </h2>
+            <p className="text-xl mb-8">Quick Response • Free Estimate • No Obligation</p>
+            <div className="w-24 h-1 bg-[#ee6c4d] mx-auto"></div>
           </div>
-          
-          <div className="flex flex-col md:flex-row justify-between items-center relative">
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-blue-200 transform -translate-y-1/2 z-0"></div>
-            
-            {processSteps.map((step, index) => (
-              <div 
-                key={step.step} 
-                className={`relative z-10 bg-white rounded-full w-24 h-24 flex flex-col items-center justify-center shadow-lg mb-8 md:mb-0 transition-all duration-700 ${visibleSections.includes(4) ? 'opacity-100 scale-100' : 'opacity-0 scale-75'}`}
-                style={{transitionDelay: `${index * 200}ms`}}
-              >
-                <div className="absolute -top-2 -right-2 bg-blue-600 text-white rounded-full w-10 h-10 flex items-center justify-center font-bold">
-                  {step.step}
-                </div>
-                <h3 className="font-bold text-gray-800 text-center text-sm">{step.title}</h3>
-              </div>
-            ))}
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
-            {processSteps.map((step, index) => (
-              <div 
-                key={step.step} 
-                className={`text-center transition-all duration-700 ${visibleSections.includes(4) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
-                style={{transitionDelay: `${index * 200 + 400}ms`}}
-              >
-                <p className="text-gray-700">{step.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      
-      {/* Gallery */}
-      <section className="py-20 bg-gray-100">
-        <div className="container mx-auto px-4">
-          <div className={`text-center mb-16 transition-all duration-1000 ${visibleSections.includes(5) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Our Work in Action</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">See the transformation our cleaning services provide.</p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {galleryImages.map((image, index) => (
-              <div 
-                key={image.id} 
-                className={`overflow-hidden rounded-lg shadow-lg group cursor-pointer transition-all duration-700 ${visibleSections.includes(5) ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
-                style={{transitionDelay: `${index * 100}ms`}}
-              >
-                <div className="h-64 overflow-hidden">
-                  <img 
-                    src={image.image} 
-                    alt={image.alt}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+
+          <div className="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl p-8">
+            <form onSubmit={handleSubmit}>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                <div>
+                  <label className="block text-gray-700 mb-2 font-medium">Full Name *</label>
+                  <input
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ee6c4d] focus:border-transparent"
+                    required
                   />
                 </div>
-                <div className="bg-white p-4">
-                  <p className="text-gray-800 font-medium">{image.alt}</p>
+                <div>
+                  <label className="block text-gray-700 mb-2 font-medium">Email *</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ee6c4d] focus:border-transparent"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700 mb-2 font-medium">Phone *</label>
+                  <input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ee6c4d] focus:border-transparent"
+                    required
+                  />
                 </div>
               </div>
-            ))}
+              
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div>
+                  <label className="block text-gray-700 mb-2 font-medium">Suburb *</label>
+                  <input
+                    type="text"
+                    name="suburb"
+                    value={formData.suburb}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ee6c4d] focus:border-transparent"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-gray-700 mb-2 font-medium">Property Size</label>
+                  <select
+                    name="rooms"
+                    value={formData.rooms}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ee6c4d] focus:border-transparent"
+                  >
+                    <option>1 Room / Studio</option>
+                    <option>2 Bedrooms</option>
+                    <option>3 Bedrooms</option>
+                    <option>4+ Bedrooms</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-gray-700 mb-2 font-medium">Service Needed</label>
+                  <select
+                    name="service"
+                    value={formData.service}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ee6c4d] focus:border-transparent"
+                  >
+                    <option>Carpet Cleaning</option>
+                    <option>Bond Cleaning</option>
+                    <option>End of Lease Cleaning</option>
+                    <option>Upholstery Cleaning</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div className="mb-6">
+                <label className="block text-gray-700 mb-2 font-medium">Preferred Date</label>
+                <input
+                  type="date"
+                  name="date"
+                  value={formData.date}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ee6c4d] focus:border-transparent"
+                  required
+                />
+              </div>
+              
+              <div className="text-center">
+                <button
+                  type="submit"
+                  className="bg-[#ee6c4d] text-white px-12 py-4 rounded-lg font-bold text-lg hover:bg-[#d45a3d] transition-all duration-300 transform hover:scale-105 shadow-xl"
+                >
+                  Get Free Quote Now
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </section>
-      
+
       {/* FAQ Section */}
-      <section id="faq" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className={`text-center mb-16 transition-all duration-1000 ${visibleSections.includes(6) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">Frequently Asked Questions</h2>
-            <p className="text-gray-600 max-w-3xl mx-auto">Find answers to common questions about our cleaning services.</p>
+      <section id="faq" className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              Frequently Asked Questions
+            </h2>
+            <div className="w-24 h-1 bg-[#ee6c4d] mx-auto mb-8"></div>
           </div>
-          
-          <div className="max-w-3xl mx-auto">
+
+          <div className="space-y-4">
             {faqs.map((faq, index) => (
               <div 
-                key={index} 
-                className={`mb-4 border border-gray-200 rounded-lg overflow-hidden transition-all duration-500 ${visibleSections.includes(6) ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-10'}`}
-                style={{transitionDelay: `${index * 100}ms`}}
+                key={index}
+                className="border border-gray-200 rounded-xl overflow-hidden transition-all duration-300"
               >
-                <button 
-                  className="w-full p-6 text-left flex justify-between items-center bg-gray-50 hover:bg-gray-100 transition-colors"
-                  onClick={() => toggleFaq(index)}
+                <button
+                  onClick={() => toggleFAQ(index)}
+                  className="w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 transition-colors duration-300 flex justify-between items-center"
                 >
-                  <h3 className="text-lg font-medium text-gray-800">{faq.question}</h3>
+                  <span className="font-bold text-gray-900 text-lg">{faq.question}</span>
                   <svg 
-                    className={`w-5 h-5 text-blue-600 transform transition-transform duration-300 ${activeFaq === index ? 'rotate-180' : ''}`}
+                    className={`w-5 h-5 transform transition-transform duration-300 ${activeFAQ === index ? 'rotate-180' : ''}`}
                     fill="none" 
                     stroke="currentColor" 
                     viewBox="0 0 24 24"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                <div className={`overflow-hidden transition-all duration-500 ${activeFaq === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-                  <div className="p-6 bg-white border-t border-gray-100">
-                    <p className="text-gray-700">{faq.answer}</p>
-                  </div>
+                <div 
+                  className={`px-6 overflow-hidden transition-all duration-300 ${activeFAQ === index ? 'py-4 bg-white' : 'max-h-0'}`}
+                >
+                  <p className="text-gray-700">{faq.answer}</p>
                 </div>
               </div>
             ))}
           </div>
         </div>
       </section>
-      
-      {/* Contact Form */}
-      <section id="contact" className="py-20 bg-blue-600 text-white">
-        <div className="container mx-auto px-4">
-          <div className={`max-w-4xl mx-auto transition-all duration-1000 ${visibleSections.includes(7) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">Ready to Get Started?</h2>
-              <p className="text-blue-100">Schedule your cleaning service today and experience the CleanPro difference.</p>
-            </div>
-            
-            <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
-              <div className="md:flex">
-                <div className="md:w-1/2 bg-blue-700 p-8">
-                  <h3 className="text-2xl font-bold mb-6">Why Choose CleanPro?</h3>
-                  <div className="space-y-6">
-                    <div className="flex items-start">
-                      <div className="bg-blue-600 p-3 rounded-lg mr-4">
-                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="font-bold">Certified Professionals</h4>
-                        <p className="text-blue-100">All staff are trained, insured, and background-checked</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start">
-                      <div className="bg-blue-600 p-3 rounded-lg mr-4">
-                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="font-bold">Eco-Friendly Products</h4>
-                        <p className="text-blue-100">Safe for children, pets, and the environment</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start">
-                      <div className="bg-blue-600 p-3 rounded-lg mr-4">
-                        <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                      </div>
-                      <div>
-                        <h4 className="font-bold">Satisfaction Guarantee</h4>
-                        <p className="text-blue-100">100% satisfaction or we'll re-clean for free</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="md:w-1/2 p-8">
-                  <form onSubmit={handleSubmit}>
-                    <div className="mb-6">
-                      <label className="block text-gray-700 mb-2">Full Name *</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
-                        required
-                      />
-                    </div>
-                    
-                    <div className="mb-6">
-                      <label className="block text-gray-700 mb-2">Email Address *</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
-                        required
-                      />
-                    </div>
-                    
-                    <div className="mb-6">
-                      <label className="block text-gray-700 mb-2">Phone Number *</label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
-                        required
-                      />
-                    </div>
-                    
-                    <div className="mb-6">
-                      <label className="block text-gray-700 mb-2">Service Needed</label>
-                      <select
-                        name="service"
-                        value={formData.service}
-                        onChange={handleInputChange}
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
-                      >
-                        <option value="">Select a service</option>
-                        <option value="residential">Residential Cleaning</option>
-                        <option value="commercial">Commercial Cleaning</option>
-                        <option value="deep">Deep Cleaning</option>
-                        <option value="carpet">Carpet & Upholstery</option>
-                        <option value="window">Window Cleaning</option>
-                        <option value="move">Move In/Out Cleaning</option>
-                      </select>
-                    </div>
-                    
-                    <div className="mb-8">
-                      <label className="block text-gray-700 mb-2">Additional Details</label>
-                      <textarea
-                        name="message"
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        rows="4"
-                        className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring-2 focus:ring-blue-200 outline-none transition-all"
-                        placeholder="Please include square footage, number of rooms, and any special requests..."
-                      ></textarea>
-                    </div>
-                    
-                    <button
-                      type="submit"
-                      className="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition-colors shadow-lg hover:shadow-xl"
-                    >
-                      Schedule Your Cleaning
-                    </button>
-                  </form>
+
+      {/* Cleaning Tips with Images */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+              Cleaning Tips & Advice
+            </h2>
+            <div className="w-24 h-1 bg-[#3d5a80] mx-auto mb-8"></div>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {cleaningTips.map((tip, index) => (
+              <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <img 
+                  src={tip.image} 
+                  alt={tip.title}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-6">
+                  <h3 className="font-bold text-gray-900 mb-2">{tip.title}</h3>
+                  <p className="text-gray-700 text-sm">{tip.tip}</p>
                 </div>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
-      
+
       {/* Footer */}
-      <footer className="bg-gray-800 text-white py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+      <footer className="bg-gray-900 text-white py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-4 gap-8">
             <div>
-              <div className="flex items-center space-x-2 mb-4">
-                <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                  <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
+              <div className="flex items-center mb-6">
+                <div className="w-10 h-10 bg-[#ee6c4d] rounded-lg flex items-center justify-center transform rotate-45">
+                  <span className="text-white font-bold text-xl -rotate-45">X</span>
                 </div>
-                <h2 className="text-2xl font-bold">Clean<span className="text-blue-400">Pro</span></h2>
+                <div className="ml-3">
+                  <div className="text-2xl font-bold">Xcellent</div>
+                  <div className="text-2xl font-bold text-[#ee6c4d]">Cleaning</div>
+                </div>
               </div>
-              <p className="text-gray-400">Professional cleaning services for homes and businesses.</p>
+              <p className="text-gray-400 mb-4">
+                Brisbane's premier cleaning service provider delivering exceptional results.
+              </p>
             </div>
             
             <div>
-              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+              <h3 className="text-lg font-bold mb-4 text-white">Quick Links</h3>
               <ul className="space-y-2">
-                <li><a href="#home" className="text-gray-400 hover:text-blue-400 transition-colors">Home</a></li>
-                <li><a href="#services" className="text-gray-400 hover:text-blue-400 transition-colors">Services</a></li>
-                <li><a href="#testimonials" className="text-gray-400 hover:text-blue-400 transition-colors">Testimonials</a></li>
-                <li><a href="#faq" className="text-gray-400 hover:text-blue-400 transition-colors">FAQ</a></li>
+                <li><a href="#services" className="text-gray-400 hover:text-[#ee6c4d] transition-colors duration-300">Our Services</a></li>
+                <li><a href="#why-us" className="text-gray-400 hover:text-[#ee6c4d] transition-colors duration-300">Why Choose Us</a></li>
+                <li><a href="#testimonials" className="text-gray-400 hover:text-[#ee6c4d] transition-colors duration-300">Testimonials</a></li>
+                <li><a href="#faq" className="text-gray-400 hover:text-[#ee6c4d] transition-colors duration-300">FAQ</a></li>
               </ul>
             </div>
             
             <div>
-              <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
+              <h3 className="text-lg font-bold mb-4 text-white">Contact Us</h3>
+              <ul className="space-y-3 text-gray-400">
+                <li className="flex items-center">
+                  <svg className="w-5 h-5 text-[#ee6c4d] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  Brisbane, QLD Australia
+                </li>
+                <li className="flex items-center">
+                  <svg className="w-5 h-5 text-[#ee6c4d] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  (07) 1234 5678
+                </li>
+                <li className="flex items-center">
+                  <svg className="w-5 h-5 text-[#ee6c4d] mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  info@xcellentcleaning.com.au
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h3 className="text-lg font-bold mb-4 text-white">Service Areas</h3>
               <ul className="space-y-2 text-gray-400">
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                  123 Clean Street, Suite 100
-                </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  (555) 123-4567
-                </li>
-                <li className="flex items-center">
-                  <svg className="w-5 h-5 mr-3 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89-5.26a2 2 0 012.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  info@cleanpro.com
-                </li>
+                <li>Brisbane CBD</li>
+                <li>South Brisbane</li>
+                <li>North Brisbane</li>
+                <li>All Brisbane Suburbs</li>
               </ul>
             </div>
           </div>
           
-          <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-            <p>© {new Date().getFullYear()} CleanPro Cleaning Services. All rights reserved.</p>
+          <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
+            <p>© {new Date().getFullYear()} Xcellent Cleaning Brisbane. All rights reserved.</p>
           </div>
         </div>
       </footer>
+
+      <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes slideUp {
+          from { transform: translateY(30px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes expand {
+          from { width: 0; }
+          to { width: 8rem; }
+        }
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-20px); }
+        }
+        .animate-fade-in {
+          animation: fadeIn 1s ease-out;
+        }
+        .animate-slide-up {
+          animation: slideUp 0.8s ease-out;
+        }
+        .animate-expand {
+          animation: expand 1s ease-out;
+        }
+        .animate-float {
+          animation: float 3s ease-in-out infinite;
+        }
+        .delay-300 {
+          animation-delay: 300ms;
+        }
+        .delay-500 {
+          animation-delay: 500ms;
+        }
+      `}</style>
     </div>
   );
 };
 
-export default ProfessionalCleaningWebsite;
+export default XcellentCleaning;
