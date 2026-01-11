@@ -1134,7 +1134,7 @@ const VideoTestimonialCard = ({ testimonial }) => {
           </div>
           
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>© Growth Flow Media. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>© CornerStone Realtors. All rights reserved. | Privacy Policy | Terms of Service</p>
           </div>
         </div>
       </footer>

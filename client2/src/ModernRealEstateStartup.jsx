@@ -1396,7 +1396,7 @@ const ModernRealEstateStartup = () => {
           <div className="border-t border-gray-800 mt-12 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="text-gray-400 text-sm mb-4 md:mb-0">
-                 <p>© Growth Flow Media. All rights reserved. | Privacy Policy | Terms of Service</p>
+                 <p>© Willcuts Company Realtors. All rights reserved. | Privacy Policy | Terms of Service</p>
               </div>
               <div className="flex space-x-6 text-sm text-gray-400">
                 <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
