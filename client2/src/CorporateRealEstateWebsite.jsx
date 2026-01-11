@@ -507,7 +507,7 @@ const VideoTestimonialCard = ({ testimonial }) => {
                 <div className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full border-2 border-white"></div>
               </div>
               <div>
-                <div className="text-2xl font-bold text-gray-900">Horizon</div>
+                <div className="text-2xl font-bold text-gray-900">Bond County Realtors</div>
                 <div className="text-xs text-gray-600 font-medium">REAL ESTATE GROUP</div>
               </div>
             </div>
@@ -1314,7 +1314,7 @@ const VideoTestimonialCard = ({ testimonial }) => {
                   <Building size={20} className="text-white" />
                 </div>
                 <div>
-                  <div className="text-xl font-bold">Horizon</div>
+                  <div className="text-xl font-bold">Bond County Realtors</div>
                   <div className="text-xs text-gray-400">REAL ESTATE GROUP</div>
                 </div>
               </div>

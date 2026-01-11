@@ -778,7 +778,7 @@ const ContactForm = () => {
         'YOUR_SERVICE_ID',
         'YOUR_TEMPLATE_ID',
         {
-          to_name: 'Texas Flat Fee Realtors Team',
+          to_name: 'Bond County Realtors Team',
           from_name: formData.name,
           from_email: formData.email,
           phone: formData.phone,
@@ -1012,11 +1012,11 @@ const ModernRealEstateWebsite = () => {
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 rounded-lg bg-orange-500 flex items-center justify-center">
-                <span className="text-white font-bold text-xl">T</span>
+                <span className="text-white font-bold text-xl">B</span>
               </div>
               <div>
                 <div className="text-2xl font-bold text-gray-900">
-                  Texas Flat Fee Realtors
+                  Bond County Realtors
                 </div>
                 <div className="text-xs text-gray-500 -mt-1">Premium Properties</div>
               </div>
@@ -1094,7 +1094,7 @@ const ModernRealEstateWebsite = () => {
             className="text-center mb-12"
           >
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-700 font-medium mb-6">
-              <FaStar className="mr-2" /> #1 Luxury Real Estate Platform
+             No 1. Luxury Real Estate Platform
             </div>
             <h1 className="text-5xl md:text-7xl font-bold mb-6">
               <span className="block text-gray-900">Discover </span>
@@ -1227,7 +1227,7 @@ const ModernRealEstateWebsite = () => {
               </span>
             </h2>
             <p className="text-gray-600 text-xl max-w-3xl mx-auto">
-              See why top investors and homeowners choose Texas Flat Fee Realtors for their property needs
+              See why top investors and homeowners choose Bond County Realtors for their property needs
             </p>
           </div>
           
@@ -1434,10 +1434,10 @@ const ModernRealEstateWebsite = () => {
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-3 mb-6">
                 <div className="w-12 h-12 rounded-xl bg-orange-500 flex items-center justify-center">
-                  <span className="text-white font-bold text-2xl">T</span>
+                  <span className="text-white font-bold text-2xl">B</span>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold">Texas Flat Fee Realtors</div>
+                  <div className="text-3xl font-bold">Bond County Realtors</div>
                   <div className="text-gray-400">Premium Properties Worldwide</div>
                 </div>
               </div>
@@ -1479,7 +1479,7 @@ const ModernRealEstateWebsite = () => {
           </div>
           
           <div className="mt-16 pt-8 border-t border-gray-800 text-center text-gray-400 text-sm">
-            <p>© Texas Flat Fee Realtors. All rights reserved. | Privacy Policy | Terms of Service</p>
+            <p>© Bond County Realtors. All rights reserved. | Privacy Policy | Terms of Service</p>
           </div>
         </div>
       </footer>
