@@ -283,7 +283,7 @@ const ModernLuxuryRealEstate = () => {
             <p className="text-lg text-white/90 mb-10 drop-shadow-md">
               From meticulous legal verification to strategic negotiations, our comprehensive services ensure your property journey is seamless, transparent, and rewarding.
             </p>
-            <div className="flex flex-wrap gap-5">
+            <div className="flex flex-wrap gap-5 py-20">
               <button className="bg-yellow-400 text-[#0a1628] px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 text-lg">
                 Explore Properties
               </button>
@@ -456,7 +456,7 @@ const ModernLuxuryRealEstate = () => {
                     <span className="text-2xl font-bold text-yellow-600">{property.price}</span>
                   </div>
                   
-                  <button className="w-full bg-yellow-400 text-[#0a1628] py-3 rounded-lg font-medium hover:bg-yellow-500 transition-all duration-300 flex items-center justify-center group/btn">
+                  <button className="w-full bg-[#0a1628] text-white py-3 rounded-lg font-medium hover:bg-yellow-500 transition-all duration-300 flex items-center justify-center group/btn">
                     <span>Schedule Visit</span>
                     <ChevronRight className="ml-2 group-hover/btn:translate-x-1 transition-transform" size={20} />
                   </button>
@@ -910,7 +910,7 @@ const ModernLuxuryRealEstate = () => {
           </div>
           
           <div className="border-t border-[#1a2a3a] mt-12 pt-8 text-center text-gray-400">
-            <p>© {currentYear} Real Estate with Nitish. All rights reserved. </p>
+            <p>© {currentYear} Real Estate with Nitish. All rights reserved. | Designed with ❤️ in Mumbai</p>
           </div>
         </div>
       </footer>
