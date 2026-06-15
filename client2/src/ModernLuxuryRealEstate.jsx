@@ -370,7 +370,7 @@ const ModernLuxuryRealEstate = () => {
                   </div>
                   <div>
                     <h4 className="font-bold text-navy-900">End-to-End Support</h4>
-                    <p className="text-sm text-gray-500">From search to registration</p>
+                    <p className="text-sm text-gray-500">From Search to Registration</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
