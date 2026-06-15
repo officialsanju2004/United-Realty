@@ -910,7 +910,7 @@ const ModernLuxuryRealEstate = () => {
           </div>
           
           <div className="border-t border-[#1a2a3a] mt-12 pt-8 text-center text-gray-400">
-            <p>© {currentYear} Real Estate with Nitish. All rights reserved. | Designed with ❤️ in Mumbai</p>
+            <p>© {currentYear} Real Estate with Nitish. All rights reserved. </p>
           </div>
         </div>
       </footer>
