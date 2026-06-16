@@ -8,8 +8,8 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, FaInstagram, FaLinkedinIn, FaPlay, FaStar, FaTwitter, FaUser } from 'react-icons/fa';
-import logo from '../images/logo.jpg';
-import nitish from '../images/nitish.jpg';
+import logo from '../images/logo.jpeg';
+import nitish from '../images/nitish.jpeg';
 
 const ModernLuxuryRealEstate = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -230,10 +230,10 @@ const ModernLuxuryRealEstate = () => {
       <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-[#0a1628] shadow-lg py-3' : 'bg-[#0a1628]/95 py-5'}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <div className="w-20 h-15 bg-yellow-400 rounded-lg flex items-center justify-center">
+            <div className="w-25 h-20 bg-yellow-400 rounded-lg flex items-center justify-center">
               <img src={logo} className=' object-cover h-full w-full rounded-xl'/>
             </div>
-            <span className="text-2xl font-bold text-white">Real Estate with Nitish</span>
+     
           </div>
           
           <div className="hidden md:flex items-center space-x-10">
@@ -326,7 +326,7 @@ const ModernLuxuryRealEstate = () => {
                 <img 
                   src={nitish}
                   alt="Luxury Property" 
-                  className="w-full h-126 object-fit"
+                 className="w-full h-full object-cover object-top"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/30 to-transparent"></div>
               </div>
@@ -727,7 +727,7 @@ const ModernLuxuryRealEstate = () => {
                     {
                       icon: <Mail className="w-6 h-6" />,
                       title: "Email Address",
-                      details: "nitish@realestatewithnitish.com",
+                      details: "nm@nitishestates.com",
                       description: "We'll respond within 24 hours",
                     },
                     {
@@ -751,7 +751,7 @@ const ModernLuxuryRealEstate = () => {
                       </div>
                       <div className="flex-1">
                         <h4 className="font-semibold text-lg text-white mb-1">{item.title}</h4>
-                        <p className="text-yellow-400 font-bold text-xl mb-1 group-hover/item:text-yellow-300 transition-colors">
+                        <p className="text-yellow-400 font-bold text-sm mb-1 group-hover/item:text-yellow-300 transition-colors">
                           {item.details}
                         </p>
                         <p className="text-gray-400 text-sm">{item.description}</p>
@@ -852,12 +852,12 @@ const ModernLuxuryRealEstate = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div>
               <div className="flex items-center space-x-2 mb-6">
-                <div className="w-20 h-15 bg-yellow-400 rounded-lg flex items-center justify-center">
+                <div className="w-30 h-25 bg-yellow-400 rounded-lg flex items-center justify-center">
                 
               <img src={logo} className=' object-cover h-full w-full rounded-xl'/>
            
                 </div>
-                <span className="text-2xl font-bold">Real Estate with Nitish</span>
+               
               </div>
               <p className="text-gray-400">
                 Your trusted partner for premium residential and commercial properties across Mumbai Metropolitan Region.
@@ -886,7 +886,7 @@ const ModernLuxuryRealEstate = () => {
                 </li>
                 <li className="flex items-center">
                   <Mail size={18} className="mr-3 text-yellow-400" />
-                  <span className="text-gray-400">nitish@realestatewithnitish.com</span>
+                  <span className="text-gray-400">nm@nitishestates.com</span>
                 </li>
                 <li className="flex items-center">
                   <MapPin size={18} className="mr-3 text-yellow-400" />
