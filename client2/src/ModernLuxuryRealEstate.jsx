@@ -8,6 +8,8 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, FaInstagram, FaLinkedinIn, FaPlay, FaStar, FaTwitter, FaUser } from 'react-icons/fa';
+import logo from '../images/logo.jpeg';
+import nitish from '../images/nitish.jpeg';
 
 const ModernLuxuryRealEstate = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -228,8 +230,8 @@ const ModernLuxuryRealEstate = () => {
       <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-[#0a1628] shadow-lg py-3' : 'bg-[#0a1628]/95 py-5'}`}>
         <div className="container mx-auto px-6 flex justify-between items-center">
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center">
-              <Home className="text-[#0a1628]" size={24} />
+            <div className="w-20 h-15 bg-yellow-400 rounded-lg flex items-center justify-center">
+              <img src={logo} className=' object-cover h-full w-full rounded-xl'/>
             </div>
             <span className="text-2xl font-bold text-white">Real Estate with Nitish</span>
           </div>
@@ -322,9 +324,9 @@ const ModernLuxuryRealEstate = () => {
             <div>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1073&q=80" 
+                  src={nitish}
                   alt="Luxury Property" 
-                  className="w-full h-96 object-cover"
+                  className="w-full h-126 object-fit"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/30 to-transparent"></div>
               </div>
@@ -548,7 +550,7 @@ const ModernLuxuryRealEstate = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
               <div className="relative h-96 md:h-auto">
                 <img 
-                  src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=687&q=80" 
+                  src={nitish}
                   alt="Nitish - Real Estate Expert"
                   className="w-full h-full object-cover object-top"
                 />
@@ -850,8 +852,10 @@ const ModernLuxuryRealEstate = () => {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div>
               <div className="flex items-center space-x-2 mb-6">
-                <div className="w-10 h-10 bg-yellow-400 rounded-lg flex items-center justify-center">
-                  <Home size={24} className="text-[#0a1628]" />
+                <div className="w-20 h-15 bg-yellow-400 rounded-lg flex items-center justify-center">
+                
+              <img src={logo} className=' object-cover h-full w-full rounded-xl'/>
+           
                 </div>
                 <span className="text-2xl font-bold">Real Estate with Nitish</span>
               </div>
@@ -863,7 +867,7 @@ const ModernLuxuryRealEstate = () => {
             <div>
               <h4 className="text-xl font-bold mb-6 text-yellow-400">Quick Links</h4>
               <ul className="space-y-3">
-                {['Home', 'About Us', 'Contact Us', 'Privacy Policy'].map((item) => (
+                {['Home', 'About Us', 'Contact Us'].map((item) => (
                   <li key={item}>
                     <a href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-gray-400 hover:text-yellow-400 transition-colors">
                       {item}
@@ -910,7 +914,7 @@ const ModernLuxuryRealEstate = () => {
           </div>
           
           <div className="border-t border-[#1a2a3a] mt-12 pt-8 text-center text-gray-400">
-            <p>© {currentYear} Real Estate with Nitish. All rights reserved. </p>
+            <p>© {currentYear} Real Estate with Nitish. All rights reserved. | Designed with ❤️ in Mumbai</p>
           </div>
         </div>
       </footer>
