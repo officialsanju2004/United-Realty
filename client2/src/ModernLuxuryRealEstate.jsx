@@ -289,12 +289,7 @@ const ModernLuxuryRealEstate = () => {
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
               Your Trusted Partner in <span className="text-yellow-400">Premium Residential & Commercial Properties with Expert Guidance</span>
             </h1>
-            <p className="text-xl text-white mb-8 leading-relaxed drop-shadow-md">
-              With over a decade of excellence, we deliver unparalleled expertise in residential and commercial property investments across India's most promising markets.
-            </p>
-            <p className="text-lg text-white/90 mb-10 drop-shadow-md">
-              From meticulous legal verification to strategic negotiations, our comprehensive services ensure your property journey is seamless, transparent, and rewarding.
-            </p>
+            
             <div className="flex flex-wrap gap-5 py-20">
               <button className="bg-yellow-400 text-[#0a1628] px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 text-lg">
                Schedule Appointment.
