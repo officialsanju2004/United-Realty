@@ -10,37 +10,37 @@ const WhyChooseUs = () => {
       icon: FaChartLine,
       title: "Market Intelligence",
       description: "Real-time data analytics and market insights to make informed decisions",
-      color: "bg-yellow-400"
+      color: "bg-[#0a1628]"
     },
     {
       icon: FaShieldAlt,
       title: "Risk Management",
       description: "Comprehensive due diligence and risk assessment for every transaction",
-      color: "bg-yellow-400"
+      color: "bg-[#0a1628]"
     },
     {
       icon: FaUsers,
       title: "Expert Network",
       description: "Access to top agents, lawyers, and financial advisors in our network",
-      color: "bg-yellow-400"
+      color: "bg-[#0a1628]"
     },
     {
       icon: FaAward,
       title: "Award-Winning Service",
       description: "Multiple industry awards for excellence in real estate services",
-      color: "bg-yellow-400"
+      color: "bg-[#0a1628]"
     },
     {
       icon: IoAnalytics,
       title: "Investment Analysis",
       description: "Detailed ROI projections and investment strategy development",
-      color: "bg-yellow-400"
+      color: "bg-[#0a1628]"
     },
     {
       icon: FaHandshake,
       title: "Client Advocacy",
       description: "We represent your interests exclusively in every negotiation",
-      color: "bg-yellow-400"
+      color: "bg-[#0a1628]"
     }
   ];
 
@@ -102,7 +102,7 @@ const WhyChooseUs = () => {
             >
               <div className="bg-white rounded-2xl shadow-xl p-8 h-full border border-gray-100 hover:border-transparent hover:shadow-2xl transition-all duration-300">
                 <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${feature.color} p-0.5 mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <div className="w-full h-full  rounded-2xl flex items-center justify-center">
+                  <div className="w-full h-full  text-yellow-400 rounded-2xl flex items-center justify-center">
                     <feature.icon className={`text-2xl bg-gradient-to-br ${feature.icon} bg-clip-text `} />
                   </div>
                 </div>
