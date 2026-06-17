@@ -3,8 +3,7 @@ import {
   Phone, Mail, MapPin, Send, User, MessageSquare,
   Facebook, Instagram, Linkedin, Twitter, Clock,
   CheckCircle, Building, Users, Star, Award, Shield,
-  Calendar, Heart, ChevronRight,
-  Menu
+  Calendar, Heart, ChevronRight,X, Menu
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
