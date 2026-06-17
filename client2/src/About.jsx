@@ -451,7 +451,7 @@ const About = () => {
       </footer>
 
         {/* Floating Contact Button */}
-      <Link to="/contact-us">
+      
         <button onClick={() =>
     window.open(
       "https://wa.me/919815978773",
