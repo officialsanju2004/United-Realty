@@ -7,6 +7,8 @@ import ModernRealEstateStartup from "./ModernRealEstateStartup";
 import ModernLuxuryRealEstate from "./ModernLuxuryRealEstate";
 import PremiumCleaningWebsite from "./PremiumCleaningWebsite";
 import ProfessionalCleaningWebsite from "./ProfessionalCleaningWebsite";
+import About from './About';
+import Contact from './Contact';
 
 export default function AppRouter() {
   return (
@@ -18,6 +20,8 @@ export default function AppRouter() {
          <Route path="/ModernRealEstateStartup" element={<ModernRealEstateStartup/>} />
          <Route path="/clean1" element={<PremiumCleaningWebsite/>} />
          <Route path="/clean2" element={<ProfessionalCleaningWebsite/>} />
+        <Route path="/about" element={<About />} />
+        <Route path="/contact" element={<Contact />} />
 
       </Routes>
     
