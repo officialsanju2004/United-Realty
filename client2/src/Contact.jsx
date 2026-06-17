@@ -104,10 +104,10 @@ const Contact = () => {
             <Link to="/" className="text-white hover:text-yellow-400 font-medium transition-colors duration-300">
               Home
             </Link>
-            <Link to="/about" className="text-white hover:text-yellow-400 font-medium transition-colors duration-300">
+            <Link to="/about-us" className="text-white hover:text-yellow-400 font-medium transition-colors duration-300">
               About Us
             </Link>
-            <Link to="/contact" className="text-yellow-400 font-medium transition-colors duration-300">
+            <Link to="/contact-us" className="text-yellow-400 font-medium transition-colors duration-300">
               Contact Us
             </Link>
             <button className="bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 hover:scale-105">
@@ -125,10 +125,10 @@ const Contact = () => {
             <Link to="/" className="block py-3 text-white hover:text-yellow-400 font-medium border-b border-[#1a2a3a]">
               Home
             </Link>
-            <Link to="/about" className="block py-3 text-white hover:text-yellow-400 font-medium border-b border-[#1a2a3a]">
+            <Link to="/about-us" className="block py-3 text-white hover:text-yellow-400 font-medium border-b border-[#1a2a3a]">
               About Us
             </Link>
-            <Link to="/contact" className="block py-3 text-yellow-400 font-medium border-b border-[#1a2a3a]">
+            <Link to="/contact-us" className="block py-3 text-yellow-400 font-medium border-b border-[#1a2a3a]">
               Contact Us
             </Link>
             <button className="mt-4 w-full bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium">
@@ -393,8 +393,8 @@ const Contact = () => {
               <h4 className="text-xl font-bold mb-6 text-yellow-400">Quick Links</h4>
               <ul className="space-y-3">
                 <li><Link to="/" className="text-gray-400 hover:text-yellow-400 transition-colors">Home</Link></li>
-                <li><Link to="/about" className="text-gray-400 hover:text-yellow-400 transition-colors">About Us</Link></li>
-                <li><Link to="/contact" className="text-yellow-400 transition-colors">Contact Us</Link></li>
+                <li><Link to="/about-us" className="text-gray-400 hover:text-yellow-400 transition-colors">About Us</Link></li>
+                <li><Link to="/contact-us" className="text-yellow-400 transition-colors">Contact Us</Link></li>
               </ul>
             </div>
             
