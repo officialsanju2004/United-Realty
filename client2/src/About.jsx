@@ -197,7 +197,7 @@ const About = () => {
             <Counter end={26} label="Properties Sold" />
             <Counter end={7} label="Years Experience" />
             <Counter end={100} label="Client Satisfaction" />
-            <Counter end={50} label="Verified Properties" />
+            <Counter end={100} label="Verified Properties" />
           </div>
         </div>
       </section>
@@ -240,7 +240,7 @@ const About = () => {
                   <p className="text-gray-600 text-sm">Client Satisfaction</p>
                 </div>
               </div>
-              <Link to="/contact">
+              <Link to="/contact-us">
                 <button className="bg-[#0a1628] text-white px-8 py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-[#0a1628] transition-all duration-300">
                   Connect with Nitish
                 </button>
@@ -373,7 +373,7 @@ const About = () => {
               Let's discuss your real estate goals and find the perfect property for you.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/contact">
+              <Link to="/contact-us">
                 <button className="bg-yellow-400 text-[#0a1628] px-8 py-4 rounded-xl font-semibold hover:bg-yellow-400 transition-all duration-300 hover:scale-105">
                   Contact Us Today
                 </button>
@@ -421,10 +421,7 @@ const About = () => {
                   <Mail size={18} className="mr-3 text-yellow-400" />
                   <span className="text-gray-400">nm@nitishestate.com</span>
                 </li>
-                <li className="flex items-center">
-                  <MapPin size={18} className="mr-3 text-yellow-400" />
-                  <span className="text-gray-400">Mumbai, Maharashtra</span>
-                </li>
+                
               </ul>
             </div>
             
@@ -453,7 +450,7 @@ const About = () => {
       </footer>
 
       {/* Floating Contact Button */}
-      <Link to="/contact">
+      <Link to="/contact-us">
         <button className="fixed bottom-6 right-6 bg-yellow-400 text-[#0a1628] p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50">
           <Phone size={24} />
         </button>
