@@ -22,10 +22,8 @@ const ModernLuxuryRealEstate = () => {
   const [favorites, setFavorites] = useState([]);
   const [openIndex, setOpenIndex] = useState(null);
   
-  // Get current year for footer
   const currentYear = new Date().getFullYear();
 
-  // Scroll effect
   useEffect(() => {
     const handleScroll = () => {
       const isScrolled = window.scrollY > 50;
@@ -37,7 +35,6 @@ const ModernLuxuryRealEstate = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [scrolled]);
 
-  // Animated counters
   const Counter = ({ end, duration = 2000, label }) => {
     const [count, setCount] = useState(0);
     const countRef = useRef(null);
@@ -68,15 +65,14 @@ const ModernLuxuryRealEstate = () => {
 
     return (
       <div className="text-center" ref={countRef}>
-        <div className="text-5xl md:text-6xl font-bold text-yellow-400 mb-2">
+        <div className="text-3xl md:text-5xl lg:text-6xl font-bold text-yellow-400 mb-2">
           {count.toLocaleString()}+
         </div>
-        <div className="text-lg text-gray-300">{label}</div>
+        <div className="text-sm md:text-lg text-gray-300">{label}</div>
       </div>
     );
   };
 
-  // FAQ items
   const faqItems = [
     {
       question: "What are the stamp duty and registration charges in Maharashtra?",
@@ -108,7 +104,6 @@ const ModernLuxuryRealEstate = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  // Property data
   const featuredProperties = [
     { id: 1, type: "residential", title: "Luxury 4BHK Apartment", price: "₹3.2 Cr", location: "Andheri West, Mumbai", image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80", featured: true, tag: "Premium Residence" },
     { id: 2, type: "commercial", title: "Grade A Office Space", price: "₹8.5 Cr", location: "BKC, Mumbai", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80", featured: true, tag: "Commercial" },
@@ -118,7 +113,6 @@ const ModernLuxuryRealEstate = () => {
     { id: 6, type: "commercial", title: "IT Park Office Space", price: "₹12.5 Cr", location: "Pune, Maharashtra", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80", featured: true, tag: "IT Hub" },
   ];
 
-  // Indian Testimonials
   const testimonialsData = [
     {
       id: 1,
@@ -166,12 +160,10 @@ const ModernLuxuryRealEstate = () => {
     }
   ];
 
-  // Filter properties
   const filteredProperties = activeFilter === 'all' 
     ? featuredProperties 
     : featuredProperties.filter(property => property.type === activeFilter);
 
-  // Toggle favorite
   const toggleFavorite = (id) => {
     if (favorites.includes(id)) {
       setFavorites(favorites.filter(fav => fav !== id));
@@ -180,44 +172,43 @@ const ModernLuxuryRealEstate = () => {
     }
   };
 
-  // Testimonial Card Component
   const TestimonialCard = ({ testimonial, isActive }) => {
     return (
       <motion.div
         initial={{ opacity: 0, x: 100 }}
         animate={{ opacity: isActive ? 1 : 0.5, x: isActive ? 0 : 50, scale: isActive ? 1 : 0.95 }}
         transition={{ duration: 0.5 }}
-        className={`bg-white rounded-2xl p-8 shadow-lg ${isActive ? 'border-l-4 border-yellow-400' : 'border border-gray-200'}`}
+        className={`bg-white rounded-2xl p-6 md:p-8 shadow-lg ${isActive ? 'border-l-4 border-yellow-400' : 'border border-gray-200'}`}
       >
-        <div className="flex items-center mb-6">
+        <div className="flex items-center mb-4 md:mb-6">
           <div className="relative">
-            <div className="w-16 h-16 rounded-full bg-yellow-400 p-0.5">
+            <div className="w-12 h-12 md:w-16 md:h-16 rounded-full bg-yellow-400 p-0.5">
               <img src={testimonial.image} alt={testimonial.name} className="w-full h-full rounded-full object-cover border-2 border-white" />
             </div>
-            <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-              <FaCheck className="text-white text-xs" />
+            <div className="absolute -bottom-1 -right-1 w-5 h-5 md:w-6 md:h-6 bg-green-500 rounded-full flex items-center justify-center">
+              <FaCheck className="text-white text-[8px] md:text-xs" />
             </div>
           </div>
-          <div className="ml-4">
-            <h4 className="text-xl font-bold text-gray-900">{testimonial.name}</h4>
-            <p className="text-gray-600">{testimonial.role}</p>
+          <div className="ml-3 md:ml-4">
+            <h4 className="text-base md:text-xl font-bold text-gray-900">{testimonial.name}</h4>
+            <p className="text-xs md:text-base text-gray-600">{testimonial.role}</p>
             <div className="flex items-center mt-1">
               {[...Array(testimonial.rating)].map((_, i) => (
-                <FaStar key={i} className="text-yellow-400 fill-current" />
+                <FaStar key={i} className="text-yellow-400 fill-current text-xs md:text-sm" />
               ))}
             </div>
           </div>
         </div>
         
-        <p className="text-gray-700 text-lg italic mb-6">"{testimonial.content}"</p>
+        <p className="text-sm md:text-lg text-gray-700 italic mb-4 md:mb-6">"{testimonial.content}"</p>
         
-        <div className="pt-6 border-t border-gray-100">
-          <div className="flex justify-between items-center">
+        <div className="pt-4 md:pt-6 border-t border-gray-100">
+          <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-2 md:gap-0">
             <div>
-              <div className="font-bold text-gray-900">{testimonial.transaction}</div>
-              <div className="text-sm text-gray-500">{testimonial.location} • {testimonial.date}</div>
+              <div className="font-bold text-sm md:text-base text-gray-900">{testimonial.transaction}</div>
+              <div className="text-xs md:text-sm text-gray-500">{testimonial.location} • {testimonial.date}</div>
             </div>
-            <div className="px-4 py-2 rounded-full bg-gray-100 text-gray-700 font-medium">
+            <div className="px-3 py-1 md:px-4 md:py-2 rounded-full bg-gray-100 text-gray-700 font-medium text-xs md:text-sm">
               Completed
             </div>
           </div>
@@ -228,83 +219,85 @@ const ModernLuxuryRealEstate = () => {
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
-      {/* Navigation - Navy Blue 80% */}
-      <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-[#0a1628] shadow-lg py-3' : 'bg-[#0a1628]/95 py-5'}`}>
-        <div className="container mx-auto px-6 flex justify-between items-center">
-          <div className="flex items-center space-x-2">
-            <div className="w-25 h-15 bg-yellow-400 rounded-lg flex items-center justify-center">
-              <img src={logo} className=' object-cover h-full w-full rounded-xl'/>
+      {/* Navigation */}
+      <nav className={`fixed w-full z-50 transition-all duration-500 ${scrolled ? 'bg-[#0a1628] shadow-lg py-2 md:py-3' : 'bg-[#0a1628]/95 py-3 md:py-5'}`}>
+        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
+          <Link to="/" className="flex items-center space-x-2">
+            <div className="w-16 h-10 md:w-25 md:h-15 bg-yellow-400 rounded-lg flex items-center justify-center overflow-hidden">
+              <img src={logo} className='object-cover h-full w-full rounded-xl' alt="Logo" />
             </div>
-     
-          </div>
+          </Link>
           
-          <div className="hidden md:flex items-center space-x-10">
-           {['Home', 'About Us', 'Contact Us'].map((item) => {
-  const path = item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`;
-  return (
-    <Link key={item} to={path} className="text-white hover:text-yellow-400 font-medium transition-colors duration-300">
-      {item}
-    </Link>
-  );
-})}
-            <button className="bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 hover:scale-105">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-10">
+            {['Home', 'About Us', 'Contact Us'].map((item) => {
+              const path = item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`;
+              return (
+                <Link key={item} to={path} className="text-white hover:text-yellow-400 font-medium transition-colors duration-300 text-sm lg:text-base">
+                  {item}
+                </Link>
+              );
+            })}
+            <button className="bg-yellow-400 text-[#0a1628] px-4 py-2 lg:px-6 lg:py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 hover:scale-105 text-sm lg:text-base">
               Schedule Visit
             </button>
           </div>
           
           <button className="md:hidden text-yellow-400" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
         
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-[#0a1628] shadow-lg py-4 px-6">
-           {['Home', 'About Us', 'Contact Us'].map((item) => {
-  const path = item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`;
-  return (
-    <Link key={item} to={path} className="text-white hover:text-yellow-400 font-medium transition-colors duration-300">
-      {item}
-    </Link>
-  );
-})}
-            <button className="mt-4 w-full bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium">
+            {['Home', 'About Us', 'Contact Us'].map((item) => {
+              const path = item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`;
+              return (
+                <Link 
+                  key={item} 
+                  to={path} 
+                  className="block py-4 text-white hover:text-yellow-400 font-medium border-b border-[#1a2a3a] text-base"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  {item}
+                </Link>
+              );
+            })}
+            <button className="mt-4 w-full bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium text-base">
               Schedule Visit
             </button>
           </div>
         )}
       </nav>
 
-      {/* Hero Section - NO BLUE OVERLAY, NATURAL IMAGE, MORE GAP */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-32">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ 
           backgroundImage: 'url("https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80")',
         }}>
-          {/* NO BLUE OVERLAY - Removed */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/60 to-black/40" />
-      
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/60 to-black/40" />
         </div>
         
-        <div className="container mx-auto px-6 relative z-10 mt-20">
+        <div className="container mx-auto px-4 md:px-6 relative z-10 mt-10 md:mt-20">
           <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
-              Your Trusted Partner in <span className="text-yellow-400">Premium Residential & Commercial Properties with Expert Guidance</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight drop-shadow-lg">
+              Your Trusted Partner in <span className="text-yellow-400">Premium Residential & Commercial Properties</span>
             </h1>
             
-            <div className="flex flex-wrap gap-5 py-20">
-              <button className="bg-yellow-400 text-[#0a1628] px-8 py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 text-lg">
-               Schedule Appointment.
-              </button>
-             
+            <div className="flex flex-wrap gap-4 md:gap-5 py-10 md:py-20">
+              <Link to="/contact-us">
+                <button className="bg-yellow-400 text-[#0a1628] px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm md:text-lg">
+                  Schedule Appointment
+                </button>
+              </Link>
             </div>
-                    </div>
+          </div>
         </div>
-         
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 bg-[#0a1628]">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <section className="py-12 md:py-20 bg-[#0a1628]">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
             <Counter end={26} label="Properties Sold" />
             <Counter end={7} label="Years Experience" />
             <Counter end={100} label="Verified Properties" />
@@ -312,96 +305,82 @@ const ModernLuxuryRealEstate = () => {
         </div>
       </section>
 
-      {/* About Us Section - Premium Layout */}
-<section  className="py-24 bg-white">
-  <div className="container mx-auto px-6">
-    <div className="bg-slate-50 rounded-[32px] p-8 lg:p-14">
-      <div className="grid lg:grid-cols-2 gap-12 items-center">
+      {/* About Us Section - Mobile First: Image on Top, Content Below */}
+      <section className="py-12 md:py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="bg-slate-50 rounded-2xl md:rounded-[32px] p-6 md:p-8 lg:p-14">
+            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
+              {/* Right Image - Shows first on mobile */}
+              <div className="relative order-first lg:order-last">
+                <div className="overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl">
+                  <img
+                    src={nitish}
+                    alt="Nitish Mahajan"
+                    className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover object-top"
+                  />
+                </div>
+                <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-white p-4 md:p-5 rounded-xl md:rounded-2xl shadow-xl">
+                  <p className="text-gray-500 text-xs md:text-sm">Successful Transactions</p>
+                  <h3 className="text-2xl md:text-3xl font-bold text-green-600">26+</h3>
+                  <p className="text-gray-500 text-xs md:text-sm">Premium Deals Closed</p>
+                </div>
+              </div>
 
-        {/* Left Content */}
-        <div>
-          <div className="flex gap-3 mb-6">
-            <span className="bg-[#0a1628] text-white px-4 py-2 rounded-full text-sm font-semibold">
-              TRUSTED REALTOR
-            </span>
+              {/* Left Content */}
+              <div className="order-last lg:order-first">
+                <div className="flex flex-wrap gap-2 md:gap-3 mb-4 md:mb-6">
+                  <span className="bg-[#0a1628] text-white px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold">
+                    TRUSTED REALTOR
+                  </span>
+                  <span className="bg-yellow-400 text-white px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold">
+                    ★ 7+ YEARS
+                  </span>
+                </div>
 
-            <span className="bg-yellow-400 text-white px-4 py-2 rounded-full text-sm font-semibold">
-              ★ 7+ YEARS
-            </span>
-          </div>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a1628] leading-tight mb-4 md:mb-6">
+                  About <br />
+                  <span className="text-yellow-500"> Nitish Mahajan</span>
+                </h2>
 
-          <h2 className="text-4xl lg:text-4xl font-bold text-[#0a1628] leading-tight mb-6">
-            About <br />
-            <span className="text-5xl lg:text-5xl text-yellow-500"> Nitish Mahajan</span>
-          </h2>
+                <p className="text-sm md:text-lg text-gray-600 leading-relaxed mb-6 md:mb-8">
+                  Nitish Mahajan is a dedicated real estate professional committed to helping homebuyers, investors, and property sellers make informed and confident decisions. With a strong understanding of the real estate market and a client-first approach, he focuses on identifying opportunities that align with each client's goals and budget. Whether you are searching for your dream home, a profitable investment, or assistance in selling a property, Nitish Mahajan provides personalized guidance throughout the entire process.
+                </p>
 
-          <p className="text-gray-600 text-lg leading-relaxed mb-8">
-            Nitish Mahajan is a dedicated real estate professional committed to helping homebuyers, investors, and property sellers make informed and confident decisions. With a strong understanding of the real estate market and a client-first approach, he focuses on identifying opportunities that align with each client's goals and budget. Whether you are searching for your dream home, a profitable investment, or assistance in selling a property, Nitish Mahajan provides personalized guidance throughout the entire process.
-          </p>
+                <div className="flex flex-wrap gap-6 md:gap-10 mb-6 md:mb-10">
+                  <div>
+                    <h3 className="text-3xl md:text-4xl font-bold text-yellow-500">26+</h3>
+                    <p className="text-gray-500 text-sm md:text-base">Properties Sold</p>
+                  </div>
+                  <div>
+                    <h3 className="text-3xl md:text-4xl font-bold text-yellow-500">100%</h3>
+                    <p className="text-gray-500 text-sm md:text-base">Client Satisfaction</p>
+                  </div>
+                </div>
 
-          <div className="flex gap-10 mb-10 flex-wrap">
-            <div>
-              <h3 className="text-4xl font-bold text-yellow-500">26+</h3>
-              <p className="text-gray-500">Properties Sold</p>
+                <Link to="/about-us">
+                  <button className="bg-[#0a1628] text-white px-6 py-3 md:px-8 md:py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-[#0a1628] transition text-sm md:text-base">
+                    More About Nitish Mahajan
+                  </button>
+                </Link>
+              </div>
             </div>
-
-            
-
-            <div>
-              <h3 className="text-4xl font-bold text-yellow-500">100%</h3>
-              <p className="text-gray-500">Client Satisfaction</p>
-            </div>
-          </div>
-
-          <button className="bg-[#0a1628] text-white px-8 py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-[#0a1628] transition">
-            More About Nitish Mahajan
-          </button>
-        </div>
-
-        {/* Right Image */}
-        <div className="relative">
-          <div className="overflow-hidden rounded-3xl shadow-2xl">
-            <img
-              src={nitish}
-              alt="Nitish Mahajan"
-              className="w-full h-[500px] object-cover object-top"
-            />
-          </div>
-
-          {/* Floating Card */}
-          <div className="absolute -bottom-6 -right-6 bg-white p-5 rounded-2xl shadow-xl">
-            <p className="text-gray-500 text-sm">
-              Successful Transactions
-            </p>
-
-            <h3 className="text-3xl font-bold text-green-600">
-              26+
-            </h3>
-
-            <p className="text-gray-500 text-sm">
-              Premium Deals Closed
-            </p>
           </div>
         </div>
-
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Featured Properties Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0a1628] mb-6">
+      <section className="py-12 md:py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a1628] mb-4 md:mb-6">
               Premium <span className="text-yellow-400">Property Portfolio</span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
               Curated selection of verified residential and commercial properties across prime locations
             </p>
           </div>
           
-          <div className="flex flex-wrap justify-center gap-4 mb-12">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12">
             {[
               { key: 'all', label: 'All Properties' },
               { key: 'residential', label: 'Residential' },
@@ -410,7 +389,7 @@ const ModernLuxuryRealEstate = () => {
               <button
                 key={filter.key}
                 onClick={() => setActiveFilter(filter.key)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                className={`px-4 py-2 md:px-6 md:py-3 rounded-full font-medium transition-all duration-300 text-sm md:text-base ${
                   activeFilter === filter.key 
                     ? 'bg-yellow-400 text-[#0a1628] shadow-lg' 
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -421,55 +400,55 @@ const ModernLuxuryRealEstate = () => {
             ))}
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {filteredProperties.map((property) => (
               <div 
                 key={property.id} 
                 className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
               >
-                <div className="relative overflow-hidden h-64">
+                <div className="relative overflow-hidden h-48 sm:h-56 md:h-64">
                   <img 
                     src={property.image} 
                     alt={property.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute top-4 left-4 bg-yellow-400 text-[#0a1628] px-3 py-1 rounded-full text-sm font-medium">
+                  <div className="absolute top-3 left-3 md:top-4 md:left-4 bg-yellow-400 text-[#0a1628] px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-medium">
                     {property.tag}
                   </div>
                   <button 
                     onClick={() => toggleFavorite(property.id)}
-                    className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm p-2 rounded-full hover:bg-white transition-colors"
+                    className="absolute top-3 right-3 md:top-4 md:right-4 bg-white/90 backdrop-blur-sm p-1.5 md:p-2 rounded-full hover:bg-white transition-colors"
                   >
                     <Heart 
-                      size={20} 
+                      size={16} 
                       className={favorites.includes(property.id) ? 'text-red-500 fill-red-500' : 'text-gray-700'} 
                     />
                   </button>
                 </div>
                 
-                <div className="p-6">
-                  <div className="flex justify-between items-start mb-4">
+                <div className="p-4 md:p-6">
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0 mb-3 md:mb-4">
                     <div>
-                      <h3 className="text-xl font-bold text-[#0a1628]">{property.title}</h3>
+                      <h3 className="text-base md:text-xl font-bold text-[#0a1628]">{property.title}</h3>
                       <div className="flex items-center text-gray-600 mt-1">
-                        <MapPin size={16} className="mr-1 text-yellow-400" />
-                        <span>{property.location}</span>
+                        <MapPin size={14} className="mr-1 text-yellow-400" />
+                        <span className="text-xs md:text-sm">{property.location}</span>
                       </div>
                     </div>
-                    <span className="text-2xl font-bold text-yellow-400">{property.price}</span>
+                    <span className="text-lg md:text-2xl font-bold text-yellow-400">{property.price}</span>
                   </div>
                   
-                  <button className="w-full bg-[#0a1628] text-white py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 flex items-center justify-center group/btn">
+                  <button className="w-full bg-[#0a1628] text-white py-2 md:py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 flex items-center justify-center group/btn text-sm md:text-base">
                     <span>Schedule Visit</span>
-                    <ChevronRight className="ml-2 group-hover/btn:translate-x-1 transition-transform" size={20} />
+                    <ChevronRight className="ml-2 group-hover/btn:translate-x-1 transition-transform" size={16} />
                   </button>
                 </div>
               </div>
             ))}
           </div>
           
-          <div className="text-center mt-16">
-            <button className="px-8 py-4 border-2 border-yellow-400 text-yellow-600 rounded-lg font-semibold hover:bg-yellow-50 transition-colors duration-300">
+          <div className="text-center mt-10 md:mt-16">
+            <button className="px-6 py-3 md:px-8 md:py-4 border-2 border-yellow-400 text-yellow-600 rounded-lg font-semibold hover:bg-yellow-50 transition-colors duration-300 text-sm md:text-base">
               View All Properties
             </button>
           </div>
@@ -477,16 +456,16 @@ const ModernLuxuryRealEstate = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 md:py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-yellow-100 text-yellow-700 font-medium mb-6">
+          <div className="text-center mb-10 md:mb-16">
+            <div className="inline-flex items-center px-3 py-1 md:px-4 md:py-2 rounded-full bg-yellow-100 text-yellow-700 font-medium mb-4 md:mb-6 text-sm md:text-base">
               <FaComment className="mr-2 text-yellow-500" /> Client Success Stories
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0a1628] mb-6">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a1628] mb-4 md:mb-6">
               What Our <span className="text-yellow-500">Clients Say</span>
             </h2>
-            <p className="text-gray-600 text-xl max-w-3xl mx-auto">
+            <p className="text-sm md:text-xl text-gray-600 max-w-3xl mx-auto px-4">
               Real experiences from homeowners and investors across India
             </p>
           </div>
@@ -495,19 +474,19 @@ const ModernLuxuryRealEstate = () => {
             <div className="overflow-hidden">
               <div className="flex transition-transform duration-500" style={{ transform: `translateX(-${activeTestimonial * 100}%)` }}>
                 {testimonialsData.map((testimonial, idx) => (
-                  <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
+                  <div key={testimonial.id} className="w-full flex-shrink-0 px-2 md:px-4">
                     <TestimonialCard testimonial={testimonial} isActive={idx === activeTestimonial} />
                   </div>
                 ))}
               </div>
             </div>
             
-            <div className="flex justify-center items-center mt-12 space-x-4">
+            <div className="flex justify-center items-center mt-6 md:mt-12 space-x-3 md:space-x-4">
               <button
                 onClick={() => setActiveTestimonial((prev) => (prev - 1 + testimonialsData.length) % testimonialsData.length)}
-                className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-300 transition-colors"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-300 transition-colors"
               >
-                <FaArrowLeft />
+                <FaArrowLeft className="text-sm md:text-base" />
               </button>
               
               <div className="flex space-x-2">
@@ -515,10 +494,10 @@ const ModernLuxuryRealEstate = () => {
                   <button
                     key={idx}
                     onClick={() => setActiveTestimonial(idx)}
-                    className={`w-3 h-3 rounded-full transition-all ${
+                    className={`h-2 md:h-3 rounded-full transition-all ${
                       idx === activeTestimonial
-                        ? 'bg-yellow-400 w-8'
-                        : 'bg-gray-300 hover:bg-gray-400'
+                        ? 'bg-yellow-400 w-6 md:w-8'
+                        : 'bg-gray-300 w-2 md:w-3 hover:bg-gray-400'
                     }`}
                   />
                 ))}
@@ -526,9 +505,9 @@ const ModernLuxuryRealEstate = () => {
               
               <button
                 onClick={() => setActiveTestimonial((prev) => (prev + 1) % testimonialsData.length)}
-                className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-300 transition-colors"
+                className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-gray-200 flex items-center justify-center text-gray-700 hover:bg-gray-300 transition-colors"
               >
-                <FaArrowRight />
+                <FaArrowRight className="text-sm md:text-base" />
               </button>
             </div>
           </div>
@@ -536,69 +515,69 @@ const ModernLuxuryRealEstate = () => {
       </section>
 
       {/* Expert Agent Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0a1628] mb-6">
+      <section className="py-12 md:py-20 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a1628] mb-4 md:mb-6">
               Meet Your <span className="text-yellow-500">Real Estate Expert</span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
               Professional guidance from industry expert with deep market knowledge
             </p>
           </div>
           
-          <div className="max-w-5xl mx-auto bg-[#0a1628] rounded-3xl overflow-hidden shadow-2xl">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-              <div className="relative h-96 md:h-auto">
+          <div className="max-w-5xl mx-auto bg-[#0a1628] rounded-2xl md:rounded-3xl overflow-hidden shadow-2xl">
+            <div className="grid grid-cols-1 md:grid-cols-2">
+              <div className="relative h-64 md:h-auto">
                 <img 
                   src={nitish}
                   alt="Nitish Mahajan - Real Estate Expert"
                   className="w-full h-full object-cover object-top"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/30 via-transparent to-transparent"></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0a1628]/50 via-transparent to-transparent md:hidden"></div>
               </div>
               
-              <div className="p-8 md:p-10 bg-[#0a1628]">
-                <div className="flex items-center gap-2 mb-4">
-                  <div className="w-10 h-1 bg-yellow-400 rounded-full"></div>
-                  <span className="text-yellow-400 font-semibold">Founder & CEO</span>
+              <div className="p-6 md:p-8 lg:p-10 bg-[#0a1628]">
+                <div className="flex items-center gap-2 mb-3 md:mb-4">
+                  <div className="w-8 md:w-10 h-1 bg-yellow-400 rounded-full"></div>
+                  <span className="text-yellow-400 font-semibold text-xs md:text-base">Founder & CEO</span>
                 </div>
-                <h3 className="text-3xl font-bold text-white mb-2">Nitish Mahajan</h3>
-                <p className="text-yellow-400 text-lg mb-6">Real Estate Consultant | Aggregator</p>
+                <h3 className="text-xl md:text-3xl font-bold text-white mb-1 md:mb-2">Nitish Mahajan</h3>
+                <p className="text-yellow-400 text-sm md:text-lg mb-4 md:mb-6">Real Estate Consultant | Aggregator</p>
                 
-                <div className="space-y-4 mb-8">
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center mt-1 flex-shrink-0">
-                      <Check size={14} className="text-[#0a1628]" />
+                <div className="space-y-3 md:space-y-4 mb-6 md:mb-8">
+                  <div className="flex items-start gap-2 md:gap-3">
+                    <div className="w-5 h-5 md:w-6 md:h-6 bg-yellow-400 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <Check size={12} className="text-[#0a1628]" />
                     </div>
-                    <p className="text-gray-300">Successfully closed 26+ property deals </p>
+                    <p className="text-gray-300 text-sm md:text-base">Successfully closed 26+ property deals</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center mt-1 flex-shrink-0">
-                      <Check size={14} className="text-[#0a1628]" />
+                  <div className="flex items-start gap-2 md:gap-3">
+                    <div className="w-5 h-5 md:w-6 md:h-6 bg-yellow-400 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <Check size={12} className="text-[#0a1628]" />
                     </div>
-                    <p className="text-gray-300">Specialist in residential luxury apartments and commercial office spaces</p>
+                    <p className="text-gray-300 text-sm md:text-base">Specialist in residential luxury apartments and commercial office spaces</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center mt-1 flex-shrink-0">
-                      <Check size={14} className="text-[#0a1628]" />
+                  <div className="flex items-start gap-2 md:gap-3">
+                    <div className="w-5 h-5 md:w-6 md:h-6 bg-yellow-400 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <Check size={12} className="text-[#0a1628]" />
                     </div>
-                    <p className="text-gray-300">Expert in legal due diligence, property verification, and negotiation</p>
+                    <p className="text-gray-300 text-sm md:text-base">Expert in legal due diligence, property verification, and negotiation</p>
                   </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-6 h-6 bg-yellow-400 rounded-full flex items-center justify-center mt-1 flex-shrink-0">
-                      <Check size={14} className="text-[#0a1628]" />
+                  <div className="flex items-start gap-2 md:gap-3">
+                    <div className="w-5 h-5 md:w-6 md:h-6 bg-yellow-400 rounded-full flex items-center justify-center mt-0.5 flex-shrink-0">
+                      <Check size={12} className="text-[#0a1628]" />
                     </div>
-                    <p className="text-gray-300">Trusted advisor for NRIs and first-time home buyers across India</p>
+                    <p className="text-gray-300 text-sm md:text-base">Trusted advisor for NRIs and first-time home buyers across India</p>
                   </div>
                 </div>
                 
-                <div className="flex flex-wrap gap-4">
-                  <button className="bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-all duration-300 flex items-center gap-2">
-                    <Phone size={18} /> Schedule Appointment
+                <div className="flex flex-wrap gap-3 md:gap-4">
+                  <button className="bg-yellow-400 text-[#0a1628] px-4 py-2 md:px-6 md:py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-all duration-300 flex items-center gap-2 text-sm md:text-base">
+                    <Phone size={16} /> Schedule Appointment
                   </button>
-                  <button className="border border-yellow-400 text-yellow-400 px-3 py-3 rounded-lg font-semibold hover:bg-yellow-400/10 transition-all duration-300 flex items-center gap-2">
-                    <Mail size={18} /> Send Email
+                  <button className="border border-yellow-400 text-yellow-400 px-3 py-2 md:px-3 md:py-3 rounded-lg font-semibold hover:bg-yellow-400/10 transition-all duration-300 flex items-center gap-2 text-sm md:text-base">
+                    <Mail size={16} /> Send Email
                   </button>
                 </div>
               </div>
@@ -606,38 +585,39 @@ const ModernLuxuryRealEstate = () => {
           </div>
         </div>
       </section>
-      <WhyChooseUs/>
+      
+      <WhyChooseUs />
 
       {/* FAQ Section */}
-      <div className="bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="bg-gray-50 py-10 md:py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-[#0a1628] sm:text-5xl mb-4">
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a1628] mb-3 md:mb-4">
               Frequently Asked <span className="text-yellow-500">Questions</span>
             </h2>
-            <p className="mt-4 text-xl text-gray-600">
+            <p className="text-sm md:text-xl text-gray-600 px-4">
               Expert answers to common questions about Indian real estate
             </p>
           </div>
 
-          <div className="space-y-4">
+          <div className="space-y-3 md:space-y-4 px-2 md:px-0">
             {faqItems.map((item, index) => (
               <div 
                 key={index} 
-                className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
+                className="bg-white rounded-xl md:rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl"
               >
                 <button
-                  className="w-full px-6 py-5 text-left focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50 rounded-2xl"
+                  className="w-full px-4 py-4 md:px-6 md:py-5 text-left focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:ring-opacity-50"
                   onClick={() => toggleFAQ(index)}
                   aria-expanded={openIndex === index}
                 >
                   <div className="flex justify-between items-center">
-                    <h3 className="text-lg font-semibold text-[#0a1628] pr-8">
+                    <h3 className="text-sm md:text-lg font-semibold text-[#0a1628] pr-4 md:pr-8">
                       {item.question}
                     </h3>
-                    <div className="flex-shrink-0 ml-4">
+                    <div className="flex-shrink-0 ml-2 md:ml-4">
                       <svg 
-                        className={`w-6 h-6 text-yellow-500 transition-transform duration-300 ${openIndex === index ? 'transform rotate-180' : ''}`}
+                        className={`w-5 h-5 md:w-6 md:h-6 text-yellow-500 transition-transform duration-300 ${openIndex === index ? 'transform rotate-180' : ''}`}
                         fill="none" 
                         stroke="currentColor" 
                         viewBox="0 0 24 24"
@@ -649,11 +629,11 @@ const ModernLuxuryRealEstate = () => {
                 </button>
                 
                 <div 
-                  className={`px-6 overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? 'pb-5' : 'max-h-0'}`}
+                  className={`px-4 md:px-6 overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? 'pb-4 md:pb-5' : 'max-h-0'}`}
                   style={{ maxHeight: openIndex === index ? '300px' : '0' }}
                 >
-                  <div className="border-l-4 border-yellow-400 pl-4 py-1">
-                    <p className="text-gray-700 leading-relaxed">
+                  <div className="border-l-4 border-yellow-400 pl-3 md:pl-4 py-1">
+                    <p className="text-sm md:text-base text-gray-700 leading-relaxed">
                       {item.answer}
                     </p>
                   </div>
@@ -662,24 +642,26 @@ const ModernLuxuryRealEstate = () => {
             ))}
           </div>
 
-          <div className="mt-12 p-6 bg-[#0a1628] rounded-2xl shadow-lg">
-            <div className="flex flex-col md:flex-row items-center justify-between">
-              <div className="mb-6 md:mb-0">
-                <h3 className="text-xl font-bold text-yellow-400">Still have questions?</h3>
-                <p className="mt-2 text-gray-300">
+          <div className="mt-8 md:mt-12 p-4 md:p-6 bg-[#0a1628] rounded-xl md:rounded-2xl shadow-lg mx-2 md:mx-0">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-0">
+              <div className="text-center md:text-left">
+                <h3 className="text-lg md:text-xl font-bold text-yellow-400">Still have questions?</h3>
+                <p className="text-sm md:text-base text-gray-300 mt-1 md:mt-2">
                   Need personalized guidance? Contact our expert team for a free consultation.
                 </p>
               </div>
-              <button className="px-6 py-3 bg-yellow-400 text-[#0a1628] font-semibold rounded-xl hover:bg-yellow-400 transition-colors duration-300 shadow-md hover:shadow-lg">
-                Contact Support
-              </button>
+              <Link to="/contact-us">
+                <button className="px-4 py-2 md:px-6 md:py-3 bg-yellow-400 text-[#0a1628] font-semibold rounded-xl hover:bg-yellow-400 transition-colors duration-300 shadow-md hover:shadow-lg text-sm md:text-base">
+                  Contact Support
+                </button>
+              </Link>
             </div>
           </div>
         </div>
       </div>
 
       {/* Contact Us Section */}
-      <div  className="py-20 px-4 bg-white">
+      <div className="py-12 md:py-20 px-4 bg-white">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -687,47 +669,47 @@ const ModernLuxuryRealEstate = () => {
           viewport={{ once: true }}
           className="max-w-6xl mx-auto"
         >
-          <div className="text-center mb-12">
-            <span className="inline-block px-4 py-2 bg-yellow-400 text-[#0a1628] text-sm font-semibold rounded-full mb-4 shadow-lg">
+          <div className="text-center mb-8 md:mb-12">
+            <span className="inline-block px-3 py-1 md:px-4 md:py-2 bg-yellow-400 text-[#0a1628] text-xs md:text-sm font-semibold rounded-full mb-3 md:mb-4 shadow-lg">
               📬 Get in Touch
             </span>
-            <h2 className="text-4xl md:text-5xl font-bold text-[#0a1628] mb-4">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a1628] mb-3 md:mb-4">
               Contact <span className="text-yellow-500">Real Estate with Nitish Mahajan</span>
             </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
               Ready to find your dream property? Reach out to us for a personalized consultation.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 lg:gap-12">
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               viewport={{ once: true }}
-              className="bg-[#0a1628] rounded-2xl p-8 lg:p-10 shadow-2xl relative overflow-hidden group"
+              className="bg-[#0a1628] rounded-2xl p-6 md:p-8 lg:p-10 shadow-2xl relative overflow-hidden group"
             >
-              <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-400/10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-125 transition-transform duration-500"></div>
-              <div className="absolute bottom-0 left-0 w-40 h-40 bg-yellow-400/10 rounded-full translate-y-20 -translate-x-20 group-hover:scale-125 transition-transform duration-700"></div>
+              <div className="absolute top-0 right-0 w-24 h-24 md:w-32 md:h-32 bg-yellow-400/10 rounded-full -translate-y-16 translate-x-16 group-hover:scale-125 transition-transform duration-500"></div>
+              <div className="absolute bottom-0 left-0 w-32 h-32 md:w-40 md:h-40 bg-yellow-400/10 rounded-full translate-y-20 -translate-x-20 group-hover:scale-125 transition-transform duration-700"></div>
               
               <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="p-3 bg-yellow-400 rounded-xl shadow-lg">
-                    <MessageSquare className="w-6 h-6 text-[#0a1628]" />
+                <div className="flex items-center gap-2 md:gap-3 mb-6 md:mb-8">
+                  <div className="p-2 md:p-3 bg-yellow-400 rounded-xl shadow-lg">
+                    <MessageSquare className="w-5 h-5 md:w-6 md:h-6 text-[#0a1628]" />
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white">Contact Information</h3>
+                  <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-white">Contact Information</h3>
                 </div>
                 
-                <div className="space-y-12">
+                <div className="space-y-6 md:space-y-8 lg:space-y-12">
                   {[
                     {
-                      icon: <Phone className="w-6 h-6" />,
+                      icon: <Phone className="w-5 h-5 md:w-6 md:h-6" />,
                       title: "Phone Number",
                       details: "+91 98159 78773",
                       description: "Available Monday-Saturday, 10am-7pm",
                     },
                     {
-                      icon: <Mail className="w-6 h-6" />,
+                      icon: <Mail className="w-5 h-5 md:w-6 md:h-6" />,
                       title: "Email Address",
                       details: "nm@nitishestate.com",
                       description: "We'll respond within 24 hours",
@@ -739,18 +721,18 @@ const ModernLuxuryRealEstate = () => {
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
                       viewport={{ once: true }}
-                      whileHover={{ x: 10 }}
-                      className="flex items-start gap-4 p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group/item"
+                      whileHover={{ x: 5 }}
+                      className="flex items-start gap-3 md:gap-4 p-3 md:p-4 rounded-xl bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300 group/item"
                     >
-                      <div className="p-3 rounded-lg bg-yellow-400 shadow-lg text-[#0a1628]">
+                      <div className="p-2 md:p-3 rounded-lg bg-yellow-400 shadow-lg text-[#0a1628]">
                         {item.icon}
                       </div>
                       <div className="flex-1">
-                        <h4 className="font-semibold text-lg text-white mb-1">{item.title}</h4>
-                        <p className="text-yellow-400 font-bold text-sm mb-1 group-hover/item:text-yellow-300 transition-colors">
+                        <h4 className="font-semibold text-sm md:text-lg text-white mb-0.5 md:mb-1">{item.title}</h4>
+                        <p className="text-yellow-400 font-bold text-xs md:text-sm mb-0.5 md:mb-1 group-hover/item:text-yellow-300 transition-colors">
                           {item.details}
                         </p>
-                        <p className="text-gray-400 text-sm">{item.description}</p>
+                        <p className="text-gray-400 text-xs md:text-sm">{item.description}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -763,19 +745,19 @@ const ModernLuxuryRealEstate = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               viewport={{ once: true }}
-              className="bg-white rounded-2xl p-8 lg:p-10 shadow-2xl border border-gray-100 relative overflow-hidden"
+              className="bg-white rounded-2xl p-6 md:p-8 lg:p-10 shadow-2xl border border-gray-100 relative overflow-hidden"
             >
               <div className="absolute top-0 left-0 w-full h-1 bg-yellow-400"></div>
               
               <div className="relative z-10">
-                <div className="flex items-center gap-3 mb-8">
-                  <div className="p-3 bg-yellow-100 rounded-xl shadow-lg">
-                    <Send className="w-6 h-6 text-yellow-500" />
+                <div className="flex items-center gap-2 md:gap-3 mb-6 md:mb-8">
+                  <div className="p-2 md:p-3 bg-yellow-100 rounded-xl shadow-lg">
+                    <Send className="w-5 h-5 md:w-6 md:h-6 text-yellow-500" />
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-[#0a1628]">Send Message</h3>
+                  <h3 className="text-xl md:text-2xl lg:text-3xl font-bold text-[#0a1628]">Send Message</h3>
                 </div>
 
-                <form className="space-y-6">
+                <form className="space-y-4 md:space-y-6">
                   {['Your Name', 'Your Email', 'Phone Number'].map((placeholder, index) => (
                     <motion.div
                       key={placeholder}
@@ -788,12 +770,12 @@ const ModernLuxuryRealEstate = () => {
                         <input
                           type={placeholder.includes('Email') ? 'email' : 'text'}
                           placeholder={placeholder}
-                          className="w-full px-5 py-4 pl-12 text-gray-700 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all duration-300 hover:bg-white hover:border-gray-300"
+                          className="w-full px-4 py-3 md:px-5 md:py-4 pl-10 md:pl-12 text-gray-700 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all duration-300 hover:bg-white hover:border-gray-300 text-sm md:text-base"
                         />
-                        <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
-                          {placeholder.includes('Name') && <User className="w-5 h-5" />}
-                          {placeholder.includes('Email') && <Mail className="w-5 h-5" />}
-                          {placeholder.includes('Phone') && <Phone className="w-5 h-5" />}
+                        <div className="absolute left-3 md:left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
+                          {placeholder.includes('Name') && <User className="w-4 h-4 md:w-5 md:h-5" />}
+                          {placeholder.includes('Email') && <Mail className="w-4 h-4 md:w-5 md:h-5" />}
+                          {placeholder.includes('Phone') && <Phone className="w-4 h-4 md:w-5 md:h-5" />}
                         </div>
                       </div>
                     </motion.div>
@@ -808,11 +790,11 @@ const ModernLuxuryRealEstate = () => {
                     <div className="relative">
                       <textarea
                         placeholder="Your Message"
-                        rows="5"
-                        className="w-full px-5 py-4 pl-12 text-gray-700 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all duration-300 hover:bg-white hover:border-gray-300 resize-none"
+                        rows="4"
+                        className="w-full px-4 py-3 md:px-5 md:py-4 pl-10 md:pl-12 text-gray-700 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 focus:border-transparent transition-all duration-300 hover:bg-white hover:border-gray-300 resize-none text-sm md:text-base"
                       ></textarea>
-                      <div className="absolute left-4 top-6 text-gray-400">
-                        <MessageSquare className="w-5 h-5" />
+                      <div className="absolute left-3 md:left-4 top-4 md:top-6 text-gray-400">
+                        <MessageSquare className="w-4 h-4 md:w-5 md:h-5" />
                       </div>
                     </div>
                   </motion.div>
@@ -827,11 +809,11 @@ const ModernLuxuryRealEstate = () => {
                   >
                     <button
                       type="submit"
-                      className="w-full bg-yellow-400 text-[#0a1628] font-bold py-4 px-6 rounded-xl shadow-lg hover:bg-yellow-400 transition-all duration-300 transform hover:-translate-y-1 text-lg"
+                      className="w-full bg-yellow-400 text-[#0a1628] font-bold py-3 md:py-4 px-4 md:px-6 rounded-xl shadow-lg hover:bg-yellow-400 transition-all duration-300 transform hover:-translate-y-1 text-sm md:text-lg"
                     >
                       <span className="flex items-center justify-center gap-2">
                         Send Message
-                        <Send className="w-5 h-5" />
+                        <Send className="w-4 h-4 md:w-5 md:h-5" />
                       </span>
                     </button>
                   </motion.div>
@@ -843,57 +825,53 @@ const ModernLuxuryRealEstate = () => {
       </div>
 
       {/* Footer */}
-      <footer className="bg-[#0a1628] text-white py-12">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+      <footer className="bg-[#0a1628] text-white py-10 md:py-12">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
             <div>
-              <div className="flex items-center space-x-2 mb-6">
-                <div className="w-30 h-25 bg-yellow-400 rounded-lg flex items-center justify-center">
-                
-              <img src={logo} className=' object-cover h-full w-full rounded-xl'/>
-           
+              <div className="flex items-center space-x-2 mb-4 md:mb-6">
+                <div className="w-20 h-12 md:w-30 md:h-25 bg-yellow-400 rounded-lg flex items-center justify-center overflow-hidden">
+                  <img src={logo} className='object-cover h-full w-full rounded-xl' alt="Logo" />
                 </div>
-               
               </div>
-              <p className="text-gray-400">
+              <p className="text-sm md:text-base text-gray-400">
                 Your trusted partner for premium residential and commercial properties across Mumbai Metropolitan Region.
               </p>
             </div>
             
             <div>
-              <h4 className="text-xl font-bold mb-6 text-yellow-400">Quick Links</h4>
-              <ul className="space-y-3">
-  <li><Link to="/" className="text-gray-400 hover:text-yellow-400 transition-colors">Home</Link></li>
-  <li><Link to="/about-us" className="text-gray-400 hover:text-yellow-400 transition-colors">About Us</Link></li>
-  <li><Link to="/contact-us" className="text-gray-400 hover:text-yellow-400 transition-colors">Contact Us</Link></li>
-</ul>
-            </div>
-            
-            <div>
-              <h4 className="text-xl font-bold mb-6 text-yellow-400">Contact Info</h4>
-              <ul className="space-y-4">
-                <li className="flex items-center">
-                  <Phone size={18} className="mr-3 text-yellow-400" />
-                  <span className="text-gray-400">+91 98159 78773</span>
-                </li>
-                <li className="flex items-center">
-                  <Mail size={18} className="mr-3 text-yellow-400" />
-                  <span className="text-gray-400">nm@nitishestate.com</span>
-                </li>
-                
+              <h4 className="text-lg md:text-xl font-bold mb-4 md:mb-6 text-yellow-400">Quick Links</h4>
+              <ul className="space-y-2 md:space-y-3">
+                <li><Link to="/" className="text-sm md:text-base text-gray-400 hover:text-yellow-400 transition-colors">Home</Link></li>
+                <li><Link to="/about-us" className="text-sm md:text-base text-gray-400 hover:text-yellow-400 transition-colors">About Us</Link></li>
+                <li><Link to="/contact-us" className="text-sm md:text-base text-gray-400 hover:text-yellow-400 transition-colors">Contact Us</Link></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="text-xl font-bold mb-6 text-yellow-400">Connect With Us</h4>
-              <p className="text-gray-400 mb-6">
+              <h4 className="text-lg md:text-xl font-bold mb-4 md:mb-6 text-yellow-400">Contact Info</h4>
+              <ul className="space-y-3 md:space-y-4">
+                <li className="flex items-center text-sm md:text-base">
+                  <Phone size={16} className="mr-2 md:mr-3 text-yellow-400" />
+                  <span className="text-gray-400">+91 98159 78773</span>
+                </li>
+                <li className="flex items-center text-sm md:text-base">
+                  <Mail size={16} className="mr-2 md:mr-3 text-yellow-400" />
+                  <span className="text-gray-400">nm@nitishestate.com</span>
+                </li>
+              </ul>
+            </div>
+            
+            <div>
+              <h4 className="text-lg md:text-xl font-bold mb-4 md:mb-6 text-yellow-400">Connect With Us</h4>
+              <p className="text-sm md:text-base text-gray-400 mb-4 md:mb-6">
                 Follow us on social media for the latest property updates.
               </p>
-              <div className="flex space-x-4">
+              <div className="flex space-x-3 md:space-x-4">
                 {[<FaFacebook key="fb"/>, <FaInstagram key="ig"/>, <FaLinkedinIn key="in"/>, <FaTwitter key="tw"/>].map((social, idx) => (
                   <div 
                     key={idx}
-                    className="w-10 h-10 bg-[#1a2a3a] rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-[#0a1628] cursor-pointer transition-colors duration-300 text-gray-400 hover:text-[#0a1628]"
+                    className="w-8 h-8 md:w-10 md:h-10 bg-[#1a2a3a] rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-[#0a1628] cursor-pointer transition-colors duration-300 text-gray-400 hover:text-[#0a1628]"
                   >
                     {social}
                   </div>
@@ -902,16 +880,18 @@ const ModernLuxuryRealEstate = () => {
             </div>
           </div>
           
-          <div className="border-t border-[#1a2a3a] mt-12 pt-8 text-center text-gray-400">
+          <div className="border-t border-[#1a2a3a] mt-8 md:mt-12 pt-6 md:pt-8 text-center text-gray-400 text-sm md:text-base">
             <p>© {currentYear} Real Estate with Nitish Mahajan. All rights reserved.</p>
           </div>
         </div>
       </footer>
 
       {/* Floating Contact Button */}
-      <button className="fixed bottom-6 right-6 bg-yellow-400 text-[#0a1628] p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50">
-        <Phone size={24} />
-      </button>
+      <Link to="/contact-us">
+        <button className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-yellow-400 text-[#0a1628] p-3 md:p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50">
+          <Phone size={20} />
+        </button>
+      </Link>
     </div>
   );
 };
