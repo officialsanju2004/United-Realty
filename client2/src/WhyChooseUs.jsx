@@ -10,37 +10,37 @@ const WhyChooseUs = () => {
       icon: FaChartLine,
       title: "Market Intelligence",
       description: "Real-time data analytics and market insights to make informed decisions",
-      color: "from-blue-500 to-cyan-500"
+      color: "bg-yellow-400"
     },
     {
       icon: FaShieldAlt,
       title: "Risk Management",
       description: "Comprehensive due diligence and risk assessment for every transaction",
-      color: "from-emerald-500 to-green-500"
+      color: "bg-yellow-400"
     },
     {
       icon: FaUsers,
       title: "Expert Network",
       description: "Access to top agents, lawyers, and financial advisors in our network",
-      color: "from-violet-500 to-purple-500"
+      color: "bg-yellow-400"
     },
     {
       icon: FaAward,
       title: "Award-Winning Service",
       description: "Multiple industry awards for excellence in real estate services",
-      color: "from-amber-500 to-yellow-500"
+      color: "bg-yellow-400"
     },
     {
       icon: IoAnalytics,
       title: "Investment Analysis",
       description: "Detailed ROI projections and investment strategy development",
-      color: "from-rose-500 to-pink-500"
+      color: "bg-yellow-400"
     },
     {
       icon: FaHandshake,
       title: "Client Advocacy",
       description: "We represent your interests exclusively in every negotiation",
-      color: "from-indigo-500 to-blue-500"
+      color: "bg-yellow-400"
     }
   ];
 
@@ -72,7 +72,7 @@ const WhyChooseUs = () => {
         >
           <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-primary-500/10 to-secondary-500/10 px-4 py-2 rounded-full mb-6">
             <IoRibbon className="text-primary-600" />
-            <span className="text-primary-600 font-semibold">Why Choose Real Estate with Nitish</span>
+            <span className="text-primary-600 font-semibold">Why Choose Real Estate with Nitish Mahajan</span>
           </div>
           
           <h2 className="text-4xl md:text-5xl font-display font-bold text-gray-900 mb-4">
