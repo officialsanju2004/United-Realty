@@ -3,7 +3,8 @@ import {
   Phone, Mail, MapPin, Send, User, MessageSquare,
   Facebook, Instagram, Linkedin, Twitter, Clock,
   CheckCircle, Building, Users, Star, Award, Shield,
-  Calendar, Heart, ChevronRight
+  Calendar, Heart, ChevronRight,
+  Menu
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
@@ -61,14 +62,6 @@ const Contact = () => {
       description: "We'll respond within 24 hours",
       action: "Send Email",
       link: "mailto:nm@nitishestate.com"
-    },
-    {
-      icon: <MapPin className="w-6 h-6" />,
-      title: "Visit Us",
-      details: "Mumbai, Maharashtra",
-      description: "By appointment only",
-      action: "Schedule Visit",
-      link: "/schedule"
     }
   ];
 
@@ -171,7 +164,7 @@ const Contact = () => {
       {/* Contact Cards */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 -mt-12 relative z-20">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 -mt-12 relative z-20">
             {contactCards.map((card, index) => (
               <motion.div
                 key={index}
@@ -373,42 +366,13 @@ const Contact = () => {
               </div>
 
               {/* Working Hours */}
-              <div className="bg-white rounded-3xl p-8 shadow-xl">
-                <h3 className="text-2xl font-bold text-[#0a1628] mb-6 flex items-center gap-2">
-                  <Clock className="w-6 h-6 text-yellow-400" /> Working Hours
-                </h3>
-                <div className="space-y-3">
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="text-gray-600">Monday - Saturday</span>
-                    <span className="font-semibold text-[#0a1628]">10:00 AM - 7:00 PM</span>
-                  </div>
-                  <div className="flex justify-between py-2 border-b border-gray-100">
-                    <span className="text-gray-600">Sunday</span>
-                    <span className="font-semibold text-[#0a1628]">By Appointment</span>
-                  </div>
-                  <div className="flex justify-between py-2">
-                    <span className="text-gray-600">Response Time</span>
-                    <span className="font-semibold text-green-600">Within 24 hours</span>
-                  </div>
-                </div>
-              </div>
+           
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-6">
-          <div className="bg-gray-200 rounded-3xl h-80 flex items-center justify-center overflow-hidden">
-            <div className="text-center text-gray-500">
-              <MapPin className="w-16 h-16 mx-auto text-yellow-400 mb-4" />
-              <p className="text-xl font-semibold text-[#0a1628]">Mumbai, Maharashtra</p>
-              <p>We serve clients across Mumbai Metropolitan Region and Pune</p>
-            </div>
-          </div>
-        </div>
-      </section>
+     
 
       {/* Footer */}
       <footer className="bg-[#0a1628] text-white py-12 border-t border-[#1a2a3a]">
