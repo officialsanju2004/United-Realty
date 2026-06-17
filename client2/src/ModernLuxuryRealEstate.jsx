@@ -306,67 +306,78 @@ const ModernLuxuryRealEstate = () => {
       </section>
 
       {/* About Us Section - Mobile First: Image on Top, Content Below */}
-      <section className="py-12 md:py-24 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="bg-slate-50 rounded-2xl md:rounded-[32px] p-6 md:p-8 lg:p-14">
-            <div className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center">
-              {/* Right Image - Shows first on mobile */}
-              <div className="relative order-first lg:order-last">
-                <div className="overflow-hidden rounded-2xl md:rounded-3xl shadow-2xl">
-                  <img
-                    src={nitish}
-                    alt="Nitish Mahajan"
-                    className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover object-top"
-                  />
-                </div>
-                <div className="absolute -bottom-4 -right-4 md:-bottom-6 md:-right-6 bg-white p-4 md:p-5 rounded-xl md:rounded-2xl shadow-xl">
-                  <p className="text-gray-500 text-xs md:text-sm">Successful Transactions</p>
-                  <h3 className="text-2xl md:text-3xl font-bold text-green-600">26+</h3>
-                  <p className="text-gray-500 text-xs md:text-sm">Premium Deals Closed</p>
-                </div>
-              </div>
+      {/* About Us Section - Premium Layout */}
+<section className="py-24 bg-white">
+  <div className="container mx-auto px-4 sm:px-6">
+    <div className="bg-slate-50 rounded-[32px] p-6 sm:p-8 lg:p-14">
+      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        
+        {/* Right Image - Moved to top on mobile */}
+        <div className="relative order-first lg:order-last">
+          <div className="overflow-hidden rounded-3xl shadow-2xl">
+            <img
+              src={nitish}
+              alt="Nitish Mahajan"
+              className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover object-top"
+            />
+          </div>
 
-              {/* Left Content */}
-              <div className="order-last lg:order-first">
-                <div className="flex flex-wrap gap-2 md:gap-3 mb-4 md:mb-6">
-                  <span className="bg-[#0a1628] text-white px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold">
-                    TRUSTED REALTOR
-                  </span>
-                  <span className="bg-yellow-400 text-white px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-semibold">
-                    ★ 7+ YEARS
-                  </span>
-                </div>
-
-                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a1628] leading-tight mb-4 md:mb-6">
-                  About <br />
-                  <span className="text-yellow-500"> Nitish Mahajan</span>
-                </h2>
-
-                <p className="text-sm md:text-lg text-gray-600 leading-relaxed mb-6 md:mb-8">
-                  Nitish Mahajan is a dedicated real estate professional committed to helping homebuyers, investors, and property sellers make informed and confident decisions. With a strong understanding of the real estate market and a client-first approach, he focuses on identifying opportunities that align with each client's goals and budget. Whether you are searching for your dream home, a profitable investment, or assistance in selling a property, Nitish Mahajan provides personalized guidance throughout the entire process.
-                </p>
-
-                <div className="flex flex-wrap gap-6 md:gap-10 mb-6 md:mb-10">
-                  <div>
-                    <h3 className="text-3xl md:text-4xl font-bold text-yellow-500">26+</h3>
-                    <p className="text-gray-500 text-sm md:text-base">Properties Sold</p>
-                  </div>
-                  <div>
-                    <h3 className="text-3xl md:text-4xl font-bold text-yellow-500">100%</h3>
-                    <p className="text-gray-500 text-sm md:text-base">Client Satisfaction</p>
-                  </div>
-                </div>
-
-                <Link to="/about-us">
-                  <button className="bg-[#0a1628] text-white px-6 py-3 md:px-8 md:py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-[#0a1628] transition text-sm md:text-base">
-                    More About Nitish Mahajan
-                  </button>
-                </Link>
-              </div>
-            </div>
+          {/* Floating Card */}
+          <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 bg-white p-4 sm:p-5 rounded-2xl shadow-xl">
+            <p className="text-gray-500 text-xs sm:text-sm">
+              Successful Transactions
+            </p>
+            <h3 className="text-2xl sm:text-3xl font-bold text-green-600">
+              26+
+            </h3>
+            <p className="text-gray-500 text-xs sm:text-sm">
+              Premium Deals Closed
+            </p>
           </div>
         </div>
-      </section>
+
+        {/* Left Content - Moved to bottom on mobile */}
+        <div className="order-last lg:order-first">
+          <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
+            <span className="bg-[#0a1628] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
+              TRUSTED REALTOR
+            </span>
+            <span className="bg-yellow-400 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
+              ★ 7+ YEARS
+            </span>
+          </div>
+
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0a1628] leading-tight mb-3 sm:mb-6">
+            About <br className="lg:hidden" />
+            <span className="text-3xl sm:text-4xl lg:text-5xl text-yellow-500 whitespace-nowrap">
+              Nitish Mahajan
+            </span>
+          </h2>
+
+          <p className="text-gray-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 px-1 sm:px-0">
+            Nitish Mahajan is a dedicated real estate professional committed to helping homebuyers, investors, and property sellers make informed and confident decisions. With a strong understanding of the real estate market and a client-first approach, he focuses on identifying opportunities that align with each client's goals and budget. Whether you are searching for your dream home, a profitable investment, or assistance in selling a property, Nitish Mahajan provides personalized guidance throughout the entire process.
+          </p>
+
+          <div className="flex gap-6 sm:gap-10 mb-6 sm:mb-10 flex-wrap">
+            <div>
+              <h3 className="text-3xl sm:text-4xl font-bold text-yellow-500">26+</h3>
+              <p className="text-gray-500 text-sm sm:text-base">Properties Sold</p>
+            </div>
+            <div>
+              <h3 className="text-3xl sm:text-4xl font-bold text-yellow-500">100%</h3>
+              <p className="text-gray-500 text-sm sm:text-base">Client Satisfaction</p>
+            </div>
+          </div>
+
+          <button className="bg-[#0a1628] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-[#0a1628] transition text-sm sm:text-base">
+            More About Nitish Mahajan
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Featured Properties Section */}
       <section className="py-12 md:py-20 bg-white">
