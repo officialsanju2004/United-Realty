@@ -243,7 +243,7 @@ const About = () => {
               </div>
               <Link to="/contact-us">
                 <button className="bg-[#0a1628] text-white px-8 py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-[#0a1628] transition-all duration-300">
-                  Connect with Nitish
+                  Connect with Nitish Mahajan 
                 </button>
               </Link>
             </motion.div>
