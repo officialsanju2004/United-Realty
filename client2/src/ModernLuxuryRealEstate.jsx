@@ -8,7 +8,7 @@ import {
   MessageSquare, Send, User, Building, Briefcase
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, FaInstagram, FaLinkedinIn, FaPlay, FaStar, FaTwitter, FaUser } from 'react-icons/fa';
+import { FaWhatsapp,FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, FaInstagram, FaLinkedinIn, FaPlay, FaStar, FaTwitter, FaUser } from 'react-icons/fa';
 import logo from '../images/logo.jpg';
 import nitish from '../images/nitish.jpg';
 import WhyChooseUs from './WhyChooseUs';
@@ -899,8 +899,13 @@ const ModernLuxuryRealEstate = () => {
 
       {/* Floating Contact Button */}
       <Link to="/contact-us">
-        <button className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-yellow-400 text-[#0a1628] p-3 md:p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50">
-          <Phone size={20} />
+        <button onClick={() =>
+    window.open(
+      "https://wa.me/919815978773",
+      "_blank"
+    )
+        } className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-yellow-400 text-[#0a1628] p-3 md:p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50">
+          <FaWhatsapp size={20} />
         </button>
       </Link>
     </div>
