@@ -11,6 +11,7 @@ import { FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, FaInstagram,
 import logo from '../images/logo.jpg';
 import nitish from '../images/nitish.jpg';
 import WhyChooseUs from './WhyChooseUs';
+import { Link } from 'react-router-dom';
 
 const ModernLuxuryRealEstate = () => {
   const [scrolled, setScrolled] = useState(false);
