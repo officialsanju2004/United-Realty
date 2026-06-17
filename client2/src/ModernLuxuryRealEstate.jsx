@@ -238,11 +238,14 @@ const ModernLuxuryRealEstate = () => {
           </div>
           
           <div className="hidden md:flex items-center space-x-10">
-            {['Home', 'About Us', 'Contact Us'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-white hover:text-yellow-400 font-medium transition-colors duration-300">
-                {item}
-              </a>
-            ))}
+           {['Home', 'About Us', 'Contact Us'].map((item) => {
+  const path = item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`;
+  return (
+    <Link key={item} to={path} className="text-white hover:text-yellow-400 font-medium transition-colors duration-300">
+      {item}
+    </Link>
+  );
+})}
             <button className="bg-[#C99A2E] text-[#0a1628] px-6 py-3 rounded-lg font-medium hover:bg-[#C99A2E] transition-all duration-300 hover:scale-105">
               Schedule Visit
             </button>
@@ -255,11 +258,14 @@ const ModernLuxuryRealEstate = () => {
         
         {mobileMenuOpen && (
           <div className="md:hidden absolute top-full left-0 right-0 bg-[#0a1628] shadow-lg py-4 px-6">
-            {['Home', 'About Us', 'Contact Us'].map((item) => (
-              <a key={item} href={`#${item.toLowerCase().replace(' ', '-')}`} className="block py-3 text-white hover:text-yellow-400 font-medium border-b border-[#1a2a3a]">
-                {item}
-              </a>
-            ))}
+            {['Home', 'About Us', 'Contact Us'].map((item) => {
+  const path = item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`;
+  return (
+    <Link key={item} to={path} className="block py-3 text-white hover:text-yellow-400 font-medium border-b border-[#1a2a3a]">
+      {item}
+    </Link>
+  );
+})}
             <button className="mt-4 w-full bg-[#C99A2E] text-[#0a1628] px-6 py-3 rounded-lg font-medium">
               Schedule Visit
             </button>
@@ -871,14 +877,10 @@ const ModernLuxuryRealEstate = () => {
             <div>
               <h4 className="text-xl font-bold mb-6 text-yellow-400">Quick Links</h4>
               <ul className="space-y-3">
-                {['Home', 'About Us', 'Contact Us'].map((item) => (
-                  <li key={item}>
-                    <a href={`#${item.toLowerCase().replace(' ', '-')}`} className="text-gray-400 hover:text-yellow-400 transition-colors">
-                      {item}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+  <li><Link to="/" className="text-gray-400 hover:text-yellow-400 transition-colors">Home</Link></li>
+  <li><Link to="/about" className="text-gray-400 hover:text-yellow-400 transition-colors">About Us</Link></li>
+  <li><Link to="/contact" className="text-gray-400 hover:text-yellow-400 transition-colors">Contact Us</Link></li>
+</ul>
             </div>
             
             <div>
