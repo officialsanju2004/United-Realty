@@ -4,7 +4,7 @@ import {
   Shield, Users, Building, Briefcase, 
   ChevronRight, Calendar, Heart, MessageSquare,
   Facebook, Instagram, Linkedin, Twitter,
-  Menu
+  Menu,X
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
