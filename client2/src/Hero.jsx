@@ -95,9 +95,7 @@ const Hero = () => {
               <span className="text-yellow-400">Premium Residential & Commercial Properties</span>
             </h1>
             
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-200 mb-10 md:mb-14 max-w-3xl mx-auto font-light">
-              Find luxury properties and exclusive real estate opportunities with our expert guidance
-            </p>
+            
           </motion.div>
 
           {/* CTA Button - Main site with more spacing */}
