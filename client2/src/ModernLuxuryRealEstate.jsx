@@ -269,115 +269,41 @@ const ModernLuxuryRealEstate = () => {
         )}
       </nav>
 
-      {/* Hero + Stats Combined Premium Section */}
-<section className="relative min-h-screen flex items-center py-24 overflow-hidden">
-  {/* Background Image Same */}
-  <div
-    className="absolute inset-0 bg-cover bg-center"
-    style={{
-      backgroundImage:
-        'url("https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80")',
-    }}
-  >
-    <div className="absolute inset-0 bg-black/65"></div>
-  </div>
-
-  <div className="container mx-auto px-4 sm:px-6 relative z-10">
-    <div className="bg-white/95 backdrop-blur-md rounded-[32px] overflow-hidden shadow-2xl">
-      <div className="grid lg:grid-cols-2 items-center">
-
-        {/* Left Content */}
-        <div className="p-8 sm:p-10 lg:p-16">
-
-          <div className="flex flex-wrap gap-3 mb-6">
-            <span className="bg-[#0a1628] text-white px-4 py-2 rounded-full text-sm font-semibold">
-              PREMIUM REAL ESTATE
-            </span>
-
-            <span className="bg-yellow-400 text-[#0a1628] px-4 py-2 rounded-full text-sm font-semibold">
-              ★ TRUSTED CONSULTANT
-            </span>
-          </div>
-
-          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold text-[#0a1628] leading-tight mb-6">
-            Your Trusted Partner in
-            <span className="block text-yellow-500 mt-2">
-              Premium Residential &
-              Commercial Properties
-            </span>
-          </h1>
-
-          <p className="text-gray-600 text-base lg:text-lg leading-relaxed mb-8">
-            Helping buyers, investors and property owners make confident
-            real estate decisions with trusted guidance and verified
-            opportunities.
-          </p>
-
-          <Link to="/contact-us">
-            <button className="bg-[#0a1628] text-white px-8 py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-[#0a1628] transition">
-              Schedule Appointment
-            </button>
-          </Link>
-
-          {/* Counters */}
-          <div className="grid grid-cols-3 gap-6 mt-12 pt-8 border-t border-gray-200">
-            <div>
-              <h3 className="text-3xl sm:text-4xl font-bold text-yellow-500">
-                26+
-              </h3>
-              <p className="text-gray-500 text-sm sm:text-base">
-                Properties Sold
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-3xl sm:text-4xl font-bold text-yellow-500">
-                7+
-              </h3>
-              <p className="text-gray-500 text-sm sm:text-base">
-                Years Experience
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-3xl sm:text-4xl font-bold text-yellow-500">
-                100+
-              </h3>
-              <p className="text-gray-500 text-sm sm:text-base">
-                Verified Properties
-              </p>
+      {/* Hero Section - Keeping your existing hero with no search bar */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-32">
+        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ 
+          backgroundImage: 'url("https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80")',
+        }}>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/60 to-black/40" />
+        </div>
+        
+        <div className="container mx-auto px-4 md:px-6 relative z-10 mt-10 md:mt-20">
+          <div className="max-w-3xl">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight drop-shadow-lg">
+              Your Trusted Partner in <span className="text-yellow-400">Premium Residential & Commercial Properties</span>
+            </h1>
+            
+            <div className="flex flex-wrap gap-4 md:gap-5 py-10 md:py-20">
+              <Link to="/contact-us">
+                <button className="bg-yellow-400 text-[#0a1628] px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm md:text-lg">
+                  Schedule Appointment
+                </button>
+              </Link>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Right Image */}
-        <div className="relative h-[350px] lg:h-full">
-          <img
-            src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
-            alt="Luxury Property"
-            className="w-full h-full object-cover"
-          />
-
-          {/* Floating Card */}
-          <div className="absolute bottom-6 right-6 bg-white p-5 rounded-2xl shadow-xl">
-            <p className="text-gray-500 text-sm">
-              Successful Transactions
-            </p>
-
-            <h3 className="text-3xl font-bold text-green-600">
-              26+
-            </h3>
-
-            <p className="text-gray-500 text-sm">
-              Premium Deals Closed
-            </p>
+      {/* Stats Section - Improved styling matching About page */}
+      <section className="py-16 md:py-20 bg-[#0a1628] border-t border-[#1a2a3a]">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
+            <Counter end={26} label="Properties Sold" />
+            <Counter end={7} label="Years Experience" />
+            <Counter end={100} label="Verified Properties" />
           </div>
         </div>
-
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* About Us Section - Mobile First: Tags → About → Name → Image → Paragraph */}
       <section className="py-16 md:py-24 bg-white">
