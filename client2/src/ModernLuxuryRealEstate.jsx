@@ -401,9 +401,7 @@ const ModernLuxuryRealEstate = () => {
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#0a1628] mb-4 md:mb-6">
               Premium <span className="text-yellow-400">Property Portfolio</span>
             </h2>
-            <p className="text-sm md:text-lg text-gray-600 max-w-2xl mx-auto px-4">
-              Curated selection of verified residential and commercial properties across prime locations
-            </p>
+            
           </div>
           
           <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12">
