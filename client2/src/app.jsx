@@ -14,7 +14,7 @@ export default function AppRouter() {
   return (
    <BrowserRouter>
       <Routes>
-        <Route path="/*" element={<ModernLuxuryRealEstate/>} />
+        <Route path="/" element={<ModernLuxuryRealEstate/>} />
          <Route path="/modernRealEstate" element={<ModernRealEstateWebsite/>} />
          <Route path="/CorporateRealEstateWebsite" element={<CorporateRealEstateWebsite/>} />
          <Route path="/ModernRealEstateStartup" element={<ModernRealEstateStartup/>} />
