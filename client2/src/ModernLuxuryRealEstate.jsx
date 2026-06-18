@@ -12,7 +12,7 @@ import { FaWhatsapp, FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, 
 import logo from '../images/logo.jpg';
 import nitish from '../images/nitish.jpg';
 import WhyChooseUs from './WhyChooseUs';
-
+import Hero from '.Hero';
 const ModernLuxuryRealEstate = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeFilter, setActiveFilter] = useState('all');
@@ -269,41 +269,7 @@ const ModernLuxuryRealEstate = () => {
         )}
       </nav>
 
-      {/* Hero Section - Keeping your existing hero with no search bar */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-32">
-        <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ 
-          backgroundImage: 'url("https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80")',
-        }}>
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/60 to-black/40" />
-        </div>
-        
-        <div className="container mx-auto px-4 md:px-6 relative z-10 mt-10 md:mt-20">
-          <div className="max-w-3xl">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-tight drop-shadow-lg">
-              Your Trusted Partner in <span className="text-yellow-400">Premium Residential & Commercial Properties</span>
-            </h1>
-            
-            <div className="flex flex-wrap gap-4 md:gap-5 py-10 md:py-20">
-              <Link to="/contact-us">
-                <button className="bg-yellow-400 text-[#0a1628] px-6 py-3 md:px-8 md:py-4 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm md:text-lg">
-                  Schedule Appointment
-                </button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section - Improved styling matching About page */}
-      <section className="py-16 md:py-20 bg-[#0a1628] border-t border-[#1a2a3a]">
-        <div className="container mx-auto px-4 md:px-6">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
-            <Counter end={26} label="Properties Sold" />
-            <Counter end={7} label="Years Experience" />
-            <Counter end={100} label="Verified Properties" />
-          </div>
-        </div>
-      </section>
+      <Hero/>
 
       {/* About Us Section - Mobile First: Tags → About → Name → Image → Paragraph */}
       <section className="py-16 md:py-24 bg-white">
