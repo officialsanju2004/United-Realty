@@ -12,7 +12,7 @@ import { FaWhatsapp, FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, 
 import logo from '../images/logo.jpg';
 import nitish from '../images/nitish.jpg';
 import WhyChooseUs from './WhyChooseUs';
-import Hero from '.Hero';
+import Hero from './Hero';
 const ModernLuxuryRealEstate = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeFilter, setActiveFilter] = useState('all');
