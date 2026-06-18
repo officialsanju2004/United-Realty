@@ -8,7 +8,7 @@ import {
   MessageSquare, Send, User, Building, Briefcase
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { FaWhatsapp,FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, FaInstagram, FaLinkedinIn, FaPlay, FaStar, FaTwitter, FaUser } from 'react-icons/fa';
+import { FaWhatsapp, FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, FaInstagram, FaLinkedinIn, FaPlay, FaStar, FaTwitter, FaUser } from 'react-icons/fa';
 import logo from '../images/logo.jpg';
 import nitish from '../images/nitish.jpg';
 import WhyChooseUs from './WhyChooseUs';
@@ -65,10 +65,10 @@ const ModernLuxuryRealEstate = () => {
 
     return (
       <div className="text-center" ref={countRef}>
-        <div className="text-3xl md:text-5xl lg:text-6xl font-bold text-yellow-400 mb-2">
+        <div className="text-4xl md:text-5xl lg:text-6xl font-bold text-yellow-400 mb-2">
           {count.toLocaleString()}+
         </div>
-        <div className="text-sm md:text-lg text-gray-300">{label}</div>
+        <div className="text-base md:text-lg text-gray-300">{label}</div>
       </div>
     );
   };
@@ -269,7 +269,7 @@ const ModernLuxuryRealEstate = () => {
         )}
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero Section - Keeping your existing hero with no search bar */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 md:pt-32">
         <div className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0" style={{ 
           backgroundImage: 'url("https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80")',
@@ -294,8 +294,8 @@ const ModernLuxuryRealEstate = () => {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 md:py-20 bg-[#0a1628]">
+      {/* Stats Section - Improved styling matching About page */}
+      <section className="py-16 md:py-20 bg-[#0a1628] border-t border-[#1a2a3a]">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12">
             <Counter end={26} label="Properties Sold" />
@@ -305,79 +305,94 @@ const ModernLuxuryRealEstate = () => {
         </div>
       </section>
 
-      {/* About Us Section - Mobile First: Image on Top, Content Below */}
-      {/* About Us Section - Premium Layout */}
-<section className="py-24 bg-white">
-  <div className="container mx-auto px-4 sm:px-6">
-    <div className="bg-slate-50 rounded-[32px] p-6 sm:p-8 lg:p-14">
-      <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-        
-        {/* Right Image - Moved to top on mobile */}
-        <div className="relative order-first lg:order-last">
-          <div className="overflow-hidden rounded-3xl shadow-2xl">
-            <img
-              src={nitish}
-              alt="Nitish Mahajan"
-              className="w-full h-[300px] sm:h-[400px] lg:h-[500px] object-cover object-top"
-            />
-          </div>
+      {/* About Us Section - Mobile First: Tags → About → Name → Image → Paragraph */}
+      <section className="py-16 md:py-24 bg-white">
+        <div className="container mx-auto px-4 sm:px-6">
+          <div className="bg-slate-50 rounded-[32px] p-6 sm:p-8 lg:p-14">
+            <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              
+              {/* Left Content - Moved to top on mobile */}
+              <div className="order-first lg:order-first">
+                {/* Tags - First on mobile */}
+                <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
+                  <span className="bg-[#0a1628] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
+                    TRUSTED REALTOR
+                  </span>
+                  <span className="bg-yellow-400 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
+                    ★ 7+ YEARS
+                  </span>
+                </div>
 
-          {/* Floating Card */}
-          <div className="absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 bg-white p-4 sm:p-5 rounded-2xl shadow-xl">
-            <p className="text-gray-500 text-xs sm:text-sm">
-              Successful Transactions
-            </p>
-            <h3 className="text-2xl sm:text-3xl font-bold text-green-600">
-              26+
-            </h3>
-            <p className="text-gray-500 text-xs sm:text-sm">
-              Premium Deals Closed
-            </p>
+                {/* About Text */}
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0a1628] leading-tight mb-2 sm:mb-3">
+                  About
+                </h2>
+                
+                {/* Name - Large prominent */}
+                <h3 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-yellow-500 mb-4 sm:mb-6">
+                  Nitish Mahajan
+                </h3>
+
+                {/* Image - Shows after name on mobile */}
+                <div className="lg:hidden mb-6">
+                  <div className="overflow-hidden rounded-3xl shadow-2xl">
+                    <img
+                      src={nitish}
+                      alt="Nitish Mahajan"
+                      className="w-full h-[280px] sm:h-[350px] object-cover object-top"
+                    />
+                  </div>
+                </div>
+
+                {/* Paragraph */}
+                <p className="text-gray-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 px-1 sm:px-0">
+                  Nitish Mahajan is a dedicated real estate professional committed to helping homebuyers, investors, and property sellers make informed and confident decisions. With a strong understanding of the real estate market and a client-first approach, he focuses on identifying opportunities that align with each client's goals and budget. Whether you are searching for your dream home, a profitable investment, or assistance in selling a property, Nitish Mahajan provides personalized guidance throughout the entire process.
+                </p>
+
+                <div className="flex gap-6 sm:gap-10 mb-6 sm:mb-10 flex-wrap">
+                  <div>
+                    <h3 className="text-3xl sm:text-4xl font-bold text-yellow-500">26+</h3>
+                    <p className="text-gray-500 text-sm sm:text-base">Properties Sold</p>
+                  </div>
+                  <div>
+                    <h3 className="text-3xl sm:text-4xl font-bold text-yellow-500">100%</h3>
+                    <p className="text-gray-500 text-sm sm:text-base">Client Satisfaction</p>
+                  </div>
+                </div>
+
+                <button className="bg-[#0a1628] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-[#0a1628] transition text-sm sm:text-base">
+                  More About Nitish Mahajan
+                </button>
+              </div>
+
+              {/* Right Image - Hidden on mobile (shown above in mobile view), visible on desktop */}
+              <div className="relative hidden lg:block order-last lg:order-last">
+                <div className="overflow-hidden rounded-3xl shadow-2xl">
+                  <img
+                    src={nitish}
+                    alt="Nitish Mahajan"
+                    className="w-full h-[500px] object-cover object-top"
+                  />
+                </div>
+
+                {/* Floating Card */}
+                <div className="absolute -bottom-4 -right-4 bg-white p-5 rounded-2xl shadow-xl">
+                  <p className="text-gray-500 text-sm">
+                    Successful Transactions
+                  </p>
+                  <h3 className="text-3xl font-bold text-green-600">
+                    26+
+                  </h3>
+                  <p className="text-gray-500 text-sm">
+                    Premium Deals Closed
+                  </p>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
-
-        {/* Left Content - Moved to bottom on mobile */}
-        <div className="order-last lg:order-first">
-          <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
-            <span className="bg-[#0a1628] text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
-              TRUSTED REALTOR
-            </span>
-            <span className="bg-yellow-400 text-white px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold">
-              ★ 7+ YEARS
-            </span>
-          </div>
-
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0a1628] leading-tight mb-3 sm:mb-6">
-            About <br className="lg:hidden" />
-            <span className="text-3xl sm:text-4xl lg:text-5xl text-yellow-500 whitespace-nowrap">
-              Nitish Mahajan
-            </span>
-          </h2>
-
-          <p className="text-gray-600 text-sm sm:text-base lg:text-lg leading-relaxed mb-6 sm:mb-8 px-1 sm:px-0">
-            Nitish Mahajan is a dedicated real estate professional committed to helping homebuyers, investors, and property sellers make informed and confident decisions. With a strong understanding of the real estate market and a client-first approach, he focuses on identifying opportunities that align with each client's goals and budget. Whether you are searching for your dream home, a profitable investment, or assistance in selling a property, Nitish Mahajan provides personalized guidance throughout the entire process.
-          </p>
-
-          <div className="flex gap-6 sm:gap-10 mb-6 sm:mb-10 flex-wrap">
-            <div>
-              <h3 className="text-3xl sm:text-4xl font-bold text-yellow-500">26+</h3>
-              <p className="text-gray-500 text-sm sm:text-base">Properties Sold</p>
-            </div>
-            <div>
-              <h3 className="text-3xl sm:text-4xl font-bold text-yellow-500">100%</h3>
-              <p className="text-gray-500 text-sm sm:text-base">Client Satisfaction</p>
-            </div>
-          </div>
-
-          <button className="bg-[#0a1628] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-[#0a1628] transition text-sm sm:text-base">
-            More About Nitish Mahajan
-          </button>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</section>
+      </section>
 
       {/* Featured Properties Section */}
       <section className="py-12 md:py-20 bg-white">
@@ -897,16 +912,13 @@ const ModernLuxuryRealEstate = () => {
         </div>
       </footer>
 
-      {/* Floating Contact Button */}
-    
-        <button onClick={() =>
-    window.open(
-      "https://wa.me/919815978773",
-      "_blank"
-    )
-        } className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-yellow-400 text-[#0a1628] p-3 md:p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50">
-          <FaWhatsapp size={20} />
-        </button>
+      {/* Floating Contact Button - WhatsApp Green */}
+      <button 
+        onClick={() => window.open("https://wa.me/919815978773", "_blank")} 
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-[#25D366] text-white p-3 md:p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50"
+      >
+        <FaWhatsapp size={24} />
+      </button>
     
     </div>
   );
