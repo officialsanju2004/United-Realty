@@ -3,13 +3,15 @@ import {
   Phone, Mail, MapPin, Send, User, MessageSquare,
   Facebook, Instagram, Linkedin, Twitter, Clock,
   CheckCircle, Building, Users, Star, Award, Shield,
-  Calendar, Heart, ChevronRight,X, Menu
+  Calendar, Heart, ChevronRight,
+  Menu,
+  X
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import logo from '../images/logo.jpg';
-import nitish from '../images/nitish.jpg';
-import {FaWhatsapp} from "react-icons/fa";
+import logo from '../images/logo.jpeg';
+import nitish from '../images/nitish.jpeg';
+import { FaWhatsapp } from 'react-icons/fa';
 
 const Contact = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -440,16 +442,13 @@ const Contact = () => {
         </div>
       </footer>
 
-        {/* Floating Contact Button */}
-      
-        {/* Floating Contact Button - WhatsApp Green */}
-      <button 
-        onClick={() => window.open("https://wa.me/919815978773", "_blank")} 
-        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-[#25D366] text-white p-3 md:p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50"
-      >
-        <FaWhatsapp size={34} />
-      </button>
-    
+      {/* Floating Contact Button - WhatsApp Green */}
+           <button 
+             onClick={() => window.open("https://wa.me/919815978773", "_blank")} 
+             className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-[#25D366] text-white p-3 md:p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50"
+           >
+             <FaWhatsapp size={24} />
+           </button>
     </div>
   );
 };
