@@ -387,7 +387,7 @@ const Contact = () => {
                 </div>
               </div>
               <p className="text-gray-400">
-                Your trusted partner for premium residential and commercial properties across Mumbai Metropolitan Region.
+                Your trusted partner for premium residential and commercial properties in Amritsar, Punjab.
               </p>
             </div>
             
@@ -411,10 +411,7 @@ const Contact = () => {
                   <Mail size={18} className="mr-3 text-yellow-400" />
                   <span className="text-gray-400">nm@nitishestate.com</span>
                 </li>
-                <li className="flex items-center">
-                  <MapPin size={18} className="mr-3 text-yellow-400" />
-                  <span className="text-gray-400">Mumbai, Maharashtra</span>
-                </li>
+                
               </ul>
             </div>
             
