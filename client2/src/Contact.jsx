@@ -46,6 +46,11 @@ const Contact = () => {
     console.log('Form submitted:', formData);
     alert('Thank you for reaching out! We will get back to you within 24 hours.');
   };
+  // WhatsApp handler
+  const handleWhatsApp = () => {
+    window.open("https://wa.me/919815978773", "_blank");
+  };
+
 
   // Quick contact cards
   const contactCards = [
@@ -112,7 +117,7 @@ const Contact = () => {
             <Link to="/contact-us" className="text-yellow-400 font-medium transition-colors duration-300">
               Contact Us
             </Link>
-            <button className="bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 hover:scale-105">
+            <button onClick={handleWhatsApp} className="bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 hover:scale-105">
               Schedule Visit
             </button>
           </div>
@@ -133,7 +138,7 @@ const Contact = () => {
             <Link to="/contact-us" className="block py-3 text-yellow-400 font-medium border-b border-[#1a2a3a]">
               Contact Us
             </Link>
-            <button className="mt-4 w-full bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium">
+            <button onClick={handleWhatsApp} className="mt-4 w-full bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium">
               Schedule Visit
             </button>
           </div>
