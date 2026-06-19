@@ -11,7 +11,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.jpg';
 import nitish from '../images/nitish.jpg';
-import { FaWhatsapp ,FaYoutube} from 'react-icons/fa';
+import { FaWhatsapp ,FaYoutube,FaFacebook} from 'react-icons/fa';
 
 const Contact = () => {
   const [scrolled, setScrolled] = useState(false);
