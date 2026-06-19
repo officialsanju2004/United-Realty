@@ -3,15 +3,14 @@ import {
   MapPin, Phone, Mail, Check, Star, Award, 
   Shield, Users, Building, Briefcase, 
   ChevronRight, Calendar, Heart, MessageSquare,
-  Facebook, Instagram, Linkedin, Twitter,
-  Menu,
-  X
+  Menu, X
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.jpg';
 import nitish from '../images/nitish.jpg';
-import { FaWhatsapp,  FaYoutube, FaFacebook,FaInstagram} from 'react-icons/fa';
+import { FaWhatsapp, FaYoutube, FaFacebook, FaInstagram } from 'react-icons/fa';
+
 const About = () => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -119,6 +118,11 @@ const About = () => {
     }
   ];
 
+  // WhatsApp handler
+  const handleWhatsApp = () => {
+    window.open("https://wa.me/919815978773", "_blank");
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Navigation */}
@@ -140,7 +144,10 @@ const About = () => {
             <Link to="/contact-us" className="text-white hover:text-yellow-400 font-medium transition-colors duration-300">
               Contact Us
             </Link>
-            <button className="bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 hover:scale-105">
+            <button 
+              onClick={handleWhatsApp}
+              className="bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 hover:scale-105"
+            >
               Schedule Visit
             </button>
           </div>
@@ -161,7 +168,10 @@ const About = () => {
             <Link to="/contact-us" className="block py-3 text-white hover:text-yellow-400 font-medium border-b border-[#1a2a3a]">
               Contact Us
             </Link>
-            <button className="mt-4 w-full bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium">
+            <button 
+              onClick={handleWhatsApp}
+              className="mt-4 w-full bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium"
+            >
               Schedule Visit
             </button>
           </div>
@@ -203,33 +213,63 @@ const About = () => {
         </div>
       </section>
 
-      {/* About Nitish Section */}
+      {/* About Nitish Section - Mobile First: Tags → About → Name → Image → Paragraphs */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
+            
+            {/* Left Content - Mobile first order */}
             <motion.div
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
+              className="order-first lg:order-first"
             >
-              <div className="flex gap-3 mb-6">
+              {/* Tags - First on mobile */}
+              <div className="flex flex-wrap gap-3 mb-6">
                 <span className="bg-[#0a1628] text-white px-4 py-2 rounded-full text-sm font-semibold">
-                  MEET YOUR EXPERT
+                  TRUSTED REALTOR
                 </span>
                 <span className="bg-yellow-400 text-[#0a1628] px-4 py-2 rounded-full text-sm font-semibold">
-                  ★ TRUSTED REALTOR
+                  ★ 7+ YEARS
                 </span>
               </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-[#0a1628] leading-tight mb-6">
-                About <br />
-                <span className="text-yellow-500">Nitish Mahajan</span>
+
+              {/* About Text */}
+              <h2 className="text-4xl md:text-5xl font-bold text-[#0a1628] leading-tight mb-2">
+                About
               </h2>
+              
+              {/* Name - Large prominent */}
+              <h3 className="text-4xl md:text-5xl font-bold text-yellow-500 mb-6">
+                Nitish Mahajan
+              </h3>
+
+              {/* Image - Shows after name on mobile, hidden on desktop (desktop shows on right) */}
+              <div className="lg:hidden mb-8">
+                <div className="overflow-hidden rounded-3xl shadow-2xl">
+                  <img
+                    src={nitish}
+                    alt="Nitish Mahajan - Real Estate Expert"
+                    className="w-full h-[400px] object-cover object-top"
+                  />
+                </div>
+              </div>
+
+              {/* Paragraphs - Below image on mobile */}
+              <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                Nitish Mahajan is a dedicated real estate professional committed to helping homebuyers, investors, and property sellers make informed and confident decisions. With a strong understanding of the real estate market and a client-first approach, he focuses on identifying opportunities that align with each client's goals and budget. Whether you are searching for your dream home, a profitable investment, or assistance in selling a property, Nitish provides personalized guidance throughout the entire process.
+              </p>
+              
+              <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                His approach is built on transparency, trust, and long-term relationships. By carefully understanding client requirements and offering verified property options, he ensures a smooth and hassle-free experience from property selection to final documentation. Nitish believes that real estate is more than just buying and selling properties—it's about helping people build their future and achieve their financial goals.
+              </p>
+              
               <p className="text-gray-600 text-lg leading-relaxed mb-8">
-        Nitish Mahajan is a dedicated real estate professional committed to helping homebuyers, investors, and property sellers make informed and confident decisions. With a strong understanding of the real estate market and a client-first approach, he focuses on identifying opportunities that align with each client's goals and budget. Whether you are searching for your dream home, a profitable investment, or assistance in selling a property, Nitish provides personalized guidance throughout the entire process.          </p>
-              <p className="text-gray-600 text-lg leading-relaxed mb-8">
-            His approach is built on transparency, trust, and long-term relationships. By carefully understanding client requirements and offering verified property options, he ensures a smooth and hassle-free experience from property selection to final documentation. Nitish believes that real estate is more than just buying and selling properties—it's about helping people build their future and achieve their financial goals.     </p>
-             <p className="text-gray-600 text-lg leading-relaxed mb-8">Through professional service, market expertise, and a commitment to client satisfaction, Nitish Mahajan continues to help individuals and families make smarter real estate decisions with confidence.</p>
+                Through professional service, market expertise, and a commitment to client satisfaction, Nitish Mahajan continues to help individuals and families make smarter real estate decisions with confidence.
+              </p>
+
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="bg-gray-50 p-4 rounded-xl">
                   <h3 className="text-3xl font-bold text-yellow-500">26+</h3>
@@ -240,6 +280,7 @@ const About = () => {
                   <p className="text-gray-600 text-sm">Client Satisfaction</p>
                 </div>
               </div>
+              
               <Link to="/contact-us">
                 <button className="bg-[#0a1628] text-white px-8 py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-[#0a1628] transition-all duration-300">
                   Connect with Nitish Mahajan
@@ -247,12 +288,13 @@ const About = () => {
               </Link>
             </motion.div>
 
+            {/* Right Image - Hidden on mobile, visible on desktop */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="relative"
+              className="relative hidden lg:block"
             >
               <div className="overflow-hidden rounded-3xl shadow-2xl">
                 <img
@@ -272,6 +314,7 @@ const About = () => {
                 <p className="text-[#0a1628] text-sm">Experience</p>
               </div>
             </motion.div>
+
           </div>
         </div>
       </section>
@@ -378,7 +421,10 @@ const About = () => {
                   Contact Us Today
                 </button>
               </Link>
-              <button className="border-2 border-yellow-400 text-yellow-400 px-8 py-4 rounded-xl font-semibold hover:bg-yellow-400/10 transition-all duration-300">
+              <button 
+                onClick={handleWhatsApp}
+                className="border-2 border-yellow-400 text-yellow-400 px-8 py-4 rounded-xl font-semibold hover:bg-yellow-400/10 transition-all duration-300"
+              >
                 Schedule a Consultation
               </button>
             </div>
@@ -421,7 +467,6 @@ const About = () => {
                   <Mail size={18} className="mr-3 text-yellow-400" />
                   <span className="text-gray-400">nm@nitishestate.com</span>
                 </li>
-               
               </ul>
             </div>
             
@@ -431,7 +476,7 @@ const About = () => {
                 Follow us on social media for the latest property updates.
               </p>
               <div className="flex space-x-3 md:space-x-4">
-                {[<FaFacebook key="fb"/>, <FaInstagram key="ig"/>,<FaYoutube key="yt"/>].map((social, idx) => (
+                {[<FaFacebook key="fb"/>, <FaInstagram key="ig"/>, <FaYoutube key="yt"/>].map((social, idx) => (
                   <div 
                     key={idx}
                     className="w-8 h-8 md:w-10 md:h-10 bg-[#1a2a3a] rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-[#0a1628] cursor-pointer transition-colors duration-300 text-gray-400 hover:text-[#0a1628]"
@@ -450,12 +495,12 @@ const About = () => {
       </footer>
 
       {/* Floating Contact Button - WhatsApp Green */}
-           <button 
-             onClick={() => window.open("https://wa.me/919815978773", "_blank")} 
-             className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-[#25D366] text-white p-3 md:p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50"
-           >
-             <FaWhatsapp size={24} />
-           </button>
+      <button 
+        onClick={handleWhatsApp}
+        className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-[#25D366] text-white p-3 md:p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50"
+      >
+        <FaWhatsapp size={24} />
+      </button>
     </div>
   );
 };
