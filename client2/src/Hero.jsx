@@ -121,7 +121,7 @@ const Hero = () => {
             className="mb-12 md:mb-16"
           >
             <button 
-              onClick={() => window.open("https://wa.me/919815978773", "_blank")} 
+              onClick={() => window.location.href = "/contact-us"}
               className="bg-yellow-400 text-[#0a1628] px-6 py-3 md:px-10 md:py-5 rounded-lg font-semibold hover:shadow-xl transition-all duration-300 hover:scale-105 text-sm md:text-lg"
             >
               Schedule Appointment
