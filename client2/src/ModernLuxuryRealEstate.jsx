@@ -9,8 +9,8 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FaWhatsapp, FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, FaInstagram, FaLinkedinIn, FaPlay, FaStar, FaTwitter, FaUser } from 'react-icons/fa';
-import logo from '../images/logo.jpeg';
-import nitish from '../images/nitish.jpeg';
+import logo from '../images/logo.jpg';
+import nitish from '../images/nitish.jpg';
 import i1 from '../images/1.png';
 import i2 from '../images/2.png';
 
