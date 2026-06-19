@@ -397,7 +397,7 @@ const About = () => {
                 </div>
               </div>
               <p className="text-gray-400">
-                Your trusted partner for premium residential and commercial properties across Mumbai Metropolitan Region.
+                Your trusted partner for premium residential and commercial properties in America,Punjab.
               </p>
             </div>
             
