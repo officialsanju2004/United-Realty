@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { 
   Phone, Mail, MapPin, Send, User, MessageSquare,
-  Facebook,FaYoutube, Instagram, Linkedin, Twitter, Clock,
+  Facebook, Instagram, Linkedin, Twitter, Clock,
   CheckCircle, Building, Users, Star, Award, Shield,
   Calendar, Heart, ChevronRight,
   Menu,
@@ -11,7 +11,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.jpg';
 import nitish from '../images/nitish.jpg';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FaWhatsapp ,FaYoutube} from 'react-icons/fa';
 
 const Contact = () => {
   const [scrolled, setScrolled] = useState(false);
