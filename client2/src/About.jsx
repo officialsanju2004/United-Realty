@@ -9,8 +9,8 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import logo from '../images/logo.jpg';
-import nitish from '../images/nitish.jpg';
+import logo from '../images/logo.jpeg';
+import nitish from '../images/nitish.jpeg';
 import { FaWhatsapp } from 'react-icons/fa';
 const About = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -226,11 +226,10 @@ const About = () => {
                 <span className="text-yellow-500">Nitish Mahajan</span>
               </h2>
               <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                Nitish Mahajan is a dedicated real estate professional committed to helping homebuyers, investors, and property sellers make informed and confident decisions. With a strong understanding of the real estate market and a client-first approach, he focuses on identifying opportunities that align with each client's goals and budget.
-              </p>
+        Nitish Mahajan is a dedicated real estate professional committed to helping homebuyers, investors, and property sellers make informed and confident decisions. With a strong understanding of the real estate market and a client-first approach, he focuses on identifying opportunities that align with each client's goals and budget. Whether you are searching for your dream home, a profitable investment, or assistance in selling a property, Nitish provides personalized guidance throughout the entire process.          </p>
               <p className="text-gray-600 text-lg leading-relaxed mb-8">
-                Whether you are searching for your dream home, a profitable investment, or assistance in selling a property, Nitish Mahajan provides personalized guidance throughout the entire process. His expertise spans luxury residential apartments, commercial office spaces, and strategic investment properties across Mumbai Metropolitan Region and Pune.
-              </p>
+            His approach is built on transparency, trust, and long-term relationships. By carefully understanding client requirements and offering verified property options, he ensures a smooth and hassle-free experience from property selection to final documentation. Nitish believes that real estate is more than just buying and selling properties—it's about helping people build their future and achieve their financial goals.     </p>
+             <p className="text-gray-600 text-lg leading-relaxed mb-8">Through professional service, market expertise, and a commitment to client satisfaction, Nitish Mahajan continues to help individuals and families make smarter real estate decisions with confidence.</p>
               <div className="grid grid-cols-2 gap-4 mb-8">
                 <div className="bg-gray-50 p-4 rounded-xl">
                   <h3 className="text-3xl font-bold text-yellow-500">26+</h3>
@@ -243,7 +242,7 @@ const About = () => {
               </div>
               <Link to="/contact-us">
                 <button className="bg-[#0a1628] text-white px-8 py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-[#0a1628] transition-all duration-300">
-                  Connect with Nitish
+                  Connect with Nitish Mahajan
                 </button>
               </Link>
             </motion.div>
@@ -455,7 +454,7 @@ const About = () => {
              onClick={() => window.open("https://wa.me/919815978773", "_blank")} 
              className="fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-[#25D366] text-white p-3 md:p-4 rounded-full shadow-2xl hover:shadow-3xl transition-all duration-300 hover:scale-110 z-50"
            >
-             <FaWhatsapp size={34} />
+             <FaWhatsapp size={24} />
            </button>
     </div>
   );
