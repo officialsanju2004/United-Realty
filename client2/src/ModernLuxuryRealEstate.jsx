@@ -129,7 +129,7 @@ const ModernLuxuryRealEstate = () => {
     { id: 5,  title: "Garden View Apartments", price: "₹1.9 Cr", location: "Ranjit Avenue B-block sco 31", image: i5, featured: true, tag: "Family Homes" },
     { id: 6,  title: "IT Park Office Space", price: "₹12.5 Cr", location: "Ranjit Avenue B-block sco 29", image: i6, featured: true, tag: "IT Hub" },
     { id: 7,  title: "Penthouse with Sea View", price: "₹7.8 Cr", location: "Ranjit Avenue B-block sco 31", image: i7, featured: true, tag: "Luxury Living" },
-    { id: 8,  title: "Retail Showroom", price: "₹4.2 Cr", location: "Ranjit Avenue C-Block", image: i8, featured: true, tag: "High Footfall" },
+    { id: 8,  title: "Retail Showroom", price: "₹4.2 Cr", location: "Ranjit Avenue B-block sco 31", image: i8, featured: true, tag: "High Footfall" },
     { id: 9,  title: "Garden View Apartments", price: "₹1.9 Cr", location: "Ranjit Avenue B-block sco 31", image: i9, featured: true, tag: "Family Homes" },
    
   ];
