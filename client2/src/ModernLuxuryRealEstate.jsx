@@ -9,8 +9,25 @@ import {
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { FaWhatsapp, FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, FaInstagram, FaLinkedinIn, FaPlay, FaStar, FaTwitter, FaUser } from 'react-icons/fa';
-import logo from '../images/logo.jpg';
-import nitish from '../images/nitish.jpg';
+import logo from '../images/logo.jpeg';
+import nitish from '../images/nitish.jpeg';
+import i1 from '../images/1.png';
+import i2 from '../images/2.png';
+
+import i3 from '../images/3.png';
+
+import i4 from '../images/4.png';
+
+import i5 from '../images/5.png';
+
+import i6 from '../images/6.png';
+
+import i7 from '../images/7.png';
+
+import i8 from '../images/8.png';
+
+import i9 from '../images/9.png';
+
 import WhyChooseUs from './WhyChooseUs';
 import Hero from './Hero';
 const ModernLuxuryRealEstate = () => {
@@ -105,12 +122,16 @@ const ModernLuxuryRealEstate = () => {
   };
 
   const featuredProperties = [
-    { id: 1, type: "residential", title: "Luxury 4BHK Apartment", price: "₹3.2 Cr", location: "Andheri West, Mumbai", image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80", featured: true, tag: "Premium Residence" },
-    { id: 2, type: "commercial", title: "Grade A Office Space", price: "₹8.5 Cr", location: "BKC, Mumbai", image: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80", featured: true, tag: "Commercial" },
-    { id: 3, type: "residential", title: "Penthouse with Sea View", price: "₹7.8 Cr", location: "Juhu, Mumbai", image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80", featured: true, tag: "Luxury Living" },
-    { id: 4, type: "commercial", title: "Retail Showroom", price: "₹4.2 Cr", location: "Lower Parel, Mumbai", image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80", featured: true, tag: "High Footfall" },
-    { id: 5, type: "residential", title: "Garden View Apartments", price: "₹1.9 Cr", location: "Thane West, Mumbai", image: "https://images.unsplash.com/photo-1560185127-6ed189bf02f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80", featured: true, tag: "Family Homes" },
-    { id: 6, type: "commercial", title: "IT Park Office Space", price: "₹12.5 Cr", location: "Pune, Maharashtra", image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80", featured: true, tag: "IT Hub" },
+    { id: 1,  title: "Luxury 4BHK Apartment", price: "₹3.2 Cr", location: "ATTARI", image: i1, featured: true, tag: "Premium Residence" },
+    { id: 2,  title: "Grade A Office Space", price: "₹8.5 Cr", location: "ATTARI", image: i2, featured: true, tag: "Commercial" },
+    { id: 3,  title: "Penthouse with Sea View", price: "₹7.8 Cr", location: "Ranjit Avenue C-block", image: i3, featured: true, tag: "Luxury Living" },
+    { id: 4,  title: "Retail Showroom", price: "₹4.2 Cr", location: "Ranjit Avenue B-block sco 31", image:i4, featured: true, tag: "High Footfall" },
+    { id: 5,  title: "Garden View Apartments", price: "₹1.9 Cr", location: "Ranjit Avenue B-block sco 31", image: i5, featured: true, tag: "Family Homes" },
+    { id: 6,  title: "IT Park Office Space", price: "₹12.5 Cr", location: "Ranjit Avenue B-block sco 29", image: i6, featured: true, tag: "IT Hub" },
+    { id: 7,  title: "Penthouse with Sea View", price: "₹7.8 Cr", location: "Ranjit Avenue C-Block", image: i7, featured: true, tag: "Luxury Living" },
+    { id: 8,  title: "Retail Showroom", price: "₹4.2 Cr", location: "Ranjit Avenue C-Block", image: i8, featured: true, tag: "High Footfall" },
+    { id: 9,  title: "Garden View Apartments", price: "₹1.9 Cr", location: "Ranjit Avenue B-block sco 31", image: i9, featured: true, tag: "Family Homes" },
+   
   ];
 
   const testimonialsData = [
@@ -370,28 +391,10 @@ const ModernLuxuryRealEstate = () => {
             
           </div>
           
-          <div className="flex flex-wrap justify-center gap-2 md:gap-4 mb-8 md:mb-12">
-            {[
-              { key: 'all', label: 'All Properties' },
-              { key: 'residential', label: 'Residential' },
-              { key: 'commercial', label: 'Commercial' }
-            ].map((filter) => (
-              <button
-                key={filter.key}
-                onClick={() => setActiveFilter(filter.key)}
-                className={`px-4 py-2 md:px-6 md:py-3 rounded-full font-medium transition-all duration-300 text-sm md:text-base ${
-                  activeFilter === filter.key 
-                    ? 'bg-yellow-400 text-[#0a1628] shadow-lg' 
-                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                }`}
-              >
-                {filter.label}
-              </button>
-            ))}
-          </div>
+        
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-            {filteredProperties.map((property) => (
+            {featuredProperties.map((property) => (
               <div 
                 key={property.id} 
                 className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2"
@@ -402,30 +405,19 @@ const ModernLuxuryRealEstate = () => {
                     alt={property.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                   />
-                  <div className="absolute top-3 left-3 md:top-4 md:left-4 bg-yellow-400 text-[#0a1628] px-2 py-1 md:px-3 md:py-1 rounded-full text-xs md:text-sm font-medium">
-                    {property.tag}
-                  </div>
-                  <button 
-                    onClick={() => toggleFavorite(property.id)}
-                    className="absolute top-3 right-3 md:top-4 md:right-4 bg-white/90 backdrop-blur-sm p-1.5 md:p-2 rounded-full hover:bg-white transition-colors"
-                  >
-                    <Heart 
-                      size={16} 
-                      className={favorites.includes(property.id) ? 'text-red-500 fill-red-500' : 'text-gray-700'} 
-                    />
-                  </button>
+                
                 </div>
                 
                 <div className="p-4 md:p-6">
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-2 sm:gap-0 mb-3 md:mb-4">
                     <div>
-                      <h3 className="text-base md:text-xl font-bold text-[#0a1628]">{property.title}</h3>
-                      <div className="flex items-center text-gray-600 mt-1">
+                      {/* <h3 className="text-base md:text-xl font-bold text-[#0a1628]">{property.title}</h3> */}
+                      <div className="flex items-center text-gray-600 mt-1"> 
                         <MapPin size={14} className="mr-1 text-yellow-400" />
                         <span className="text-xs md:text-sm">{property.location}</span>
                       </div>
                     </div>
-                    <span className="text-lg md:text-2xl font-bold text-yellow-400">{property.price}</span>
+                    {/* <span className="text-lg md:text-2xl font-bold text-yellow-400">{property.price}</span>  */}
                   </div>
                   
                   <button className="w-full bg-[#0a1628] text-white py-2 md:py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 flex items-center justify-center group/btn text-sm md:text-base">
@@ -437,11 +429,7 @@ const ModernLuxuryRealEstate = () => {
             ))}
           </div>
           
-          <div className="text-center mt-10 md:mt-16">
-            <button className="px-6 py-3 md:px-8 md:py-4 border-2 border-yellow-400 text-yellow-600 rounded-lg font-semibold hover:bg-yellow-50 transition-colors duration-300 text-sm md:text-base">
-              View All Properties
-            </button>
-          </div>
+     
         </div>
       </section>
 
