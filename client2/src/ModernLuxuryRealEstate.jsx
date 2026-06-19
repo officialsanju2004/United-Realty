@@ -91,31 +91,31 @@ const ModernLuxuryRealEstate = () => {
   };
 
   const faqItems = [
-    {
-      question: "What are the stamp duty and registration charges in Maharashtra?",
-      answer: "Stamp duty in Maharashtra is 5% for male property buyers and 6% for female buyers. Registration charges are typically 1% of the property value. There's also a 1% metro cess applicable in municipal corporation areas."
-    },
-    {
-      question: "Can NRIs purchase residential property in India?",
-      answer: "Yes, NRIs can purchase both residential and commercial properties in India. They need to comply with FEMA regulations, make payments through Indian bank accounts, and can avail home loans from Indian banks subject to certain conditions."
-    },
-    {
-      question: "What is the process for home loan approval?",
-      answer: "The process includes: eligibility check, document submission (income proof, address proof, property documents), bank verification, property valuation, legal scrutiny, and finally loan sanction. Typical processing time is 7-15 working days."
-    },
-    {
-      question: "What documents are required for property registration?",
-      answer: "Key documents include: Sale Deed, proof of identity (Aadhar, PAN), address proof, property tax receipts, building approval plan, encumbrance certificate, and no-objection certificates from relevant authorities."
-    },
-    {
-      question: "Is GST applicable on under-construction properties?",
-      answer: "Yes, GST of 5% is applicable on under-construction residential properties (without input tax credit). Completed/sold properties ready for possession are exempt from GST as they fall under 'sale of immovable property'."
-    },
-    {
-      question: "What is the difference between carpet area, built-up area, and super built-up area?",
-      answer: "Carpet area is the actual usable area within walls. Built-up area includes carpet area plus wall thickness. Super built-up area includes built-up area plus common amenities like lobby, stairs, elevator, etc. RERA mandates carpet area disclosure for transparency."
-    }
-  ];
+  {
+    question: "What are the stamp duty and registration charges in Punjab?",
+    answer: "In Punjab, stamp duty generally ranges between 5% to 7% depending on the buyer category and property type. Registration charges are usually around 1% of the property value, subject to government regulations."
+  },
+  {
+    question: "Can NRIs purchase property in Amritsar and Punjab?",
+    answer: "Yes, NRIs can purchase residential and commercial properties in Punjab under FEMA guidelines. Payments must be made through approved banking channels, and eligible NRIs can also apply for home loans from Indian banks."
+  },
+  {
+    question: "What should I verify before buying a property in Amritsar?",
+    answer: "You should verify the property's ownership records, registry documents, approved layout plans, RERA registration (if applicable), encumbrance status, and ensure there are no legal disputes associated with the property."
+  },
+  {
+    question: "What documents are required for property registration?",
+    answer: "Important documents include Sale Deed, Aadhaar Card, PAN Card, address proof, property tax receipts, approved building plans, and any required NOCs from local authorities."
+  },
+  {
+    question: "Is GST applicable on under-construction properties?",
+    answer: "Yes, GST is generally applicable on under-construction residential properties as per prevailing government norms. Ready-to-move properties with completion certificates are usually exempt from GST."
+  },
+  {
+    question: "What is the difference between carpet area, built-up area, and super built-up area?",
+    answer: "Carpet area refers to the actual usable space inside the property. Built-up area includes wall thickness, while super built-up area includes common amenities such as staircases, lobbies, lifts, and shared facilities."
+  }
+];
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -134,52 +134,54 @@ const ModernLuxuryRealEstate = () => {
    
   ];
 
+  
+      
   const testimonialsData = [
-    {
-      id: 1,
-      name: "Rajesh Mehta",
-      role: "Business Owner, Andheri",
-      content: "Nitish Mahajan helped me find the perfect commercial space for my expanding business. His market knowledge and negotiation skills saved me over ₹50 lakhs!",
-      rating: 5,
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-      transaction: "₹4.2 Cr Office Space Purchase",
-      location: "BKC, Mumbai",
-      date: "March 2024"
-    },
-    {
-      id: 2,
-      name: "Priya Sharma",
-      role: "IT Professional, Pune",
-      content: "As a first-time home buyer, I was nervous. Nitish Mahajan guided me through every step - from property selection to legal verification and loan approval. Highly recommended!",
-      rating: 5,
-      image: "https://randomuser.me/api/portraits/women/44.jpg",
-      transaction: "₹1.8 Cr Apartment",
-      location: "Hinjewadi, Pune",
-      date: "February 2024"
-    },
-    {
-      id: 3,
-      name: "Amit Khanna",
-      role: "Real Estate Investor",
-      content: "Professional, transparent, and results-driven. Nitish Mahajan identified an undervalued property that has already appreciated 25% in just 6 months. Will work with him again.",
-      rating: 5,
-      image: "https://randomuser.me/api/portraits/men/45.jpg",
-      transaction: "₹3.5 Cr Investment Property",
-      location: "Thane, Mumbai",
-      date: "January 2024"
-    },
-    {
-      id: 4,
-      name: "Neha Gupta",
-      role: "Doctor, South Mumbai",
-      content: "Found my dream home exactly as I wanted. The entire process was seamless and Nitish Mahajan handled all paperwork meticulously. Trustworthy and dedicated professional.",
-      rating: 5,
-      image: "https://randomuser.me/api/portraits/women/68.jpg",
-      transaction: "₹6.2 Cr Sea View Apartment",
-      location: "Worli, Mumbai",
-      date: "December 2023"
-    }
-  ];
+  {
+    id: 1,
+    name: "Harpreet Singh",
+    role: "Business Owner, Amritsar",
+    content: "Nitish helped me secure a prime commercial property on the Attari Highway. His market insights and transparent guidance made the entire process smooth and profitable.",
+    rating: 5,
+    image: "https://randomuser.me/api/portraits/men/32.jpg",
+    transaction: "Commercial Plot Purchase",
+    location: "Attari Main Highway, Amritsar",
+    date: "April 2026"
+  },
+  {
+    id: 2,
+    name: "Jasleen Kaur",
+    role: "Software Engineer",
+    content: "As a first-time buyer, I had many doubts. Nitish guided me through documentation, legal verification, and negotiations. I couldn't have asked for a better experience.",
+    rating: 5,
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+    transaction: "Residential Plot Purchase",
+    location: "Ranjit Avenue, Amritsar",
+    date: "March 2026"
+  },
+  {
+    id: 3,
+    name: "Gurpreet Singh",
+    role: "Property Investor",
+    content: "Professional, honest, and highly knowledgeable about the Amritsar market. Nitish helped me identify a high-potential investment opportunity with excellent future growth prospects.",
+    rating: 5,
+    image: "https://randomuser.me/api/portraits/men/45.jpg",
+    transaction: "Investment Property",
+    location: "Airport Road, Amritsar",
+    date: "February 2026"
+  },
+  {
+    id: 4,
+    name: "Simran Arora",
+    role: "Doctor",
+    content: "From property visits to final registration, Nitish managed everything efficiently. His attention to detail and commitment to client satisfaction are truly commendable.",
+    rating: 5,
+    image: "https://randomuser.me/api/portraits/women/68.jpg",
+    transaction: "Luxury Home Purchase",
+    location: "Green Avenue, Amritsar",
+    date: "January 2026"
+  }
+];
 
   const filteredProperties = activeFilter === 'all' 
     ? featuredProperties 
