@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { 
   Phone, Mail, MapPin, Send, User, MessageSquare,
-  Facebook, Instagram, Linkedin, Twitter, Clock,
+  Facebook,FaYoutube, Instagram, Linkedin, Twitter, Clock,
   CheckCircle, Building, Users, Star, Award, Shield,
   Calendar, Heart, ChevronRight,
   Menu,
@@ -420,13 +420,13 @@ const Contact = () => {
               <p className="text-gray-400 mb-6">
                 Follow us on social media for the latest property updates.
               </p>
-              <div className="flex space-x-4">
-                {[Facebook, Instagram, Linkedin, Twitter].map((Icon, idx) => (
+              <div className="flex space-x-3 md:space-x-4">
+                {[<FaFacebook key="fb"/>, <FaInstagram key="ig"/>,<FaYoutube key="yt"/>].map((social, idx) => (
                   <div 
                     key={idx}
-                    className="w-10 h-10 bg-[#1a2a3a] rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-[#0a1628] cursor-pointer transition-colors duration-300 text-gray-400 hover:text-[#0a1628]"
+                    className="w-8 h-8 md:w-10 md:h-10 bg-[#1a2a3a] rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-[#0a1628] cursor-pointer transition-colors duration-300 text-gray-400 hover:text-[#0a1628]"
                   >
-                    <Icon size={18} />
+                    {social}
                   </div>
                 ))}
               </div>
