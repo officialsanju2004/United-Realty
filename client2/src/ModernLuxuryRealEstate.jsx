@@ -24,9 +24,9 @@ import i6 from '../images/6.png';
 
 import i7 from '../images/7.png';
 
-import i8 from '../images/8.png';
+import i8 from '../images/i8.jpg';
 
-import i9 from '../images/9.png';
+import i9 from '../images/i9.jpg';
 
 import WhyChooseUs from './WhyChooseUs';
 import Hero from './Hero';
