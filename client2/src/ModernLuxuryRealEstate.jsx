@@ -126,7 +126,7 @@ const ModernLuxuryRealEstate = () => {
     { id: 2,  title: "Grade A Office Space", price: "₹8.5 Cr", location: "ATTARI", image: i2, featured: true, tag: "Commercial" },
     { id: 3,  title: "Penthouse with Sea View", price: "₹7.8 Cr", location: "Ranjit Avenue C-block", image: i3, featured: true, tag: "Luxury Living" },
     { id: 4,  title: "Retail Showroom", price: "₹4.2 Cr", location: "Ranjit Avenue B-block sco 31", image:i4, featured: true, tag: "High Footfall" },
-    { id: 5,  title: "Garden View Apartments", price: "₹1.9 Cr", location: "Ranjit Avenue B-block sco 31", image: i5, featured: true, tag: "Family Homes" },
+    { id: 5,  title: "Garden View Apartments", price: "₹1.9 Cr", location: "Ranjit Avenue C-block", image: i5, featured: true, tag: "Family Homes" },
     { id: 6,  title: "IT Park Office Space", price: "₹12.5 Cr", location: "Ranjit Avenue B-block sco 29", image: i6, featured: true, tag: "IT Hub" },
     { id: 7,  title: "Penthouse with Sea View", price: "₹7.8 Cr", location: "Ranjit Avenue B-block sco 31", image: i7, featured: true, tag: "Luxury Living" },
     { id: 8,  title: "Retail Showroom", price: "₹4.2 Cr", location: "Ranjit Avenue B-block sco 31", image: i8, featured: true, tag: "High Footfall" },
