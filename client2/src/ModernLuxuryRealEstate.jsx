@@ -8,9 +8,9 @@ import {
   MessageSquare, Send, User, Building, Briefcase
 } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { FaWhatsapp, FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, FaInstagram, FaLinkedinIn, FaPlay, FaStar, FaTwitter, FaUser } from 'react-icons/fa';
-import logo from '../images/logo.jpg';
-import nitish from '../images/nitish.jpg';
+import {FaWhatsapp, FaArrowLeft, FaArrowRight, FaCheck, FaComment, FaFacebook, FaInstagram, FaLinkedinIn, FaPlay, FaStar, FaTwitter, FaUser, FaYoutube } from 'react-icons/fa';
+import logo from '../images/logo.jpeg';
+import nitish from '../images/nitish.jpeg';
 import i1 from '../images/1.png';
 import i2 from '../images/2.png';
 
@@ -24,9 +24,9 @@ import i6 from '../images/6.png';
 
 import i7 from '../images/7.png';
 
-import i8 from '../images/i8.jpg';
+import i8 from '../images/8.png';
 
-import i9 from '../images/i9.jpg';
+import i9 from '../images/9.png';
 
 import WhyChooseUs from './WhyChooseUs';
 import Hero from './Hero';
@@ -122,14 +122,14 @@ const ModernLuxuryRealEstate = () => {
   };
 
   const featuredProperties = [
-    { id: 1,  title: "Luxury 4BHK Apartment", price: "₹3.2 Cr", location: "ATTARI", image: i1, featured: true, tag: "Premium Residence" },
+    { id: 1,  title: "Luxury 4BHK Apartment", price: "₹3.2 Cr", location: "ATTARI", image:i1, featured: true, tag: "Premium Residence" },
     { id: 2,  title: "Grade A Office Space", price: "₹8.5 Cr", location: "ATTARI", image: i2, featured: true, tag: "Commercial" },
     { id: 3,  title: "Penthouse with Sea View", price: "₹7.8 Cr", location: "Ranjit Avenue C-block", image: i3, featured: true, tag: "Luxury Living" },
-    { id: 4,  title: "Retail Showroom", price: "₹4.2 Cr", location: "Ranjit Avenue C-block", image:i4, featured: true, tag: "High Footfall" },
-    { id: 5,  title: "Garden View Apartments", price: "₹1.9 Cr", location: "Ranjit Avenue C-block", image: i5, featured: true, tag: "Family Homes" },
+    { id: 4,  title: "Retail Showroom", price: "₹4.2 Cr", location: "Ranjit Avenue B-block sco 31", image:i4, featured: true, tag: "High Footfall" },
+    { id: 5,  title: "Garden View Apartments", price: "₹1.9 Cr", location: "Ranjit Avenue B-block sco 31", image: i5, featured: true, tag: "Family Homes" },
     { id: 6,  title: "IT Park Office Space", price: "₹12.5 Cr", location: "Ranjit Avenue B-block sco 29", image: i6, featured: true, tag: "IT Hub" },
-    { id: 7,  title: "Penthouse with Sea View", price: "₹7.8 Cr", location: "Ranjit Avenue B-block sco 31", image: i7, featured: true, tag: "Luxury Living" },
-    { id: 8,  title: "Retail Showroom", price: "₹4.2 Cr", location: "Ranjit Avenue B-block sco 31", image: i8, featured: true, tag: "High Footfall" },
+    { id: 7,  title: "Penthouse with Sea View", price: "₹7.8 Cr", location: "Ranjit Avenue C-Block", image: i7, featured: true, tag: "Luxury Living" },
+    { id: 8,  title: "Retail Showroom", price: "₹4.2 Cr", location: "Ranjit Avenue C-Block", image: i8, featured: true, tag: "High Footfall" },
     { id: 9,  title: "Garden View Apartments", price: "₹1.9 Cr", location: "Ranjit Avenue B-block sco 31", image: i9, featured: true, tag: "Family Homes" },
    
   ];
@@ -258,7 +258,7 @@ const ModernLuxuryRealEstate = () => {
                 </Link>
               );
             })}
-            <button className="bg-yellow-400 text-[#0a1628] px-4 py-2 lg:px-6 lg:py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 hover:scale-105 text-sm lg:text-base">
+            <button onClick={() => window.open("https://wa.me/919815978773", "_blank")} className="bg-yellow-400 text-[#0a1628] px-4 py-2 lg:px-6 lg:py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 hover:scale-105 text-sm lg:text-base">
               Schedule Visit
             </button>
           </div>
@@ -283,7 +283,7 @@ const ModernLuxuryRealEstate = () => {
                 </Link>
               );
             })}
-            <button className="mt-4 w-full bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium text-base">
+            <button onClick={() => window.open("https://wa.me/919815978773", "_blank")}className="mt-4 w-full bg-yellow-400 text-[#0a1628] px-6 py-3 rounded-lg font-medium text-base">
               Schedule Visit
             </button>
           </div>
@@ -347,7 +347,7 @@ const ModernLuxuryRealEstate = () => {
                   </div>
                 </div>
 
-                <button className="bg-[#0a1628] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-[#0a1628] transition text-sm sm:text-base">
+                <button onClick={() => window.open("/about-us", "_blank")}className="bg-[#0a1628] text-white px-6 sm:px-8 py-3 sm:py-4 rounded-xl font-semibold hover:bg-yellow-400 hover:text-[#0a1628] transition text-sm sm:text-base">
                   More About Nitish Mahajan
                 </button>
               </div>
@@ -420,7 +420,7 @@ const ModernLuxuryRealEstate = () => {
                     {/* <span className="text-lg md:text-2xl font-bold text-yellow-400">{property.price}</span>  */}
                   </div>
                   
-                  <button className="w-full bg-[#0a1628] text-white py-2 md:py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 flex items-center justify-center group/btn text-sm md:text-base">
+                  <button onClick={() => window.open("https://wa.me/919815978773", "_blank")} className="w-full bg-[#0a1628] text-white py-2 md:py-3 rounded-lg font-medium hover:bg-yellow-400 transition-all duration-300 flex items-center justify-center group/btn text-sm md:text-base">
                     <span>Schedule Visit</span>
                     <ChevronRight className="ml-2 group-hover/btn:translate-x-1 transition-transform" size={16} />
                   </button>
@@ -551,10 +551,10 @@ const ModernLuxuryRealEstate = () => {
                 </div>
                 
                 <div className="flex flex-wrap gap-3 md:gap-4">
-                  <button className="bg-yellow-400 text-[#0a1628] px-4 py-2 md:px-6 md:py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-all duration-300 flex items-center gap-2 text-sm md:text-base">
+                  <button onClick={() => window.open("https://wa.me/919815978773", "_blank")} className="bg-yellow-400 text-[#0a1628] px-4 py-2 md:px-6 md:py-3 rounded-lg font-semibold hover:bg-yellow-400 transition-all duration-300 flex items-center gap-2 text-sm md:text-base">
                     <Phone size={16} /> Schedule Appointment
                   </button>
-                  <button className="border border-yellow-400 text-yellow-400 px-3 py-2 md:px-3 md:py-3 rounded-lg font-semibold hover:bg-yellow-400/10 transition-all duration-300 flex items-center gap-2 text-sm md:text-base">
+                  <button onClick={() => window.location.href="mailto:nm@nitishestate.com"} className="border border-yellow-400 text-yellow-400 px-3 py-2 md:px-3 md:py-3 rounded-lg font-semibold hover:bg-yellow-400/10 transition-all duration-300 flex items-center gap-2 text-sm md:text-base">
                     <Mail size={16} /> Send Email
                   </button>
                 </div>
@@ -813,7 +813,7 @@ const ModernLuxuryRealEstate = () => {
                 </div>
               </div>
               <p className="text-sm md:text-base text-gray-400">
-                Your trusted partner for premium residential and commercial properties across Mumbai Metropolitan Region.
+                Your trusted partner for premium residential and commercial properties in Amritsar,Punjab.
               </p>
             </div>
             
@@ -846,7 +846,7 @@ const ModernLuxuryRealEstate = () => {
                 Follow us on social media for the latest property updates.
               </p>
               <div className="flex space-x-3 md:space-x-4">
-                {[<FaFacebook key="fb"/>, <FaInstagram key="ig"/>, <FaLinkedinIn key="in"/>, <FaTwitter key="tw"/>].map((social, idx) => (
+                {[<FaFacebook key="fb"/>, <FaInstagram key="ig"/>,<FaYoutube key="yt"/>].map((social, idx) => (
                   <div 
                     key={idx}
                     className="w-8 h-8 md:w-10 md:h-10 bg-[#1a2a3a] rounded-full flex items-center justify-center hover:bg-yellow-400 hover:text-[#0a1628] cursor-pointer transition-colors duration-300 text-gray-400 hover:text-[#0a1628]"
